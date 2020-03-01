@@ -61,6 +61,11 @@
        rotate-text       ; cycle region at point between text candidates
        snippets          ; my elves. They type so I don't have to
        ;;word-wrap         ; soft wrapping with language-aware indent
+	
+       :checkers
+       (syntax)
+       ;;spell
+       ;;grammar
 
        :emacs
        (dired             ; making dired pretty [functional]
@@ -90,7 +95,7 @@
        gist              ; interacting with github gists
        (lookup           ; helps you navigate your code and documentation
         +docsets)        ; ...or in Dash docsets locally
-       lsp
+       (lsp +peek)
        ;;macos             ; MacOS-specific commands
        magit             ; a git porcelain for Emacs
        make              ; run make tasks from Emacs
@@ -111,26 +116,26 @@
        (common-lisp +lsp)      ; if you've seen one lisp, you've seen them all
        coq               ; proofs-as-programs
        (crystal +lsp)          ; ruby at the speed of c
-       (csharp +lsp)           ; unity, .NET, and mono shenanigans
+       (csharp +lsp +unity)           ; unity, .NET, and mono shenanigans
        data              ; config/data formats
        (erlang +lsp)           ; an elegant language for a more civilized age
        (elixir +lsp)          ; erlang done right
        (elm +lsp)              ; care for a cup of TEA?
        (emacs-lisp +lsp)       ; drown in parentheses
        (ess +lsp)               ; emacs speaks statistics
-       ;;fsharp           ; ML stands for Microsoft's Language
+       (fsharp +lsp)          ; ML stands for Microsoft's Language
        (go +lsp)               ; the hipster dialect
-       (haskell +intero) ; a language that's lazier than I am
-       ;;hy                ; readability of scheme w/ speed of python
-       ;;idris             ;
+       (haskell +dante +lsp) ; a language that's lazier than I am
+       (hy +lsp)               ; readability of scheme w/ speed of python
+       (idris +lsp)             ;
        (java +meghanada
              +lsp) ; the poster child for carpal tunnel syndrome
        (javascript +lsp)     ; all(hope(abandon(ye(who(enter(here))))))
        (julia +lsp)            ; a better, faster MATLAB
        (kotlin +lsp)           ; a better, slicker Java(Script)
-       latex             ; writing papers in Emacs has never been so fun
-       ;;lean
-       ;;ledger            ; an accounting system in Emacs
+       (latex +lsp)             ; writing papers in Emacs has never been so fun
+       (lean +lsp)
+       (ledger +lsp)           ; an accounting system in Emacs
        (lua +lsp)              ; one-based indices? one-based indices
        (markdown +grip)         ; writing docs for people to ignore
        (nim +lsp)               ; python + lisp at the speed of c
@@ -143,6 +148,7 @@
         +ipython
         +jupyter         ; ipython/jupyter support for babel
         +pandoc          ; export-with-pandoc support
+	+brain
         +gnuplot
         +present
         +journal)        ; using org-mode for presentations
@@ -150,7 +156,11 @@
        (php +lsp)               ; perl's insecure younger brother
        plantuml          ; diagrams for confusing people more
        (purescript +lsp)       ; javascript, but functional
-       (python +pyenv +conda +lsp +cython)           ; beautiful is better than ugly
+       (python
+	 +pyenv
+	 +conda
+	 +lsp
+	 +cython)           ; beautiful is better than ugly
        (qt +lsp)               ; the 'cutest' gui framework ever
        (racket +lsp)            ; a DSL for DSLs
        rest              ; Emacs as a REST client
@@ -159,11 +169,10 @@
        (scala +lsp)           ; java, but good
        (scheme +lsp)           ; a fully conniving family of lisps
        (sh +lsp +fish)               ; she sells {ba,z,fi}sh shells on the C xor
-       ;;solidity          ; do you need a blockchain? No.
+       solidity          ; do you need a blockchain? No.
        (swift +lsp)            ; who asked for emoji variables?
-       ;;terra             ; Earth and Moon in alignment for performance.
+       terra             ; Earth and Moon in alignment for performance.
        (web +lsp)              ; the tubes
-       (vala +lsp)             ; GObjective-C
 
        :email
        ;;(mu4e +gmail)       ; WIP
@@ -174,13 +183,10 @@
        ;; toward a specific purpose. They may have additional dependencies and
        ;; should be loaded late.
        :app
-       ;;calendar
+       calendar
        irc               ; how neckbeards socialize
        (rss +org)        ; emacs as an RSS reader
-       ;;twitter           ; twitter client https://twitter.com/vnought
-       ;;(write            ; emacs for writers (fiction, notes, papers, etc.)
-       ;; +wordnut         ; wordnet (wn) search
-       ;; +langtool)       ; a proofreader (grammar/style check) for Emacs
+       twitter           ; twitter client https://twitter.com/vnought
 
        :config
        ;; For literate config users. This will tangle+compile a config.org

@@ -145,3 +145,17 @@ Version 2019-11-04"
   "Calculate the actual char height of the mode-line."
   (+ (frame-char-height) 6))
 (advice-add #'doom-modeline--font-height :override #'my-doom-modeline--font-height)
+;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+
+(defun ding-ding-ding ()
+  "Ding whatever the settings are."
+  (interactive)
+  (require 'cl-macs)
+  (let ((ring-bell-function nil)
+        (visible-bell nil))
+    (loop repeat 100 do (ding) (other-frame 0) (sit-for 1))))
+
+(defun zj-pomodoro ()
+  "Ding after a pomodoro time"
+  (interactive)
+  (run-at-time "25 min" nil 'ding-ding-ding))
