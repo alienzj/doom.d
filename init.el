@@ -14,7 +14,8 @@
 
        :completion
        (company           ; the ultimate code completion backend
-        +childframe)
+        +childframe
+        +tng)
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        (ivy               ; a search engine for love and life
@@ -48,6 +49,7 @@
         +switch-window
         +numbers)
        workspaces        ; tab emulation, persistence & separate workspaces
+       zen
 
        :editor
        (evil +everywhere); come to the dark side, we have cookies
@@ -61,10 +63,11 @@
        rotate-text       ; cycle region at point between text candidates
        snippets          ; my elves. They type so I don't have to
        ;;word-wrap         ; soft wrapping with language-aware indent
-	
+
        :checkers
-       (syntax)
-       ;;spell
+       (syntax
+        +childframe)
+       ;;(spell +everywhere)
        ;;grammar
 
        :emacs
@@ -133,10 +136,11 @@
        (javascript +lsp)     ; all(hope(abandon(ye(who(enter(here))))))
        (julia +lsp)            ; a better, faster MATLAB
        (kotlin +lsp)           ; a better, slicker Java(Script)
-       (latex +lsp)             ; writing papers in Emacs has never been so fun
+       (latex +latexmk             ; writing papers in Emacs has never been so fun
+              +cdlatex)
        (lean +lsp)
        (ledger +lsp)           ; an accounting system in Emacs
-       (lua +lsp)              ; one-based indices? one-based indices
+       (lua +monoscript)              ; one-based indices? one-based indices
        (markdown +grip)         ; writing docs for people to ignore
        (nim +lsp)               ; python + lisp at the speed of c
        (nix +lsp)              ; I hereby declare "nix geht mehr!"
@@ -148,7 +152,7 @@
         +ipython
         +jupyter         ; ipython/jupyter support for babel
         +pandoc          ; export-with-pandoc support
-	+brain
+        +brain
         +gnuplot
         +present
         +journal)        ; using org-mode for presentations
@@ -157,10 +161,10 @@
        plantuml          ; diagrams for confusing people more
        (purescript +lsp)       ; javascript, but functional
        (python
-	 +pyenv
-	 +conda
-	 +lsp
-	 +cython)           ; beautiful is better than ugly
+        +pyenv
+        +conda
+        +lsp
+        +cython)           ; beautiful is better than ugly
        (qt +lsp)               ; the 'cutest' gui framework ever
        (racket +lsp)            ; a DSL for DSLs
        rest              ; Emacs as a REST client
