@@ -40,10 +40,10 @@
        (popup            ; tame sudden yet inevitable temporary windows
         +all             ; catch all popups that start with an asterix
         +defaults)       ; default popup rules
-       ;;pretty-code       ; replace bits of code with pretty symbols
-       ;;tabs              ; an tab bar for Emacs
+       pretty-code       ; replace bits of code with pretty symbols
+       tabs              ; an tab bar for Emacs
        treemacs          ; a project drawer, like neotree but cooler
-       ;;unicode           ; extended unicode support for various languages
+       unicode           ; extended unicode support for various languages
        vc-gutter         ; vcs diff in the fringe
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        (window-select     ; visually switch windows
@@ -210,14 +210,7 @@
  ;; If there is more than one, they won't work right.
  '(org-agenda-files
    (quote
-    ("~/documents/doraemon/org/gtd.org"
-     "~/documents/doraemon/org/idea.org"
-     "~/documents/doraemon/org/inbox.org"
-     "~/documents/doraemon/org/learn.org"
-     "~/documents/doraemon/org/life.org"
-     "~/documents/doraemon/org/meeting.org"
-     "~/documents/doraemon/org/ref.org"
-     "~/documents/doraemon/org/review.org"
+    ("~/documents/doraemon/org/idea.org"
      "~/documents/doraemon/org/workflow.org")))
 
  ;;'(conda-anaconda-home "~/.conda/envs/bioenv")

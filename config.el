@@ -40,18 +40,29 @@
       magit-save-repository-buffers nil
       magit-inhibit-save-previous-winconf t)
 
-(setq bibtex-completion-notes-path "~/documents/doraemon/org/ref.org"
-      bibtex-completion-bibliography '("~/documents/doraemon/org/reference/Bibliography.bib")
-      bibtex-completion-library-path "~/documents/doraemon/org/reference/pdf/"
+(setq
+ ;; configuration for bibtex-completion, helm-bibtex, ivy-bibtex
+ bibtex-completion-bibliography '("~/documents/doraemon/org/ref/ref.bib")
+ ;; specify where PDFs can be found
+ bibtex-completion-library-path "~/documents/doraemon/org/ref/pdf"
+ bibtex-completion-pdf-field "File"
+ ;; notes
+ bibtex-completion-notes-path "~/documents/doraemon/org/ref/ref.org"
 
-      org-directory "~/documents/doraemon/org"
+ org-directory "~/documents/doraemon/org"
 
-      ;; org-ref
-      org-ref-bibliography-notes "~/documents/doraemon/org/ref.org"
-      org-ref-default-bibliography '("~/documents/doraemon/org/reference/Bibliography.bib")
-      org-ref-pdf-directory "~/documents/doraemon/org/reference/pdf/")
+ reftex-default-bibliography '("~/documents/doraemon/org/ref/ref.bib")
+ ;; configuration for org-ref
+ org-ref-default-bibliography '("~/documents/doraemon/org/ref/ref.bib")
+ org-ref-pdf-directory "~/documents/doraemon/org/ref/pdf"
+ org-ref-bibliography-notes "~/documents/doraemon/org/ref/ref.org")
 
-(setq-default org-download-image-dir "~/documents/doraemon/org/notebooks/images")
+;; open pdf with system pdf viewer
+(setq bibtex-completion-pdf-open-function
+      (lambda (fqpath)
+        (start-process "open" "*open" "open" fqpath)))
+
+(setq-default org-download-image-dir "~/documents/doraemon/org/images")
 
 
 (after! org
@@ -195,3 +206,79 @@ Make sure to put cursor on date heading that contains list of urls."
                (ln (replace-regexp-in-string "\n" "" ln)))
           (browse-url ln))
         (forward-line 1)))))
+
+;; centaur-tabs configuration
+(use-package centaur-tabs
+  :config
+  (setq centaur-tabs-style "bar"
+        centaur-tabs-height 32
+        centaur-tabs-set-icons t
+        centaur-tabs-set-modified-marker t
+        centaur-tabs-show-navigation-buttons t
+        centaur-tabs-set-bar 'under
+        x-underline-at-descent-line t)
+  (centaur-tabs-headline-match)
+  ;; (setq centaur-tabs-gray-out-icons 'buffer)
+  ;; (centaur-tabs-enable-buffer-reordering)
+  ;; (setq centaur-tabs-adjust-buffer-order t)
+  (centaur-tabs-mode t)
+  (centaur-tabs-group-by-projectile-project)
+  (setq uniquify-separator "/")
+  (setq uniquify-buffer-name-style 'forward)
+  (setq centaur-tabs-cycle-scope 'tabs)
+  (defun centaur-tabs-buffer-groups ()
+    "`centaur-tabs-buffer-groups' control buffers' group rules.
+
+ Group centaur-tabs with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
+ All buffer name start with * will group to \"Emacs\".
+ Other buffer group by `centaur-tabs-get-group-name' with project name."
+    (list
+     (cond
+      ;; ((not (eq (file-remote-p (buffer-file-name)) nil))
+      ;; "Remote")
+      ((or (string-equal "*" (substring (buffer-name) 0 1))
+           (memq major-mode '(magit-process-mode
+                              magit-status-mode
+                              magit-diff-mode
+                              magit-log-mode
+                              magit-file-mode
+                              magit-blob-mode
+                              magit-blame-mode
+                              )))
+       "Emacs")
+      ((derived-mode-p 'prog-mode)
+       "Editing")
+      ((derived-mode-p 'dired-mode)
+       "Dired")
+      ((memq major-mode '(helpful-mode
+                          help-mode))
+       "Help")
+      ((memq major-mode '(org-mode
+                          org-agenda-clockreport-mode
+                          org-src-mode
+                          org-agenda-mode
+                          org-beamer-mode
+                          org-indent-mode
+                          org-bullets-mode
+                          org-cdlatex-mode
+                          org-agenda-log-mode
+                          diary-mode))
+       "OrgMode")
+      (t
+       (centaur-tabs-get-group-name (current-buffer))))))
+  :hook
+  (dashboard-mode . centaur-tabs-local-mode)
+  (term-mode . centaur-tabs-local-mode)
+  (calendar-mode . centaur-tabs-local-mode)
+  (org-agenda-mode . centaur-tabs-local-mode)
+  (helpful-mode . centaur-tabs-local-mode)
+  :bind
+  ("C-<prior>" . centaur-tabs-backward)
+  ("C-<next>" . centaur-tabs-forward)
+  ("C-c t s" . centaur-tabs-counsel-switch-group)
+  ("C-c t p" . centaur-tabs-group-by-projectile-project)
+  ("C-c t g" . centaur-tabs-group-buffer-groups)
+  ;;  (:map evil-normal-state-map
+  ;;    ("g t" . centaur-tabs-forward)
+  ;;    ("g T" . centaur-tabs-backward))
+  )

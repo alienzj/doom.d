@@ -35,3 +35,8 @@
 
 (package! graphviz-dot-mode)
 (package! hungry-delete)
+
+(package! mermaid-mode :recipe (:host github :repo "abrochard/mermaid-mode" :files("*")))
+(package! ob-mermaid :recipe (:host github :repo "arnm/ob-mermaid" :files("*")))
+
+(package! interleave :recipe (:host github :repo "rudolfochrist/interleave" :files("*")))
