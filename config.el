@@ -282,3 +282,5 @@ Make sure to put cursor on date heading that contains list of urls."
   ;;    ("g t" . centaur-tabs-forward)
   ;;    ("g T" . centaur-tabs-backward))
   )
+
+(setq rmh-elfeed-org-files (list "~/.doom.d/elfeed.org"))

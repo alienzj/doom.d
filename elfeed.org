@@ -1,0 +1,29 @@
+* Feeds :elfeed:
+** Emacs :emacs:
+*** entry-title: \(emacs\|org-mode\|rust\)
+*** [[http://planet.emacsen.org/atom.xml][Planet Emacsen]]
+*** [[https://www.reddit.com/r/emacs/.rss][r/M-x Emacs]]
+*** [[https://www.reddit.com/r/orgmode/.rss][r/orgmode]]
+*** [[http://oremacs.com/atom.xml][(or emacs irrelevant)]]
+** Literature :literature:
+*** entry-title: \(assembly\|dbg\|graph\) :assembly:
+*** entry-title: \(binning\) :binning:
+*** entry-title: \(profiling\|classification\) :profiling:
+*** entry-title: \(pangenome\) :pangenome:
+*** entry-title: \(alignment\|variants\) :alignment:
+*** entry-title: \(snakemake\|pipeline\) :snakemake:
+*** entry-title: \(microbiome\|gut\|oral\) :microbiome:
+*** entry-title: \(single-cell\) :singlecell:
+*** [[http://connect.biorxiv.org/biorxiv_xml.php?subject=bioinformatics+microbiology+genomics][bioRxiv]] :preprint:
+*** [[http://bioinformatics.oxfordjournals.org/rss/current.xml][Bioinformatics]] :bioinfo:
+*** [[http://www.cell.com/cell/inpress.rss][Cell]] :cell:
+*** [[http://genome.cshlp.org/rss/ahead.xml][Genome Research AOP]] :genome:
+*** [[http://genomebiology.biomedcentral.com/articles/most-recent/rss.xml][Genome Biology]] :genome:
+*** [[http://www.nature.com/nbt/current_issue/rss/][Nature Biotechnology]] :nature:
+*** [[http://www.nature.com/nbt/journal/vaop/ncurrent/rss.rdf][Nature Biotechnology AOP]] :nature:
+*** [[http://feeds.nature.com/nature/rss/aop?format=usm][Nature AOP]] :nature:
+*** [[http://feeds.nature.com/nmeth/rss/current][Nature Methods]] :nature:
+*** [[http://www.nature.com/nmeth/journal/vaop/ncurrent/rss.rdf][Nature Methods AOP]] :nature:
+*** [[http://www.nature.com/ng/current_issue/rss/][Nature Genetics]] :nature:
+*** [[http://www.nature.com/ng/journal/vaop/ncurrent/rss.rdf][Nature Genetics AOP]] :nature:
+** Bioinfo :bioinfo:
