@@ -284,3 +284,9 @@ Make sure to put cursor on date heading that contains list of urls."
   )
 
 (setq rmh-elfeed-org-files (list "~/.doom.d/elfeed.org"))
+
+(use package aqi
+     :config (setq aqi-api-key ""
+                   aqi-use-cache t
+                   aqi-report "Shenzhen"
+                   aqi-city-aqi "Shenzhen"))

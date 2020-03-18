@@ -40,3 +40,6 @@
 (package! ob-mermaid :recipe (:host github :repo "arnm/ob-mermaid" :files("*")))
 
 (package! interleave :recipe (:host github :repo "rudolfochrist/interleave" :files("*")))
+
+;; Air Quality Index(AQI)
+(package! aqi)
