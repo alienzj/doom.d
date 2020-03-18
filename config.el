@@ -123,10 +123,10 @@ Version 2019-11-04"
 ;;(setq tramp-default-method "ssh")
 ;;(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 
-;;(add-hook! python-mode
-;;  (setq python-shell-interpreter "ipython"))
-;;(setq rustic-lsp-server 'rust-analyzer)
-;;(setq lsp-rust-analyzer-server-command '("/usr/bin/rust-analyzer"))
+(add-hook! python-mode
+  (setq python-shell-interpreter "ipython"))
+
+(setq rustic-lsp-server 'rust-analyzer)
 
 ;;(def-package! calibre-mode
 ;;  :config
@@ -285,8 +285,8 @@ Make sure to put cursor on date heading that contains list of urls."
 
 (setq rmh-elfeed-org-files (list "~/.doom.d/elfeed.org"))
 
-(use package aqi
-     :config (setq aqi-api-key ""
-                   aqi-use-cache t
-                   aqi-report "Shenzhen"
-                   aqi-city-aqi "Shenzhen"))
+(use-package aqi
+  :config (setq aqi-api-key ""
+                aqi-use-cache t
+                aqi-report "Shenzhen"
+                aqi-city-aqi "Shenzhen"))

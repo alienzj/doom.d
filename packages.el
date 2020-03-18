@@ -42,4 +42,4 @@
 (package! interleave :recipe (:host github :repo "rudolfochrist/interleave" :files("*")))
 
 ;; Air Quality Index(AQI)
-(package! aqi)
+(package! aqi :recipe (:host github :repo "zzkt/aqi" :files("*")))
