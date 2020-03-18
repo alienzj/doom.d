@@ -136,7 +136,15 @@ Version 2019-11-04"
 
 ;;(setq debug-on-error t)
 
+(defun colorit ()
+  (interactive)
+  (rainbow-delimiters-mode)
+  (rainbow-identifiers-mode))
+
+(add-hook 'rustic-mode-hook #'colorit t)
+
 (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
+
 (setq rainbow-identifiers-choose-face-function 'rainbow-identifiers-cie-l*a*b*-choose-face
       rainbow-identifiers-cie-l*a*b*-saturation 72  ;80 ;125
       rainbow-identifiers-cie-l*a*b*-lightness 72   ;45 ;100
