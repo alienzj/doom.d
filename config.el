@@ -1,84 +1,126 @@
 ;;; .doom.d/config.el -*- lexical-binding: t; -*-
 
-;; Place your private configuration here
-
+;; user information
 (setq user-full-name "alienzj"
       user-mail-address "alienchuj@gmail.com"
       epa-file-encrypt-to user-mail-address)
+
 
 ;; enable auto-completion
 (require 'company)
 (setq company-idle-delay 0.2
       company-minimum-prefix-length 3)
 
+
+;; doom ui
 (setq doom-font (font-spec :family "Monospace" :size 23)
       doom-variable-pitch-font (font-spec :family "Noto Sans" :size 23)
       doom-unicode-font (font-spec :family "Noto Sans")
-      doom-big-font (font-spec :family "Noto Sans" :size 28))
+      doom-big-font (font-spec :family "Noto Sans" :size 28)
 
-;;(setq doom-theme 'doom-solarized-light)
-(setq doom-themes-enable-bold t
-      doom-themes-enable-italic t)
-(setq doom-themes-treemacs-theme "doom-colors")
+      doom-themes-enable-bold t
+      doom-themes-enable-italic t
+      doom-themes-treemacs-theme "doom-colors"
+      ;;doom-theme 'doom-solarized-dark
+      ;;doom-theme 'doom-molokai)
+      ;;all-the-icons-scale-factor 1.0
+      ;;doom-modeline-height 4
+      ;;doom-modeline-bar-width 2
+      doom-modeline-icon t)
 
-;;(doom-themes-visual-bell-config)
-;;(doom-themes-neotree-config)
+(add-hook 'completion-list-mode-hook #'hide-mode-line-mode)
+;;(add-hook 'neotree-mode-hook #'hide-mode-line-mode)
 
-;;(setq doom-theme 'doom-solarized-dark)
-;;(setq doom-theme 'doom-molokai)
-;;(after! doom-themes
-;;  (add-hook 'doom-load-theme-hook #'doom-themes-org-config))
+(defun my-doom-modeline--font-height ()
+  "Calculate the actual char height of the mode-line."
+  (+ (frame-char-height) 6))
+(advice-add #'doom-modeline--font-height :override #'my-doom-modeline--font-height)
 
-;;(setq all-the-icons-scale-factor 1.0)
-;;(doom-themes-treemacs-config)
-;;(doom-themes-org-config)
-;;(setq doom-modeline-height 4)
-;;(setq doom-modeline-bar-width 2)
-(setq doom-modeline-icon t)
+(defun remove-fringes ()
+  (set-window-fringes nil 0 0)
+  (set-window-margins nil 0 0))
 
+
+;; treemacs
+(after! treemacs
+  (add-hook 'treemacs-select-hook #'remove-fringes))
+
+
+;; magit
 (setq magit-repository-directories '(("~/projects" .2))
       magit-save-repository-buffers nil
       magit-inhibit-save-previous-winconf t)
 
-(setq
- ;; configuration for bibtex-completion, helm-bibtex, ivy-bibtex
- bibtex-completion-bibliography '("~/documents/doraemon/org/ref/ref.bib")
- ;; specify where PDFs can be found
- bibtex-completion-library-path "~/documents/doraemon/org/ref/pdf"
- bibtex-completion-pdf-field "File"
- ;; notes
- bibtex-completion-notes-path "~/documents/doraemon/org/ref/ref.org"
+(after! magit
+  (add-hook 'magit-post-display-buffer-hook #'remove-fringes t)
+  (add-hook! magit-popup-mode-hook #'remove-fringes))
 
- org-directory "~/documents/doraemon/org"
 
- reftex-default-bibliography '("~/documents/doraemon/org/ref/ref.bib")
- ;; configuration for org-ref
- org-ref-default-bibliography '("~/documents/doraemon/org/ref/ref.bib")
- org-ref-pdf-directory "~/documents/doraemon/org/ref/pdf"
- org-ref-bibliography-notes "~/documents/doraemon/org/ref/ref.org")
+;; org, org-ref, org-noter, bibtex
+(after! org
+  (add-to-list 'org-modules 'org-habit t))
+
+(setq bibtex-completion-bibliography '("~/documents/doraemon/org/ref/ref.bib")
+      bibtex-completion-library-path "~/documents/doraemon/org/ref/pdf"
+      bibtex-completion-pdf-field "File"
+      bibtex-completion-notes-path "~/documents/doraemon/org/note/note.org"
+
+      org-directory "~/documents/doraemon/org"
+      org-download-image-dir "~/documents/doraemon/org/images"
+
+      reftex-default-bibliography '("~/documents/doraemon/org/ref/ref.bib")
+      org-ref-default-bibliography '("~/documents/doraemon/org/ref/ref.bib")
+      org-ref-pdf-directory "~/documents/doraemon/org/ref/pdf"
+      org-ref-bibliography-notes "~/documents/doraemon/org/note/note.org"
+
+      org-noter-default-notes-file-names '("note.org")
+      org-noter-notes-search-path '("~/documents/doraemon/org/note")
+      org-noter-separate-notes-from-heading t)
 
 ;; open pdf with system pdf viewer
 (setq bibtex-completion-pdf-open-function
       (lambda (fqpath)
         (start-process "open" "*open" "open" fqpath)))
 
-(setq-default org-download-image-dir "~/documents/doraemon/org/images")
+;; org-ref, org-noter function
+;; https://write.as/dani/notes-on-org-noter
+(defun org-ref-noter-at-point ()
+  "Open the pdf for bibtex key under point if it exists."
+  (interactive)
+  (let* ((results (org-ref-get-bibtex-key-and-file))
+         (key (car results))
+         (pdf-file (funcall org-ref-get-pdf-filename-function key)))
+    (if (file-exists-p pdf-file)
+        (progn
+          (find-file-other-window pdf-file)
+          (org-noter))
+      (message "no pdf found for %s" key))))
+
+(add-to-list 'org-ref-helm-user-candidates
+             '("Org-Noter notes" . org-ref-noter-at-point))
 
 
-(after! org
-  (add-to-list 'org-modules 'org-habit t))
+;; deft
+(setq deft-extensions '("txt" "tex" "org")
+      deft-directory "~/documents/doraemon/org"
+      deft-recursive t)
 
-(setq deft-extensions '("txt" "tex" "org"))
-(setq deft-directory "~/documents/doraemon/org")
-(setq deft-recursive t)
 
+;; elfeed
+(setq rmh-elfeed-org-files (list "~/.doom.d/elfeed.org"))
+
+
+;; lookup
 ;;(setq +lookup-open-url-fn #'eww)
 
+
+;; ddragon
 (setq ddragon-dir "~/documents/database/lol")
 
+
+;; vscode
 (defun xah-open-in-vscode ()
-  "Open current file or dir in vscode.
-Version 2019-11-04"
+  "Open current file or dir in vscode. Version 2019-11-04"
   (interactive)
   (let (($path (if (buffer-file-name) (buffer-file-name) default-directory )))
     (cond
@@ -89,23 +131,12 @@ Version 2019-11-04"
      ((string-equal system-type "gnu/linux")
       (shell-command (format "code \"%s\"" $path))))))
 
+
+;; anki-editor
 (setq anki-editor-create-decks t)
 
-;;(setq clang-format-style-option "llvm")
-;;(setq tab-width 4)
 
-;; *** fringe
-(defun remove-fringes ()
-  (set-window-fringes nil 0 0)
-  (set-window-margins nil 0 0))
-
-(after! magit
-  (add-hook 'magit-post-display-buffer-hook #'remove-fringes t)
-  (add-hook! magit-popup-mode-hook #'remove-fringes))
-
-(after! treemacs
-  (add-hook 'treemacs-select-hook #'remove-fringes))
-
+;; conda
 ;;(require 'conda)
 ;;(setq conda-anaconda-home "~/.conda/envs/bioenv")
 ;;(conda-env-initialize-interactive-shells)
@@ -113,38 +144,34 @@ Version 2019-11-04"
 ;;(conda-env-autoactivate-mode t)
 
 
-;;(dap-mode 1)
-;;(dap-ui-mode 1)
-;;(dap-tooltip-mode 1)
-;;(tooltip-mode 1)
-;;(require 'dap-gdb-lldb)
-;;(require 'dap-python)
-
+;; tramp
 ;;(setq tramp-default-method "ssh")
 ;;(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 
-(add-hook! python-mode
-  (setq python-shell-interpreter "ipython"))
 
+;; rust
 (setq rustic-lsp-server 'rust-analyzer)
 
+
+;; calibre-mode
 ;;(def-package! calibre-mode
 ;;  :config
-;;  (setq sql-sqlite-program "/usr/bin/sqlite3")
-;;  (setq calibre-root-dir (expand-file-name "~/documents/doraemon/books/calibre"))
-;;  (setq calibre-db (concat calibre-root-dir "/metadata.db")))
+;;  (setq sql-sqlite-program "/usr/bin/sqlite3"
+;;        calibre-root-dir (expand-file-name "~/documents/doraemon/books/calibre")
+;;        calibre-db (concat calibre-root-dir "/metadata.db")))
 
+
+;; debug
 ;;(setq debug-on-error t)
 
+
+;; rainbow color
 (defun colorit ()
   (interactive)
   (rainbow-delimiters-mode)
   (rainbow-identifiers-mode))
-
 (add-hook 'rustic-mode-hook #'colorit t)
-
 (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
-
 (setq rainbow-identifiers-choose-face-function 'rainbow-identifiers-cie-l*a*b*-choose-face
       rainbow-identifiers-cie-l*a*b*-saturation 72  ;80 ;125
       rainbow-identifiers-cie-l*a*b*-lightness 72   ;45 ;100
@@ -153,19 +180,15 @@ Version 2019-11-04"
                                               font-lock-keyword-face
                                               font-lock-function-name-face
                                               font-lock-variable-name-face))
+
+
+;; nyan
 (setq nyan-wavy-trail t)
 (setq nyan-animate-nyancat t)
 (nyan-mode)
 
-(add-hook 'completion-list-mode-hook #'hide-mode-line-mode)
-;;(add-hook 'neotree-mode-hook #'hide-mode-line-mode)
 
-(defun my-doom-modeline--font-height ()
-  "Calculate the actual char height of the mode-line."
-  (+ (frame-char-height) 6))
-(advice-add #'doom-modeline--font-height :override #'my-doom-modeline--font-height)
-;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
-
+;; pomodoro
 (defun ding-ding-ding ()
   "Ding whatever the settings are."
   (interactive)
@@ -179,6 +202,8 @@ Version 2019-11-04"
   (interactive)
   (run-at-time "25 min" nil 'ding-ding-ding))
 
+
+;; firefox
 (defun save-firefox-session ()
   "Reads firefox current session and coverts it to org-mode chunk."
   (interactive)
@@ -215,7 +240,8 @@ Make sure to put cursor on date heading that contains list of urls."
           (browse-url ln))
         (forward-line 1)))))
 
-;; centaur-tabs configuration
+
+;; centaur-tabs
 (use-package centaur-tabs
   :config
   (setq centaur-tabs-style "bar"
@@ -291,9 +317,9 @@ Make sure to put cursor on date heading that contains list of urls."
   ;;    ("g T" . centaur-tabs-backward))
   )
 
-(setq rmh-elfeed-org-files (list "~/.doom.d/elfeed.org"))
 
-(use-package aqi
+;; aqi, air quality
+(use-package! aqi
   :config (setq aqi-api-key ""
                 aqi-use-cache t
                 aqi-report "Shenzhen"
