@@ -42,4 +42,7 @@
 (package! interleave :recipe (:host github :repo "rudolfochrist/interleave" :files("*")))
 
 ;; Air Quality Index(AQI)
-(package! aqi :recipe (:host github :repo "zzkt/aqi" :files("*")))
+;;(package! aqi :recipe (:host github :repo "zzkt/aqi" :files("*")))
+
+;; BNF Mode for GNU Emacs
+(package! bnf-mode)

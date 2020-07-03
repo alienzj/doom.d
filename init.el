@@ -114,7 +114,7 @@
 
        :lang
        agda              ; types of types of types of types...
-       assembly          ; assembly for fun or debugging
+       ;;assembly          ; assembly for fun or debugging
        (cc +lsp)                ; C/C++/Obj-C madness
        (clojure +lsp)           ; java with a lisp
        (common-lisp +lsp)      ; if you've seen one lisp, you've seen them all
@@ -157,7 +157,7 @@
         +gnuplot
         +present
         +journal)        ; using org-mode for presentations
-       (perl +lsp)            ; write code no one else can comprehend
+       (raku +lsp)            ; write code no one else can comprehend
        (php +lsp)               ; perl's insecure younger brother
        plantuml          ; diagrams for confusing people more
        (purescript +lsp)       ; javascript, but functional

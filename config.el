@@ -167,8 +167,10 @@
   (interactive)
   (rainbow-delimiters-mode)
   (rainbow-identifiers-mode))
+
 (add-hook 'rustic-mode-hook #'colorit t)
 (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
+
 (setq rainbow-identifiers-choose-face-function 'rainbow-identifiers-cie-l*a*b*-choose-face
       rainbow-identifiers-cie-l*a*b*-saturation 72  ;80 ;125
       rainbow-identifiers-cie-l*a*b*-lightness 72   ;45 ;100
@@ -316,8 +318,12 @@ Make sure to put cursor on date heading that contains list of urls."
 
 
 ;; aqi, air quality
-(use-package! aqi
-  :config (setq aqi-api-key ""
-                aqi-use-cache t
-                aqi-report "Shenzhen"
-                aqi-city-aqi "Shenzhen"))
+;;(use-package! aqi
+;;  :config (setq aqi-api-key ""
+;;                aqi-use-cache t
+;;                aqi-report "Shenzhen"
+;;                aqi-city-aqi "Shenzhen"))
+
+;;https://github.com/lassik/emacs-format-all-the-code/issues/76
+;; ESS, R
+(setenv "R_HOME" nil)
