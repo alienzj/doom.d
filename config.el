@@ -1,5 +1,6 @@
 ;;; .doom.d/config.el -*- lexical-binding: t; -*-
 
+
 ;; user information
 (setq user-full-name "alienzj"
       user-mail-address "alienchuj@gmail.com"
@@ -8,19 +9,31 @@
 
 ;; enable auto-completion
 (require 'company)
-(setq company-idle-delay 0.2
+(setq
+      ;; IMO, modern editors have trained a bad habit into us all: a burning
+      ;; need for completion all the time -- as we type, as we breathe, as we
+      ;; pray to the ancient ones -- but how often do you *really* need that
+      ;; information? I say rarely. So opt for manual completion:
+      ;;company-idle-delay nil
+      company-idle-delay 0.2
       company-minimum-prefix-length 3)
 
 
+;; scratch-lisp
+(setq doom-scratch-initial-major-mode 'lisp-interaction-mode)
+
+
 ;; doom ui
-(setq doom-font (font-spec :family "Monospace" :size 23)
-      doom-variable-pitch-font (font-spec :family "Noto Sans" :size 23)
-      doom-unicode-font (font-spec :family "Noto Sans")
-      doom-big-font (font-spec :family "Noto Sans" :size 28)
+(setq doom-font (font-spec :family "monospace" :size 23 :weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "sans" :size 23)
+      doom-unicode-font (font-spec :family "sans")
+      doom-big-font (font-spec :family "sans" :size 28)
 
       doom-themes-enable-bold t
       doom-themes-enable-italic t
       doom-themes-treemacs-theme "doom-colors"
+
+      doom-theme 'doom-dracula
       ;;doom-theme 'doom-solarized-dark
       ;;doom-theme 'doom-molokai)
       ;;all-the-icons-scale-factor 1.0
@@ -28,22 +41,98 @@
       ;;doom-modeline-bar-width 2
       doom-modeline-icon t)
 
-(add-hook 'completion-list-mode-hook #'hide-mode-line-mode)
-;;(add-hook 'neotree-mode-hook #'hide-mode-line-mode)
+(custom-theme-set-faces! 'doom-dracula
+  `(markdown-code-face :background ,(doom-darken 'bg 0.075))
+  `(font-lock-variable-name-face :foreground ,(doom-lighten 'magenta 0.6)))
 
+
+;; mode line
 (defun my-doom-modeline--font-height ()
   "Calculate the actual char height of the mode-line."
   (+ (frame-char-height) 6))
 (advice-add #'doom-modeline--font-height :override #'my-doom-modeline--font-height)
 
-(defun remove-fringes ()
-  (set-window-fringes nil 0 0)
-  (set-window-margins nil 0 0))
+
+;; lsp ui
+(setq lsp-ui-sideline-enable nil
+      lsp-enable-symbol-highlighting nil)
+
+
+;; markdown
+(use-package! atomic-chrome
+  :after-call focus-out-hook
+  :config
+  (setq atomic-chrome-default-major-mode 'markdown-mode
+        atomic-chrome-buffer-open-style 'frame)
+  (atomic-chrome-start-server))
+
+
+;; prevents some cases of Emacs flickering
+(add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
+
+
+;; keybinds
+(map! :n [tab] (cmds! (and (featurep! :editor fold)
+                           (save-excursion (end-of-line) (invisible-p (point))))
+                      #'+fold/toggle
+                      (fboundp 'evil-jump-item)
+                      #'evil-jump-item)
+      :v [tab] (cmds! (and (bound-and-true-p yas-minor-mode)
+                           (or (eq evil-visual-selection 'line)
+                               (not (memq (char-after) (list ?\( ?\[ ?\{ ?\} ?\] ?\))))))
+                      #'yas-insert-snippet
+                      (fboundp 'evil-jump-item)
+                      #'evil-jump-item)
+
+      :leader
+      "h L" #'global-keycast-mode
+      "f t" #'find-in-dotfiles
+      "f T" #'browse-dotfiles)
+
+
+;; ivy
+(after! ivy
+  ;; I prefer search matching to be ordered; it's more precise
+  (add-to-list 'ivy-re-builders-alist '(counsel-projectile-find-file . ivy--regex-plus)))
+
+
+;; I don't need the menu. I know all the shortcuts.
+;;(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
+
+
+;; switch to the new window after splitting
+(setq evil-split-window-below t
+      evil-vsplit-window-right t)
+
+
+;; silence all that useless output
+(setq direnv-always-show-summary nil)
+
+
+;;; :ui doom-dashboard
+(setq fancy-splash-image "~/projects/doom.d/splash.png")
+
+
+
+;;(add-hook 'completion-list-mode-hook #'hide-mode-line-mode)
+;;(add-hook 'neotree-mode-hook #'hide-mode-line-mode)
+
+
+;; mode line
+(defun my-doom-modeline--font-height ()
+  "Calculate the actual char height of the mode-line."
+  (+ (frame-char-height) 6))
+(advice-add #'doom-modeline--font-height :override #'my-doom-modeline--font-height)
+
+
+;;(defun remove-fringes ()
+;;  (set-window-fringes nil 0 0)
+;;  (set-window-margins nil 0 0))
 
 
 ;; treemacs
-(after! treemacs
-  (add-hook 'treemacs-select-hook #'remove-fringes))
+;;(after! treemacs
+;;  (add-hook 'treemacs-select-hook #'remove-fringes))
 
 
 ;; magit
@@ -51,16 +140,22 @@
       magit-save-repository-buffers nil
       magit-inhibit-save-previous-winconf t)
 
-(after! magit
-  (add-hook 'magit-post-display-buffer-hook #'remove-fringes t)
-  (add-hook! magit-popup-mode-hook #'remove-fringes))
+
+;;(after! magit
+;;  (add-hook 'magit-post-display-buffer-hook #'remove-fringes t)
+;;  (add-hook! magit-popup-mode-hook #'remove-fringes))
 
 
 ;; org, org-ref, org-noter, bibtex
 (after! org
   (add-to-list 'org-modules 'org-habit t))
 
-(setq bibtex-completion-bibliography '("~/documents/doraemon/org/ref/ref.bib")
+(setq org-journal-encrypt-journal t
+      org-journal-file-format "%Y%m%d.org"
+      org-ellipsis " ▼ "
+      org-superstar-headline-bullets-list '("#")
+
+      bibtex-completion-bibliography '("~/documents/doraemon/org/ref/ref.bib")
       bibtex-completion-library-path "~/documents/doraemon/org/ref/pdf"
       bibtex-completion-pdf-field "File"
       bibtex-completion-notes-path "~/documents/doraemon/org/note/note.org"
@@ -75,12 +170,15 @@
 
       org-noter-default-notes-file-names '("note.org")
       org-noter-notes-search-path '("~/documents/doraemon/org/note")
-      org-noter-separate-notes-from-heading t)
+      org-noter-separate-notes-from-heading t
+      org-roam-directory (concat org-directory "note/"))
+
 
 ;; open pdf with system pdf viewer
 (setq bibtex-completion-pdf-open-function
       (lambda (fqpath)
         (start-process "open" "*open" "open" fqpath)))
+
 
 ;; org-ref, org-noter function
 ;; https://write.as/dani/notes-on-org-noter
