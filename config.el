@@ -25,9 +25,9 @@
 
 ;; doom ui
 (setq doom-font (font-spec :family "monospace" :size 23 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "sans" :size 23)
-      doom-unicode-font (font-spec :family "sans")
-      doom-big-font (font-spec :family "sans" :size 28)
+      ;;doom-variable-pitch-font (font-spec :family "sans" :size 23)
+      ;;doom-unicode-font (font-spec :family "sans")
+      ;;doom-big-font (font-spec :family "sans" :size 28)
 
       doom-themes-enable-bold t
       doom-themes-enable-italic t
@@ -37,9 +37,10 @@
       ;;doom-theme 'doom-solarized-dark
       ;;doom-theme 'doom-molokai)
       ;;all-the-icons-scale-factor 1.0
-      ;;doom-modeline-height 4
-      ;;doom-modeline-bar-width 2
-      doom-modeline-icon t)
+      )
+
+(doom-themes-treemacs-config)
+(doom-themes-org-config)
 
 (custom-theme-set-faces! 'doom-dracula
   `(markdown-code-face :background ,(doom-darken 'bg 0.075))
@@ -47,10 +48,22 @@
 
 
 ;; mode line
-(defun my-doom-modeline--font-height ()
-  "Calculate the actual char height of the mode-line."
-  (+ (frame-char-height) 6))
-(advice-add #'doom-modeline--font-height :override #'my-doom-modeline--font-height)
+(setq
+      ;;doom-modeline-height 4
+      ;;doom-modeline-bar-width 2
+      doom-modeline-icon (display-graphic-p))
+
+;; don't compact font caches during GC
+(setq inhibit-compacting-font-caches t)
+
+;;(setq doom-modeline-height 1)
+;;(set-face-attribute 'mode-line nil :family "Noto Sans" :height 100)
+;;(set-face-attribute 'mode-line-inactive nil :family "Noto Sans" :height 100)
+
+;;(defun my-doom-modeline--font-height ()
+;;  "Calculate the actual char height of the mode-line."
+;;  (+ (frame-char-height) 3))
+;;(advice-add #'doom-modeline--font-height :override #'my-doom-modeline--font-height)
 
 
 ;; lsp ui
@@ -116,13 +129,6 @@
 
 ;;(add-hook 'completion-list-mode-hook #'hide-mode-line-mode)
 ;;(add-hook 'neotree-mode-hook #'hide-mode-line-mode)
-
-
-;; mode line
-(defun my-doom-modeline--font-height ()
-  "Calculate the actual char height of the mode-line."
-  (+ (frame-char-height) 6))
-(advice-add #'doom-modeline--font-height :override #'my-doom-modeline--font-height)
 
 
 ;;(defun remove-fringes ()
@@ -339,20 +345,27 @@ Make sure to put cursor on date heading that contains list of urls."
 
 
 ;; centaur-tabs
-(use-package centaur-tabs
+(use-package! centaur-tabs
+  :demand
   :config
   (setq centaur-tabs-style "bar"
-        centaur-tabs-height 32
+        centaur-tabs-height 35
         centaur-tabs-set-icons t
         centaur-tabs-set-modified-marker t
         centaur-tabs-show-navigation-buttons t
         centaur-tabs-set-bar 'under
+        centaur-tabs-set-close-button nil
         x-underline-at-descent-line t)
+  (centaur-tabs-enable-buffer-reordering)
+  (centaur-tabs-change-fonts "arial" 23)
+  (setq centaur-tabs-adjust-buffer-order t
+        centaur-tabs-adjust-buffer-order 'right)
   (centaur-tabs-headline-match)
   ;; (setq centaur-tabs-gray-out-icons 'buffer)
   ;; (centaur-tabs-enable-buffer-reordering)
   ;; (setq centaur-tabs-adjust-buffer-order t)
   (centaur-tabs-mode t)
+  ;; projectile integration
   (centaur-tabs-group-by-projectile-project)
   (setq uniquify-separator "/")
   (setq uniquify-buffer-name-style 'forward)
