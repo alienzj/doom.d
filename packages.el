@@ -52,3 +52,5 @@
 
 ;; BNF Mode for GNU Emacs
 (package! bnf-mode)
+
+;;(package! lsp-treemacs)

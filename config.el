@@ -24,7 +24,7 @@
 
 
 ;; doom ui
-(setq doom-font (font-spec :family "monospace" :size 23 :weight 'semi-light)
+(setq doom-font (font-spec :family "monospace" :size 23) ;;:weight 'semi-light)
       ;;doom-variable-pitch-font (font-spec :family "sans" :size 23)
       ;;doom-unicode-font (font-spec :family "sans")
       ;;doom-big-font (font-spec :family "sans" :size 28)
@@ -33,7 +33,7 @@
       doom-themes-enable-italic t
       doom-themes-treemacs-theme "doom-colors"
 
-      doom-theme 'doom-dracula
+      ;;doom-theme 'doom-dracula
       ;;doom-theme 'doom-solarized-dark
       ;;doom-theme 'doom-molokai)
       ;;all-the-icons-scale-factor 1.0
@@ -42,16 +42,16 @@
 (doom-themes-treemacs-config)
 (doom-themes-org-config)
 
-(custom-theme-set-faces! 'doom-dracula
-  `(markdown-code-face :background ,(doom-darken 'bg 0.075))
-  `(font-lock-variable-name-face :foreground ,(doom-lighten 'magenta 0.6)))
+;;(custom-theme-set-faces! 'doom-dracula
+;;  `(markdown-code-face :background ,(doom-darken 'bg 0.075))
+;;  `(font-lock-variable-name-face :foreground ,(doom-lighten 'magenta 0.6)))
 
 
 ;; mode line
 (setq
       ;;doom-modeline-height 4
       ;;doom-modeline-bar-width 2
-      doom-modeline-icon (display-graphic-p))
+      doom-modeline-icon t)
 
 ;; don't compact font caches during GC
 (setq inhibit-compacting-font-caches t)
@@ -345,11 +345,11 @@ Make sure to put cursor on date heading that contains list of urls."
 
 
 ;; centaur-tabs
-(use-package! centaur-tabs
+(use-package centaur-tabs
   :demand
   :config
   (setq centaur-tabs-style "bar"
-        centaur-tabs-height 35
+        centaur-tabs-height 32
         centaur-tabs-set-icons t
         centaur-tabs-set-modified-marker t
         centaur-tabs-show-navigation-buttons t
@@ -357,7 +357,7 @@ Make sure to put cursor on date heading that contains list of urls."
         centaur-tabs-set-close-button nil
         x-underline-at-descent-line t)
   (centaur-tabs-enable-buffer-reordering)
-  (centaur-tabs-change-fonts "arial" 23)
+  ;;(centaur-tabs-change-fonts "arial" 23)
   (setq centaur-tabs-adjust-buffer-order t
         centaur-tabs-adjust-buffer-order 'right)
   (centaur-tabs-headline-match)
@@ -438,3 +438,12 @@ Make sure to put cursor on date heading that contains list of urls."
 ;;https://github.com/lassik/emacs-format-all-the-code/issues/76
 ;; ESS, R
 (setenv "R_HOME" nil)
+
+
+;; ccls
+;;(use-package ccls)
+;;(setq ccls-executable "/usr/bin/ccls")
+
+
+;; lsp-treemacs
+;;(lsp-treemacs-sync-mode 1)
