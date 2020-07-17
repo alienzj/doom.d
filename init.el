@@ -21,6 +21,7 @@
        ;;ido               ; the other *other* search engine...
        (ivy               ; a search engine for love and life
         +fuzzy
+        +icons
         +prescient
         +childframe)
 
@@ -56,7 +57,7 @@
        (evil +everywhere); come to the dark side, we have cookies
        file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
-       (format) ;;+onsave)  ; automated prettiness
+       (format +onsave) ;;+onsave)  ; automated prettiness
        ;;lispy             ; vim for lisp, for people who dont like vim
        multiple-cursors  ; editing in many places at once
        ;;objed             ; text object editing for the innocent
@@ -79,7 +80,8 @@
        vc                ; version-control and Emacs, sitting in a tree
        (ibuffer
         +icons)
-       undo
+       (undo
+        +icons)
 
        :term
        eshell            ; a consistent, cross-platform shell (WIP)
@@ -103,7 +105,8 @@
         +docsets)        ; ...or in Dash docsets locally
        (lsp +peek)
        ;;macos             ; MacOS-specific commands
-       magit             ; a git porcelain for Emacs
+       (magit             ; a git porcelain for Emacs
+        +forge)
        make              ; run make tasks from Emacs
        pass              ; password manager for nerds
        pdf               ; pdf enhancements
@@ -140,7 +143,8 @@
        ;;(julia +lsp)            ; a better, faster MATLAB
        (kotlin +lsp)           ; a better, slicker Java(Script)
        (latex +latexmk             ; writing papers in Emacs has never been so fun
-              +cdlatex)
+              +cdlatex
+              +fold)
        (lean +lsp)
        (ledger +lsp)           ; an accounting system in Emacs
        (lua +monoscript)              ; one-based indices? one-based indices
@@ -158,6 +162,9 @@
         +brain
         +gnuplot
         +present
+        +noter
+        +roam
+        +pandoc
         +journal)        ; using org-mode for presentations
        (raku +lsp)            ; write code no one else can comprehend
        (php +lsp)               ; perl's insecure younger brother
@@ -182,7 +189,7 @@
        (web +lsp)              ; the tubes
 
        :email
-       ;;(mu4e +gmail)       ; WIP
+       (mu4e +gmail)       ; WIP
        ;;notmuch             ; WIP
        ;;(wanderlust +gmail) ; WIP
 

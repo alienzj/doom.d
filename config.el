@@ -7,16 +7,62 @@
       epa-file-encrypt-to user-mail-address)
 
 
+;; better defaults
+(setq-default
+ delete-by-moving-to-trash t
+ tab-width 4
+ uniquify-buffer-name-style 'forward
+ window-combination-resize t
+ x-stretch-cursor t
+ history-length 1000
+ prescient-history-length 1000)
+
+
+(setq undo-limit 80000000
+      evil-want-fine-undo t
+      auto-save-default t
+      inhibit-compacting-font-caches t
+      truncate-streing-ellipsis "...")
+
+
+;; time-mode
+(display-time-mode t)
+
+
+;; evil
+(setq evil-vsplit-window-right t
+      evil-split-window-below t)
+(defadvice! prompt-for-buffer (&rest _)
+  :after '(evil-window-split evil-window-split)
+  (+ivy/switch-buffer))
+(setq +ivy-buffer-preview t)
+(map! :map evil-window-map
+      "SPC" #'rotate-layout)
+
+
 ;; enable auto-completion
-(require 'company)
-(setq
-      ;; IMO, modern editors have trained a bad habit into us all: a burning
-      ;; need for completion all the time -- as we type, as we breathe, as we
-      ;; pray to the ancient ones -- but how often do you *really* need that
-      ;; information? I say rarely. So opt for manual completion:
-      ;;company-idle-delay nil
-      company-idle-delay 0.2
-      company-minimum-prefix-length 3)
+(after! company
+  (setq
+   ;; IMO, modern editors have trained a bad habit into us all: a burning
+   ;; need for completion all the time -- as we type, as we breathe, as we
+   ;; pray to the ancient ones -- but how often do you *really* need that
+   ;; information? I say rarely. So opt for manual completion:
+   ;;company-idle-delay nil
+   company-idle-delay 0.2
+   company-minimum-prefix-length 3
+   company-show-numbers t)
+(add-hook 'evil-normal-state-entry-hook #'company-abort))
+
+(set-company-backend! '(text-mode
+                        markdown-mode
+                        gfm-mode)
+  '(:seperate company-ispell
+              company-files
+              company-yasnippet))
+
+(set-company-backend!
+  'ess-r-mode
+  '(company-R-args company-R-objects company-dabbrev-code :separate))
 
 
 ;; scratch-lisp
@@ -45,6 +91,9 @@
 ;;(custom-theme-set-faces! 'doom-dracula
 ;;  `(markdown-code-face :background ,(doom-darken 'bg 0.075))
 ;;  `(font-lock-variable-name-face :foreground ,(doom-lighten 'magenta 0.6)))
+
+(setq doom-fallback-buffer-name "► Doom"
+      +doom-dashboard-name "► Doom")
 
 
 ;; mode line
@@ -142,9 +191,11 @@
 
 
 ;; magit
-(setq magit-repository-directories '(("~/projects" .2))
-      magit-save-repository-buffers nil
-      magit-inhibit-save-previous-winconf t)
+(after! magit
+  (magit-delta-mode +1)
+  (setq magit-repository-directories '(("~/projects" .2))
+        magit-save-repository-buffers nil
+        magit-inhibit-save-previous-winconf t))
 
 
 ;;(after! magit
@@ -180,6 +231,12 @@
       org-roam-directory (concat org-directory "note/"))
 
 
+(use-package! org-ref
+   :after org
+   :config
+    (setq org-ref-completion-library 'org-ref-ivy-cite))
+
+
 ;; open pdf with system pdf viewer
 (setq bibtex-completion-pdf-open-function
       (lambda (fqpath)
@@ -199,6 +256,24 @@
           (find-file-other-window pdf-file)
           (org-noter))
       (message "no pdf found for %s" key))))
+
+
+;; org-roam
+(use-package org-roam-server
+  :after org-roam
+  :config
+  (setq org-roam-server-host "127.0.0.1"
+        org-roam-server-port 8078
+        org-roam-server-export-inline-images t
+        org-roam-server-authenticate nil
+        org-roam-server-label-truncate t
+        org-roam-server-label-truncate-length 60
+        org-roam-server-label-wrap-length 20)
+  (defun org-roam-server-open ()
+    "Ensure the server is active, then open the roam graph."
+    (interactive)
+    (org-roam-server-mode 1)
+    (browse-url-xdg-open (format "http://localhost:%d" org-roam-server-port))))
 
 
 ;; deft
@@ -248,6 +323,9 @@
 ;; tramp
 ;;(setq tramp-default-method "ssh")
 ;;(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
+(after! tramp
+  (setenv "SHELL" "/bin/bash")
+  (setq tramp-shell-prompt-pattern "\\(?:^\\|\\)[^]#$%>\n]*#?[]#$%>] *\\(\\[[0-9;]*[a-zA-Z] *\\)*"))
 
 
 ;; rust
@@ -447,3 +525,20 @@ Make sure to put cursor on date heading that contains list of urls."
 
 ;; lsp-treemacs
 ;;(lsp-treemacs-sync-mode 1)
+
+
+;; info-colors
+(use-package! info-colors
+  :commands (info-colors-fontify-node))
+
+(add-hook 'Info-selection-hook 'info-colors-fontify-node)
+
+(add-hook 'Info-mode-hook #'mixed-pitch-mode)
+
+
+;; text-mode
+(after! text-mode
+  (add-hook! 'text-mode-hook
+    ;; Apply ANSI color codes
+    (with-silent-modifications
+      (ansi-color-apply-on-region (point-min) (point-max)))))
