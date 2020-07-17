@@ -22,7 +22,8 @@
       evil-want-fine-undo t
       auto-save-default t
       inhibit-compacting-font-caches t
-      truncate-streing-ellipsis "...")
+      ;;truncate-streing-ellipsis "..."
+      )
 
 
 ;; time-mode
@@ -217,7 +218,7 @@
       bibtex-completion-pdf-field "File"
       bibtex-completion-notes-path "~/documents/doraemon/org/note/note.org"
 
-      org-directory "~/documents/doraemon/org"
+      org-directory "~/documents/doraemon/org/"
       org-download-image-dir "~/documents/doraemon/org/images"
 
       reftex-default-bibliography '("~/documents/doraemon/org/ref/ref.bib")
@@ -350,7 +351,7 @@
   (rainbow-delimiters-mode)
   (rainbow-identifiers-mode))
 
-(add-hook 'rustic-mode-hook #'colorit t)
+;;(add-hook 'rustic-mode-hook #'colorit t)
 (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
 
 (setq rainbow-identifiers-choose-face-function 'rainbow-identifiers-cie-l*a*b*-choose-face

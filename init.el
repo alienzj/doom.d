@@ -180,7 +180,7 @@
        rest              ; Emacs as a REST client
        (ruby +lsp +rvm +rbenv)              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        (rust +lsp)             ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
-       (scala +lsp)           ; java, but good
+       ;;(scala +lsp)           ; java, but good
        (scheme +lsp)           ; a fully conniving family of lisps
        (sh +lsp +fish)               ; she sells {ba,z,fi}sh shells on the C xor
        solidity          ; do you need a blockchain? No.
@@ -189,7 +189,7 @@
        (web +lsp)              ; the tubes
 
        :email
-       (mu4e +gmail)       ; WIP
+       ;;(mu4e +gmail)       ; WIP
        ;;notmuch             ; WIP
        ;;(wanderlust +gmail) ; WIP
 
