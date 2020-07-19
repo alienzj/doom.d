@@ -543,3 +543,12 @@ Make sure to put cursor on date heading that contains list of urls."
     ;; Apply ANSI color codes
     (with-silent-modifications
       (ansi-color-apply-on-region (point-min) (point-max)))))
+
+;; format-all
+;; clang-format
+(after! format
+  (set-formatter! 'clang-format
+  '("clang-format"
+    "-style={BasedOnStyle: LLVM, IndentWidth: 4, BreakBeforeBraces: Allman, SortIncludes: true}"
+    ("-assume-filename=%S" (or buffer-file-name mode-result "")))
+  ))
