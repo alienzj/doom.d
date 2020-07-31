@@ -52,14 +52,14 @@
    company-idle-delay 0.2
    company-minimum-prefix-length 3
    company-show-numbers t)
-(add-hook 'evil-normal-state-entry-hook #'company-abort))
+  (add-hook 'evil-normal-state-entry-hook #'company-abort))
 
 (set-company-backend! '(text-mode
                         markdown-mode
                         gfm-mode)
   '(:seperate company-ispell
-              company-files
-              company-yasnippet))
+    company-files
+    company-yasnippet))
 
 (set-company-backend!
   'ess-r-mode
@@ -99,9 +99,9 @@
 
 ;; mode line
 (setq
-      ;;doom-modeline-height 4
-      ;;doom-modeline-bar-width 2
-      doom-modeline-icon t)
+ ;;doom-modeline-height 4
+ ;;doom-modeline-bar-width 2
+ doom-modeline-icon t)
 
 ;; don't compact font caches during GC
 (setq inhibit-compacting-font-caches t)
@@ -212,30 +212,21 @@
       org-journal-file-format "%Y%m%d.org"
       org-ellipsis " ▼ "
       org-superstar-headline-bullets-list '("#")
-
-      bibtex-completion-bibliography '("~/documents/doraemon/org/ref/ref.bib")
-      bibtex-completion-library-path "~/documents/doraemon/org/ref/pdf"
-      bibtex-completion-pdf-field "File"
-      bibtex-completion-notes-path "~/documents/doraemon/org/note/note.org"
-
       org-directory "~/documents/doraemon/org/"
       org-download-image-dir "~/documents/doraemon/org/images"
 
-      reftex-default-bibliography '("~/documents/doraemon/org/ref/ref.bib")
-      org-ref-default-bibliography '("~/documents/doraemon/org/ref/ref.bib")
-      org-ref-pdf-directory "~/documents/doraemon/org/ref/pdf"
-      org-ref-bibliography-notes "~/documents/doraemon/org/note/note.org"
+      bibtex-completion-bibliography '("~/documents/doraemon/org/reference/references.bib")
+      bibtex-completion-library-path "~/documents/doraemon/org/reference/pdf"
+      bibtex-completion-pdf-field "File"
+      bibtex-completion-notes-path "~/documents/doraemon/org/note/references.org"
 
-      org-noter-default-notes-file-names '("note.org")
+      reftex-default-bibliography '("~/documents/doraemon/org/reference/references.bib")
+
+      org-noter-default-notes-file-names '("references.org")
       org-noter-notes-search-path '("~/documents/doraemon/org/note")
       org-noter-separate-notes-from-heading t
-      org-roam-directory (concat org-directory "note/"))
 
-
-(use-package! org-ref
-   :after org
-   :config
-    (setq org-ref-completion-library 'org-ref-ivy-cite))
+      org-roam-directory "~/documents/doraemon/org/note/")
 
 
 ;; open pdf with system pdf viewer
@@ -244,19 +235,76 @@
         (start-process "open" "*open" "open" fqpath)))
 
 
-;; org-ref, org-noter function
-;; https://write.as/dani/notes-on-org-noter
-(defun org-ref-noter-at-point ()
-  "Open the pdf for bibtex key under point if it exists."
-  (interactive)
-  (let* ((results (org-ref-get-bibtex-key-and-file))
-         (key (car results))
-         (pdf-file (funcall org-ref-get-pdf-filename-function key)))
-    (if (file-exists-p pdf-file)
-        (progn
-          (find-file-other-window pdf-file)
-          (org-noter))
-      (message "no pdf found for %s" key))))
+;; ebib
+;; https://emacs-china.org/t/emacs/12580/6
+(use-package ebib
+  :general
+  ([f5] 'ebib)
+  :custom
+  (ebib-bibtex-dialect 'biblatex)
+  (ebib-index-window-size 10)
+  (ebib-preload-bib-files '("~/documents/doraemon/org/reference/references.bib"))
+  (ebib-notes-use-single-file "~/documents/doraemon/org/note/references.org")
+  (ebib-file-search-dirs '("~/documents/doraemon/org/reference/pdf/"))
+  (ebib-reading-list-file "~/documents/doraemon/org/note/toread_list.org")
+  (ebib-keywords-file "~/documents/doraemon/org/reference/ebib_keywords.txt")
+  (ebib-keywords-field-keep-sorted t)
+  (ebib-keywords-file-save-on-exit 'always)
+  (ebib-file-associations '(("pdf")) "using Emacs to open pdf")
+  (ebib-use-timestamp t "recording the time that entries are added")
+  (ebib-index-columns '(("Entry Key" 20 t)
+                        ("Author/Editor" 40 nil)
+                        ("Year" 6 t)
+                        ("Title" 50 t)))
+  (ebib-index-default-sort '("timestamp" . descend)))
+
+
+;; org-ref
+(use-package org-ref
+  ;;:general
+  ;;(z-spc-leader-def "r" 'org-ref-hydra/body)
+  ;;:pretty-hydra
+  ;;((:color red :quit-key "q")
+  ;; ("Insert"
+  ;;  (("i" org-ref-helm-insert-cite-link "citation key")
+  ;;   ("r" org-ref-helm-insert-ref-link "ref link")
+  ;;   ("l" org-ref-helm-insert-label-link "label link"))
+  ;;  "Browse"
+  ;;  (("b" helm-bibtex "bibtex")
+  ;;   ("s" crossref-lookup "lookup"))
+  ;;  "Add"
+  ;;  (("a" crossref-add-bibtex-entry "new entry")
+  ;;   ("d" doi-add-bibtex-entry "doi"))))
+  :custom
+  (bibtex-dialect 'biblatex)
+  (org-ref-bibliography-notes "~/documents/doraemon/org/note/references.org")
+  (org-ref-default-bibliography '("~/documents/doraemon/org/reference/references.bib"))
+  (org-ref-pdf-directory "~/documents/doraemon/org/reference/pdf/")
+  (org-ref-show-broken-links nil)
+  (org-ref-default-ref-type "eqref")
+  (org-ref-default-citation-link "citet")
+  :config
+  (require 'org-ref-citeproc)
+  (defun org-ref-grep-pdf (&optional _candidate)
+    "Search pdf files of marked CANDIDATEs."
+    (interactive)
+    (let ((keys (helm-marked-candidates))
+          (get-pdf-function org-ref-get-pdf-filename-function))
+      (helm-do-pdfgrep-1
+       (-remove (lambda (pdf)
+                  (string= pdf ""))
+                (mapcar (lambda (key)
+                          (funcall get-pdf-function key))
+                        keys)))))
+  (helm-add-action-to-source "Grep PDF" 'org-ref-grep-pdf helm-source-bibtex 1)
+
+  (setq helm-bibtex-map
+        (let ((map (make-sparse-keymap)))
+          (set-keymap-parent map helm-map)
+          (define-key map (kbd "C-s") (lambda () (interactive)
+                                        (helm-run-after-exit 'org-ref-grep-pdf)))
+          map))
+  (push `(keymap . ,helm-bibtex-map) helm-source-bibtex))
 
 
 ;; org-roam
@@ -540,15 +588,27 @@ Make sure to put cursor on date heading that contains list of urls."
 ;; text-mode
 (after! text-mode
   (add-hook! 'text-mode-hook
-    ;; Apply ANSI color codes
-    (with-silent-modifications
-      (ansi-color-apply-on-region (point-min) (point-max)))))
+             ;; Apply ANSI color codes
+             (with-silent-modifications
+               (ansi-color-apply-on-region (point-min) (point-max)))))
+
 
 ;; format-all
 ;; clang-format
 (after! format
   (set-formatter! 'clang-format
-  '("clang-format"
-    "-style={BasedOnStyle: LLVM, IndentWidth: 4, BreakBeforeBraces: Allman, SortIncludes: true}"
-    ("-assume-filename=%S" (or buffer-file-name mode-result "")))
-  ))
+    '("clang-format"
+      "-style={BasedOnStyle: LLVM, IndentWidth: 4, BreakBeforeBraces: Allman, SortIncludes: true}"
+      ("-assume-filename=%S" (or buffer-file-name mode-result "")))
+    ))
+
+;; org-static-blog
+(define-key global-map "\C-cb" 'zj/publish-to-blog)
+
+(cl-defun zj/publish-to-blog (&optional (draft nil) (local nil))
+  (load-file "blog.el")
+  (preview-article :draft draft)
+  (unless draft (publish))
+  (let ((server (if local "http://localhost:4000/" "https://alienzj.github.io/")))
+    (async-shell-command (concat "open " server NAME "/") "*blog-post-in-browser*"))
+  )

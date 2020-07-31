@@ -178,6 +178,7 @@
        (qt +lsp)               ; the 'cutest' gui framework ever
        (racket +lsp)            ; a DSL for DSLs
        rest              ; Emacs as a REST client
+       rst
        (ruby +lsp +rvm +rbenv)              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        (rust +lsp)             ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;(scala +lsp)           ; java, but good

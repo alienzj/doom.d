@@ -55,19 +55,9 @@
 (package! info-colors)
 
 (package! org-ref)
-(package! org-brain)
-(package! org-pdftools :recipe (:host github :repo "fuxialexander/org-pdftools" :files("*")))
-(package! org-super-agenda)
-(package! doct :recipe (:host github :repo "progfolio/doct"))
-(package! org-pretty-table-mode :recipe (:host github :repo "Fuco1/org-pretty-table"))
-(package! org-fragtog)
-(package! org-pretty-tags)
-
-;;(package! org-gfm)
-(package! org-graph-view :recipe (:host github :repo "alphapapa/org-graph-view"))
-(package! org-chef)
-;;(package! org-plot)
-
+(package! org-static-blog)
+(package! ebib)
 (package! org-roam-server)
+(package! writeroom-mode)
 
 (package! systemd)
