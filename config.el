@@ -602,11 +602,27 @@ Make sure to put cursor on date heading that contains list of urls."
       ("-assume-filename=%S" (or buffer-file-name mode-result "")))
     ))
 
+
 ;; org-static-blog
+;; https://github.com/alhassy/emacs.d/blob/master/init.el#L2323
+
+(use-package org-static-blog
+  :config
+  (setq org-static-blog-publish-title "Hello World")
+  (setq org-static-blog-publish-url "https://alienzj.github.io/")
+  (setq org-static-blog-publish-directory "~/documents/doraemon/org/blog/alienzj.github.io/")
+  (setq org-static-blog-posts-directory "~/documents/doraemon/org/blog/alienzj.github.io/posts/")
+  (setq org-static-blog-drafts-directory "~/documents/doraemon/org/blog/alienzj.github.io/drafts/")
+)
+
 (define-key global-map "\C-cb" 'zj/publish-to-blog)
 
 (cl-defun zj/publish-to-blog (&optional (draft nil) (local nil))
-  (load-file "blog.el")
+  ;;(load-file "~/.doom.d/blog.el")
+  (load-file "~/documents/doraemon/org/blog/alienzj.github.io/blog.el")
+
+  (setq file.org (buffer-name))
+
   (preview-article :draft draft)
   (unless draft (publish))
   (let ((server (if local "http://localhost:4000/" "https://alienzj.github.io/")))

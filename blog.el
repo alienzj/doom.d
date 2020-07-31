@@ -11,7 +11,7 @@
 
 (setq org-static-blog-publish-title "Hello World")
 (setq org-static-blog-publish-url "https://alienzj.github.io/")
-(setq org-static-blog-publish-directory "~/documents/doraemon/org/blog/alienzj.github.io")
+(setq org-static-blog-publish-directory "~/documents/doraemon/org/blog/alienzj.github.io/")
 (setq org-static-blog-posts-directory "~/documents/doraemon/org/blog/alienzj.github.io/posts/")
 (setq org-static-blog-drafts-directory "~/documents/doraemon/org/blog/alienzj.github.io/drafts/")
 
@@ -207,7 +207,7 @@ Modify this function if you want to change a posts headline."
                        (org-static-blog-get-date post-filename))
    "</div>"
    ;; The article's image
-   (my/org-static-blog-assemble-image post-filename)
+   (zj/org-static-blog-assemble-image post-filename)
    "<br><center><strong>Abstract</strong></center>"))
 
 (defun org-static-blog-post-postamble (post-filename)
@@ -344,7 +344,7 @@ Posts are sorted in descending time."
                                       (delete-other-windows)
                                       (/ __x 200)))) ;; 200 words per minute reading
           ;; ⟨2⟩ Article image
-          (my/org-static-blog-assemble-image it)
+          (zj/org-static-blog-assemble-image it)
           ;; ⟨3⟩ Preview
           it
           ;; ⟨4⟩ “Read more” link
@@ -371,7 +371,7 @@ Posts are sorted in descending time."
 (setq org-html-table-caption-above nil
       org-export-latex-table-caption-above nil)
 
-(defvar my/blog/tags
+(defvar zj/blog/tags
   '(emacs faith category-theory order-theory
           lisp types packages haskell agda
           c frama-c program-proving)
@@ -379,7 +379,7 @@ Posts are sorted in descending time."
 
 ;; Use C-SPC to select multiple items
 
-(defun my/blog/new-article ()
+(defun zj/blog/new-article ()
   "Make a new article for my blog; prompting for the necessary ingredients.
 If the filename entered already exists, we simply write to it.
 The user notices this and picks a new name."
@@ -402,7 +402,7 @@ The user notices this and picks a new name."
             "\n#+email: "  user-mail-address
             "\n#+date: " (format-time-string "<%Y-%m-%d %H:%M>")
             "\n#+filetags: " (s-join " " (helm-comp-read "Tags: "
-                                                         my/blog/tags
+                                                         zj/blog/tags
                                                          :marked-candidates t))
             "\n#+fileimage: " (completing-read
                                "Image: "
@@ -414,9 +414,9 @@ The user notices this and picks a new name."
             "\n\n* ???")))
 
 ;; Override all minor modes that use this binding.
-(bind-key* (kbd "C-c C-b")
+(bind-key* (kbd "C-c C-2")
            (lambda (&optional prefix)
-             "C-c C-b        ⇒ Publish current buffer
+             "C-c C-2        ⇒ Publish current buffer
 C-u C-c C-b     ⇒ Publish entire blog
 C-u C-u C-c C-b ⇒ Publish entire blog; re-rendering all blog posts
                   (This will take time!)
