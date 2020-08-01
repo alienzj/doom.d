@@ -1,5 +1,5 @@
 ;;; .doom.d/config.el -*- lexical-binding: t; -*-
-
+(require 'cl-lib)
 
 ;; user information
 (setq user-full-name "alienzj"
@@ -608,23 +608,19 @@ Make sure to put cursor on date heading that contains list of urls."
 
 (use-package org-static-blog
   :config
-  (setq org-static-blog-publish-title "Hello World")
-  (setq org-static-blog-publish-url "https://alienzj.github.io/")
-  (setq org-static-blog-publish-directory "~/documents/doraemon/org/blog/alienzj.github.io/")
-  (setq org-static-blog-posts-directory "~/documents/doraemon/org/blog/alienzj.github.io/posts/")
-  (setq org-static-blog-drafts-directory "~/documents/doraemon/org/blog/alienzj.github.io/drafts/")
+  (define-key global-map "\C-cb" 'zj/publish-to-blog)
+  (load-file "~/.doom.d/blog.el")
 )
-
-(define-key global-map "\C-cb" 'zj/publish-to-blog)
-
-(cl-defun zj/publish-to-blog (&optional (draft nil) (local nil))
+;(cl-defun zj/publish-to-blog (&optional (draft nil) (local nil))
+  ;;(interactive)
   ;;(load-file "~/.doom.d/blog.el")
-  (load-file "~/documents/doraemon/org/blog/alienzj.github.io/blog.el")
+  ;;(load-file "~/documents/doraemon/org/blog/alienzj.github.io/blog.el")
 
-  (setq file.org (buffer-name))
+  ;;(setq file.org (buffer-name))
 
-  (preview-article :draft draft)
-  (unless draft (publish))
-  (let ((server (if local "http://localhost:4000/" "https://alienzj.github.io/")))
-    (async-shell-command (concat "open " server NAME "/") "*blog-post-in-browser*"))
-  )
+  ;;(preview-article :draft draft)
+  ;;(unless draft (publish))
+  ;;(let ((server (if local "http://localhost:4000/" "https://alienzj.github.io/")))
+  ;;  (async-shell-command (concat "open " server NAME "/") "*blog-post-in-browser*"))
+  ;; )
+;)
