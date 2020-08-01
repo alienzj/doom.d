@@ -650,35 +650,91 @@ Make sure to put cursor on date heading that contains list of urls."
 ;; org-static-blog
 (setq org-static-blog-publish-title "ZJ Blog")
 (setq org-static-blog-publish-url "https://alienzj.github.io/")
-(setq org-static-blog-publish-directory "~/documents/doraemon/org/blog/alienzj.github.io/blog/")
+(setq org-static-blog-publish-directory "~/documents/doraemon/org/blog/alienzj.github.io/")
 (setq org-static-blog-posts-directory "~/documents/doraemon/org/blog/alienzj.github.io/posts/")
 (setq org-static-blog-drafts-directory "~/documents/doraemon/org/blog/alienzj.github.io/drafts/")
 (setq org-static-blog-enable-tags t)
-(setq org-export-with-toc nil)
+(setq org-export-with-toc t)
 (setq org-export-with-section-numbers nil)
 
 (setq org-static-blog-page-header
-      "<meta name=\"author\" content=\"Jie Zhu\">
-<meta name=\"referrer\" content=\"no-referrer\">
-<link href= \"styles/style.css\" rel=\"stylesheet\" type=\"text/css\" />
-<link rel=\"icon\" href=\"images/favicon.ico\">")
+      (concat
+       "<meta name=\"author\" content=\"Jie Zhu\">"
+       "<meta name=\"referrer\" content=\"no-referrer\">"
+       "<link href=\"styles/usual-org-front-matter.css\" rel=\"stylesheet\" type=\"text/css\" />"
+       "<link href=\"styles/org-notes-style.css\" rel=\"stylesheet\" type=\"text/css\" />"
+       "<link href=\"styles/floating-toc.css\" rel=\"stylesheet\" type=\"text/css\" />"
+       "<link href=\"styles/blog-banner.css\" rel=\"stylesheet\" type=\"text/css\" />"
+       "<link rel=\"icon\" href=\"images/hmp.jpg\">"
+       "<script type=\"text/javascript\""))
 
 (setq org-static-blog-page-preamble
-      "<div class=\"header\">
-  <a href=\"https://alienzj.github.io\">ZJ Blog</a>
-</div>")
+      (concat
+       "<div class=\"header\">"
+       "<a href=\"https://alienzj.github.io/\">ZJ Blog</a>"
+       "<br>"
+       "<a href=\"https://alienzj.github.io/archive\">Archive</a>"
+       "<a href=\"https://alienzj.github.io/tags\">Tags</a>"
+       "<a href=\"https://alienzj.github.io/rss.xml\">RSS</a>"
+       "<a href=\"https://alienzj.github.io/about\">About</a>"
+       "</div>"))
+
+(advice-add 'org-html--translate :before-until 'display-toc-as-Ξ)
+
+;; (advice-remove 'org-html--translate 'display-toc-as-Ξ)
+
+(defun display-toc-as-Ξ (phrase info)
+  (when (equal phrase "Table of Contents")
+    (s-collapse-whitespace
+     " <a href=\"javascript:window.scrollTo(0,0)\"
+        style=\"color: black !important; border-bottom: none !important;\"
+        class=\"tooltip\"
+        title=\"Go to the top of the page\">
+      Ξ
+    </a> ")))
 
 (setq org-static-blog-page-postamble
+      (s-collapse-whitespace (s-replace "\n" ""
+"
+<center>
+  <a rel=\"license\" href=\"https://creativecommons.org/licenses/by-sa/3.0/\">
+     <img alt=\"Creative Commons License\" style=\"border-width:0\"
+          src=\"https://i.creativecommons.org/l/by-sa/3.0/88x31.png\"/>
+  </a>
+  <br/>
+  <span xmlns:dct=\"https://purl.org/dc/terms/\"
+        href=\"https://purl.org/dc/dcmitype/Text\"
+        property=\"dct:title\" rel=\"dct:type\">
+     <em>ZJ Blog</em>
+  </span>
+  by
+  <a xmlns:cc=\"https://creativecommons.org/ns#\"
+  href=\"https://alienzj.github.io/\"
+  property=\"cc:attributionName\" rel=\"cc:attributionURL\">
+    Jie Zhu
+  </a>
+  is licensed under a
+  <a rel=\"license\" href=\"https://creativecommons.org/licenses/by-sa/3.0/\">
+    Creative Commons Attribution-ShareAlike 3.0 Unported License.
+  </a>
+</center>
+<div id=\"disqus_thread\"></div>
+<script type=\"text/javascript\">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'zj-blog';
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the
+    <a href=\"http://disqus.com/?ref_noscript\">comments powered by Disqus.</a></noscript>
+<a href=\"http://disqus.com\" class=\"dsq-brlink\">comments powered by <span class=\"logo-disqus\">Disqus</span></a>")))
+
+(setq index-content-header
       (concat
-       "<div id=\"archive\">"
-       "<a href=\"https://staticblog.org/archive.html\">Other posts</a>"
-       "</div>"
-       "<center><a rel=\"license\" href=\"https://creativecommons.org/licenses/by-sa/3.0/\">"
-       "<img alt=\"Creative Commons License\" style=\"border-width:0\" "
-       "src=\"https://i.creativecommons.org/l/by-sa/3.0/88x31.png\" /></a>"
-       "<br /><span xmlns:dct=\"https://purl.org/dc/terms/\" href=\"https://purl.org/dc/dcmitype/Text\" "
-       "property=\"dct:title\" rel=\"dct:type\">alienzj.github.io</span> "
-       "by <a xmlns:cc=\"https://creativecommons.org/ns#\" "
-       "href=\"https://bastibe.de\" property=\"cc:attributionName\" "
-       "rel=\"cc:attributionURL\">Jie Zhu</a> is licensed under a <a rel=\"license\" "
-       "href=\"https://creativecommons.org/licenses/by-sa/3.0/\">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</center>"))
+       "Here are some of my latest thoughts...(•̀ᴗ•́)و"))
