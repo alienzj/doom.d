@@ -61,3 +61,6 @@
 (package! writeroom-mode)
 
 (package! systemd)
+
+(package! google-translate)
+(package! dad-joke)

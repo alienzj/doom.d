@@ -1,5 +1,4 @@
 ;;; .doom.d/config.el -*- lexical-binding: t; -*-
-(require 'cl-lib)
 
 ;; user information
 (setq user-full-name "alienzj"
@@ -64,6 +63,35 @@
 (set-company-backend!
   'ess-r-mode
   '(company-R-args company-R-objects company-dabbrev-code :separate))
+
+
+;; flyspell
+(setq ispell-dictionary "en_GB")
+(setq ispell-extra-args '("--sug-mode=ultra"
+                          "--run-together"
+                          "--run-together-limit=5"
+                          "--run-together-min=2"))
+
+(eval-after-load "flyspell"
+  ' (progn
+      (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
+      (define-key flyspell-mouse-map [mouse-3] #'undefined)))
+;;(global-font-lock-mode t)
+;;(custom-set-faces '(flyspell-incorrect ((t (:inverse-video t)))))
+(setq ispell-silently-savep t)
+;;(setq ispell-personal-dictionary "~/.doom.d/.aspell.en.pws")
+
+
+(use-package google-translate
+  :defer t
+  :config
+  (global-set-key "\C-ct" 'google-translate-at-point))
+
+
+;; dad-joke
+(use-package dad-joke
+  :defer t
+  :config (defun dad-joke() (interactive) (insert (dad-joke-get))))
 
 
 ;; scratch-lisp
@@ -210,7 +238,23 @@
 
 (setq org-journal-encrypt-journal t
       org-journal-file-format "%Y%m%d.org"
-      org-ellipsis " ▼ "
+      ;;org-ellipsis " ▼ "
+      org-ellipsis " ⤵"
+      org-hide-block-startup t
+      ;; Lists may be labelled with letters.
+      org-list-allow-alphabetical t
+      ;; Avoid accidentally editing folded regions, say by adding text after an Org “⋯”.
+      org-catch-invisible-edits 'show
+      ;; I use indentation-sensitive programming languages.
+      ;; Tangling should preserve my indentation.
+      org-src-preserve-indentation t
+      ;; Tab should do indent in code blocks
+      org-src-tab-acts-natively t
+      ;; Give quote and verse blocks a nice look.
+      org-fontify-quote-and-verse-blocks t
+      ;; Pressing ENTER on a link should follow it.
+      org-return-follows-link t
+
       org-superstar-headline-bullets-list '("#")
       org-directory "~/documents/doraemon/org/"
       org-download-image-dir "~/documents/doraemon/org/images"
@@ -604,23 +648,37 @@ Make sure to put cursor on date heading that contains list of urls."
 
 
 ;; org-static-blog
-;; https://github.com/alhassy/emacs.d/blob/master/init.el#L2323
+(setq org-static-blog-publish-title "ZJ Blog")
+(setq org-static-blog-publish-url "https://alienzj.github.io/")
+(setq org-static-blog-publish-directory "~/documents/doraemon/org/blog/alienzj.github.io/blog/")
+(setq org-static-blog-posts-directory "~/documents/doraemon/org/blog/alienzj.github.io/posts/")
+(setq org-static-blog-drafts-directory "~/documents/doraemon/org/blog/alienzj.github.io/drafts/")
+(setq org-static-blog-enable-tags t)
+(setq org-export-with-toc nil)
+(setq org-export-with-section-numbers nil)
 
-(use-package org-static-blog
-  :config
-  (define-key global-map "\C-cb" 'zj/publish-to-blog)
-  (load-file "~/.doom.d/blog.el")
-)
-;(cl-defun zj/publish-to-blog (&optional (draft nil) (local nil))
-  ;;(interactive)
-  ;;(load-file "~/.doom.d/blog.el")
-  ;;(load-file "~/documents/doraemon/org/blog/alienzj.github.io/blog.el")
+(setq org-static-blog-page-header
+      "<meta name=\"author\" content=\"Jie Zhu\">
+<meta name=\"referrer\" content=\"no-referrer\">
+<link href= \"styles/style.css\" rel=\"stylesheet\" type=\"text/css\" />
+<link rel=\"icon\" href=\"images/favicon.ico\">")
 
-  ;;(setq file.org (buffer-name))
+(setq org-static-blog-page-preamble
+      "<div class=\"header\">
+  <a href=\"https://alienzj.github.io\">ZJ Blog</a>
+</div>")
 
-  ;;(preview-article :draft draft)
-  ;;(unless draft (publish))
-  ;;(let ((server (if local "http://localhost:4000/" "https://alienzj.github.io/")))
-  ;;  (async-shell-command (concat "open " server NAME "/") "*blog-post-in-browser*"))
-  ;; )
-;)
+(setq org-static-blog-page-postamble
+      (concat
+       "<div id=\"archive\">"
+       "<a href=\"https://staticblog.org/archive.html\">Other posts</a>"
+       "</div>"
+       "<center><a rel=\"license\" href=\"https://creativecommons.org/licenses/by-sa/3.0/\">"
+       "<img alt=\"Creative Commons License\" style=\"border-width:0\" "
+       "src=\"https://i.creativecommons.org/l/by-sa/3.0/88x31.png\" /></a>"
+       "<br /><span xmlns:dct=\"https://purl.org/dc/terms/\" href=\"https://purl.org/dc/dcmitype/Text\" "
+       "property=\"dct:title\" rel=\"dct:type\">alienzj.github.io</span> "
+       "by <a xmlns:cc=\"https://creativecommons.org/ns#\" "
+       "href=\"https://bastibe.de\" property=\"cc:attributionName\" "
+       "rel=\"cc:attributionURL\">Jie Zhu</a> is licensed under a <a rel=\"license\" "
+       "href=\"https://creativecommons.org/licenses/by-sa/3.0/\">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</center>"))

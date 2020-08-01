@@ -69,8 +69,8 @@
        :checkers
        (syntax
         +childframe)
-       ;;(spell +everywhere)
-       ;;grammar
+       spell ;+everywhere
+       grammar
 
        :emacs
        (dired             ; making dired pretty [functional]
@@ -97,8 +97,6 @@
        editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)              ; run code, run (also, repls)
-       ;;flycheck          ; tasing you for every semicolon you forget
-       ;;flyspell          ; tasing you for misspelling mispelling
        gist              ; interacting with github gists
        (lookup           ; helps you navigate your code and documentation
         +dictionary
