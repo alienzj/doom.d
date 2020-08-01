@@ -66,7 +66,7 @@
 
 
 ;; flyspell
-(setq ispell-dictionary "en_GB")
+;;(setq ispell-dictionary "en_GB")
 (setq ispell-extra-args '("--sug-mode=ultra"
                           "--run-together"
                           "--run-together-limit=5"
@@ -82,10 +82,17 @@
 ;;(setq ispell-personal-dictionary "~/.doom.d/.aspell.en.pws")
 
 
+;; google-translate
 (use-package google-translate
   :defer t
   :config
   (global-set-key "\C-ct" 'google-translate-at-point))
+
+
+(setq url-proxy-services
+      '(("http" . "127.0.0.1:9910")
+        ("https" . "127.0.0.1:9910")
+        ("socks5" . "127.0.0.1:9909")))
 
 
 ;; dad-joke
@@ -646,6 +653,10 @@ Make sure to put cursor on date heading that contains list of urls."
       ("-assume-filename=%S" (or buffer-file-name mode-result "")))
     ))
 
+;; org-special-block-extras
+(use-package org-special-block-extras
+  :ensure t
+  :hook (org-mode . org-special-block-extras-mode))
 
 ;; org-static-blog
 (setq org-static-blog-publish-title "ZJ Blog")
@@ -659,25 +670,95 @@ Make sure to put cursor on date heading that contains list of urls."
 
 (setq org-static-blog-page-header
       (concat
-       "<meta name=\"author\" content=\"Jie Zhu\">"
-       "<meta name=\"referrer\" content=\"no-referrer\">"
-       "<link href=\"styles/usual-org-front-matter.css\" rel=\"stylesheet\" type=\"text/css\" />"
-       "<link href=\"styles/org-notes-style.css\" rel=\"stylesheet\" type=\"text/css\" />"
-       "<link href=\"styles/floating-toc.css\" rel=\"stylesheet\" type=\"text/css\" />"
-       "<link href=\"styles/blog-banner.css\" rel=\"stylesheet\" type=\"text/css\" />"
-       "<link rel=\"icon\" href=\"images/hmp.jpg\">"
-       "<script type=\"text/javascript\""))
+       org-html-head-extra  ;; Alterd by ‘org-special-block-extras’
+       (concat
+        "<meta name=\"author\" content=\"Jie Zhu\">"
+        "<meta name=\"referrer\" content=\"no-referrer\">"
+        "<link href=\"styles/usual-org-front-matter.css\" rel=\"stylesheet\" type=\"text/css\" />"
+        "<link href=\"styles/org-notes-style.css\" rel=\"stylesheet\" type=\"text/css\" />"
+        "<link href=\"styles/floating-toc.css\" rel=\"stylesheet\" type=\"text/css\" />"
+        "<link href=\"styles/blog-banner.css\" rel=\"stylesheet\" type=\"text/css\" />"
+        "<link rel=\"icon\" href=\"images/org_logo.png\">")
+       "<script type=\"text/javascript\">
+   /*
+   @licstart  The following is the entire license notice for the
+   JavaScript code in this tag.
+
+   Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+   The JavaScript code in this tag is free software: you can
+   redistribute it and/or modify it under the terms of the GNU
+   General Public License (GNU GPL) as published by the Free Software
+   Foundation, either version 3 of the License, or (at your option)
+   any later version.  The code is distributed WITHOUT ANY WARRANTY;
+   without even the implied warranty of MERCHANTABILITY or FITNESS
+   FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+   As additional permission under GNU GPL version 3 section 7, you
+   may distribute non-source (e.g., minimized or compacted) forms of
+   that code without the copy of the GNU GPL normally required by
+   section 4, provided you include this license notice and a URL
+   through which recipients can access the Corresponding Source.
+
+
+   @licend  The above is the entire license notice
+   for the JavaScript code in this tag.
+   */
+   <!--/*--><![CDATA[/*><!--*/
+    function CodeHighlightOn(elem, id)
+    {
+      var target = document.getElementById(id);
+      if(null != target) {
+        elem.cacheClassElem = elem.className;
+        elem.cacheClassTarget = target.className;
+        target.className = \"code-highlighted\";
+        elem.className   = \"code-highlighted\";
+      }
+    }
+    function CodeHighlightOff(elem, id)
+    {
+      var target = document.getElementById(id);
+      if(elem.cacheClassElem)
+        elem.className = elem.cacheClassElem;
+      if(elem.cacheClassTarget)
+        target.className = elem.cacheClassTarget;
+    }
+   /*]]>*///-->
+   </script>"
+       "<script type=\"text/x-mathjax-config\">
+       MathJax.Hub.Config({
+           displayAlign: \"center\",
+           displayIndent: \"0em\",
+
+           \"HTML-CSS\": { scale: 100,
+                           linebreaks: { automatic: \"false\" },
+                           webFont: \"TeX\"
+                          },
+           SVG: {scale: 100,
+                 linebreaks: { automatic: \"false\" },
+                 font: \"TeX\"},
+           NativeMML: {scale: 100},
+           TeX: { equationNumbers: {autoNumber: \"AMS\"},
+                  MultLineWidth: \"85%\",
+                  TagSide: \"right\",
+                  TagIndent: \".8em\"
+                }
+   });
+   </script>
+   <script type=\"text/javascript\"
+           src=\"https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML\"></script>
+   "
+       ))
 
 (setq org-static-blog-page-preamble
-      (concat
-       "<div class=\"header\">"
-       "<a href=\"https://alienzj.github.io/\">ZJ Blog</a>"
-       "<br>"
-       "<a href=\"https://alienzj.github.io/archive\">Archive</a>"
-       "<a href=\"https://alienzj.github.io/tags\">Tags</a>"
-       "<a href=\"https://alienzj.github.io/rss.xml\">RSS</a>"
-       "<a href=\"https://alienzj.github.io/about\">About</a>"
-       "</div>"))
+"<div class=\"header\">
+  <a href=\"https://alienzj.github.io/\">ZJ Blog</a>
+  <br>
+    <a href=\"https://alienzj.github.io/archive\">Archive</a>
+    <a href=\"https://alienzj.github.io/tags\">Tags</a>
+    <a href=\"https://alienzj.github.io/rss.xml\">RSS</a>
+    <a href=\"https://alienzj.github.io/about\">About</a>
+</div>")
 
 (advice-add 'org-html--translate :before-until 'display-toc-as-Ξ)
 
@@ -695,7 +776,7 @@ Make sure to put cursor on date heading that contains list of urls."
 
 (setq org-static-blog-page-postamble
       (s-collapse-whitespace (s-replace "\n" ""
-"
+                                        "
 <center>
   <a rel=\"license\" href=\"https://creativecommons.org/licenses/by-sa/3.0/\">
      <img alt=\"Creative Commons License\" style=\"border-width:0\"

@@ -56,6 +56,7 @@
 
 (package! org-ref)
 (package! org-static-blog)
+(package! org-special-block-extras)
 (package! ebib)
 (package! org-roam-server)
 (package! writeroom-mode)
