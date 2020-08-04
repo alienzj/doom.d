@@ -284,7 +284,7 @@
       org-noter-notes-search-path '("~/documents/doraemon/org/note/")
       org-noter-separate-notes-from-heading t
 
-      org-roam-directory "~/documents/doraemon/org/roam")
+      org-roam-directory "~/documents/doraemon/org/")
 
 
 ;; open pdf with system pdf viewer
