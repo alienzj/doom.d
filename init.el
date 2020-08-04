@@ -34,6 +34,7 @@
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
        ;;indent-guides     ; highlighted indent columns
+       minimap
        (modeline)          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink the current line after jumping
        ;;neotree           ; a project drawer, like NERDTree for vim
@@ -69,7 +70,7 @@
        :checkers
        (syntax
         +childframe)
-       spell ;+everywhere
+       (spell +everywhere +aspell +hunspell)
        grammar
 
        :emacs
@@ -81,7 +82,7 @@
        (ibuffer
         +icons)
        (undo
-        +icons)
+        +tree)
 
        :term
        eshell            ; a consistent, cross-platform shell (WIP)
@@ -91,22 +92,23 @@
 
        :tools
        ansible
-       debugger          ; FIXME stepping through code, to help you add bugs
+       (debugger +lsp)          ; FIXME stepping through code, to help you add bugs
        direnv
        docker
        editorconfig      ; let someone else argue about tabs vs spaces
-       ;;ein               ; tame Jupyter notebooks with emacs
+       ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)              ; run code, run (also, repls)
        gist              ; interacting with github gists
        (lookup           ; helps you navigate your code and documentation
         +dictionary
+        +offline
         +docsets)        ; ...or in Dash docsets locally
        (lsp +peek)
        ;;macos             ; MacOS-specific commands
        (magit             ; a git porcelain for Emacs
         +forge)
        make              ; run make tasks from Emacs
-       pass              ; password manager for nerds
+       (pass +auth)             ; password manager for nerds
        pdf               ; pdf enhancements
        ;;prodigy           ; FIXME managing external services & code builders
        rgb               ; creating color strings
@@ -116,54 +118,60 @@
        ;;wakatime
 
        :lang
-       agda              ; types of types of types of types...
-       ;;assembly          ; assembly for fun or debugging
+       (agda +local)       ; types of types of types of types...
        (cc +lsp)                ; C/C++/Obj-C madness
-       (clojure +lsp)           ; java with a lisp
+       ;;(clojure +lsp)           ; java with a lisp
        (common-lisp +lsp)      ; if you've seen one lisp, you've seen them all
-       coq               ; proofs-as-programs
-       (crystal +lsp)          ; ruby at the speed of c
-       (csharp +lsp +unity)           ; unity, .NET, and mono shenanigans
+       ;;coq               ; proofs-as-programs
+       ;;(crystal +lsp)          ; ruby at the speed of c
+       ;;(csharp +lsp +unity)           ; unity, .NET, and mono shenanigans
        data              ; config/data formats
-       (erlang +lsp)           ; an elegant language for a more civilized age
-       (elixir +lsp)          ; erlang done right
-       (elm +lsp)              ; care for a cup of TEA?
-       (emacs-lisp +lsp)       ; drown in parentheses
+       ;;(dart +flutter)
+       ;;(erlang +lsp)           ; an elegant language for a more civilized age
+       ;;(elixir +lsp)          ; erlang done right
+       ;;(elm +lsp)              ; care for a cup of TEA?
+       emacs-lisp       ; drown in parentheses
        (ess +lsp)               ; emacs speaks statistics
-       (fsharp +lsp)          ; ML stands for Microsoft's Language
+       ;;faust
+       ;;fstar
+       ;;gdscript
+       ;;(fsharp +lsp)          ; ML stands for Microsoft's Language
        (go +lsp)               ; the hipster dialect
-       (haskell +dante +lsp) ; a language that's lazier than I am
-       (hy +lsp)               ; readability of scheme w/ speed of python
-       (idris +lsp)             ;
-       (java +meghanada
-             +lsp) ; the poster child for carpal tunnel syndrome
+       (haskell +dante +lsp +ghcide) ; a language that's lazier than I am
+       ;;(hy +lsp)               ; readability of scheme w/ speed of python
+       ;;(idris +lsp)             ;
+       (json +lsp)
+       (java +lsp) ; the poster child for carpal tunnel syndrome
        (javascript +lsp)     ; all(hope(abandon(ye(who(enter(here))))))
-       ;;(julia +lsp)            ; a better, faster MATLAB
+       (julia +lsp)            ; a better, faster MATLAB
        (kotlin +lsp)           ; a better, slicker Java(Script)
        (latex +latexmk             ; writing papers in Emacs has never been so fun
               +cdlatex
-              +fold)
-       (lean +lsp)
-       (ledger +lsp)           ; an accounting system in Emacs
-       (lua +monoscript)              ; one-based indices? one-based indices
+              +fold
+              +lsp)
+       ;;(lean +lsp)
+       ;;factor
+       ;;(ledger +lsp)           ; an accounting system in Emacs
+       ;;(lua +monoscript)              ; one-based indices? one-based indices
        (markdown +grip)         ; writing docs for people to ignore
        (nim +lsp)               ; python + lisp at the speed of c
        (nix +lsp)              ; I hereby declare "nix geht mehr!"
        (ocaml +lsp)            ; an objective camel
        (org              ; organize your plain life in plain text
-        +dragndrop       ; drag & drop files/images into org buffers
-        +hugo
-        +pomodoro
-        +ipython
-        +jupyter         ; ipython/jupyter support for babel
-        +pandoc          ; export-with-pandoc support
         +brain
+        +dragndrop       ; drag & drop files/images into org buffers
         +gnuplot
-        +present
+        +hugo
+        +ipython
+        +journal        ; using org-mode for presentations
+        +jupyter         ; ipython/jupyter support for babel
         +noter
-        +roam
+        +pandoc          ; export-with-pandoc support
+        +present
         +pandoc
-        +journal)        ; using org-mode for presentations
+        +pomodoro
+        +present
+        +roam)        ; using org-mode for presentations
        (raku +lsp)            ; write code no one else can comprehend
        (php +lsp)               ; perl's insecure younger brother
        plantuml          ; diagrams for confusing people more
@@ -172,23 +180,27 @@
         +pyenv
         +conda
         +lsp
-        +cython)           ; beautiful is better than ugly
-       (qt +lsp)               ; the 'cutest' gui framework ever
-       (racket +lsp)            ; a DSL for DSLs
-       rest              ; Emacs as a REST client
+        +cython
+        +poetry)           ; beautiful is better than ugly
+       qt               ; the 'cutest' gui framework ever
+       racket            ; a DSL for DSLs
+       raku
+       rest            ; Emacs as a REST client
        rst
-       (ruby +lsp +rvm +rbenv)              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
+       (ruby +lsp +rvm +rbenv +rails +chruby)   ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        (rust +lsp)             ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
-       ;;(scala +lsp)           ; java, but good
-       (scheme +lsp)           ; a fully conniving family of lisps
+       (scala +lsp)           ; java, but good
+       scheme           ; a fully conniving family of lisps
        (sh +lsp +fish)               ; she sells {ba,z,fi}sh shells on the C xor
-       solidity          ; do you need a blockchain? No.
+       ;;sml
+       ;;solidity          ; do you need a blockchain? No.
        (swift +lsp)            ; who asked for emoji variables?
-       terra             ; Earth and Moon in alignment for performance.
+       ;;terra             ; Earth and Moon in alignment for performance.
        (web +lsp)              ; the tubes
+       (yaml +lsp)
 
        :email
-       ;;(mu4e +gmail)       ; WIP
+       (mu4e +gmail)       ; WIP
        ;;notmuch             ; WIP
        ;;(wanderlust +gmail) ; WIP
 

@@ -29,6 +29,10 @@
 (display-time-mode t)
 
 
+;; input method
+(setq pyim-default-scheme 'rime)
+
+
 ;; evil
 (setq evil-vsplit-window-right t
       evil-split-window-below t)
@@ -114,7 +118,7 @@
       doom-themes-enable-bold t
       doom-themes-enable-italic t
       doom-themes-treemacs-theme "doom-colors"
-
+      ;;doom-theme 'doom-dark+
       ;;doom-theme 'doom-dracula
       ;;doom-theme 'doom-solarized-dark
       ;;doom-theme 'doom-molokai)
@@ -239,7 +243,7 @@
 ;;  (add-hook! magit-popup-mode-hook #'remove-fringes))
 
 
-;; org, org-ref, org-noter, bibtex
+;; org, org-noter, bibtex
 (after! org
   (add-to-list 'org-modules 'org-habit t))
 
@@ -262,8 +266,11 @@
       ;; Pressing ENTER on a link should follow it.
       org-return-follows-link t
 
-      org-superstar-headline-bullets-list '("#")
+      ;;org-superstar-headline-bullets-list '("#")
+      ;;org-hide-emphasis-markers t
       org-directory "~/documents/doraemon/org/"
+
+      org-download-screenshot-method "flameshot gui --raw > %s"
       org-download-image-dir "~/documents/doraemon/org/images"
 
       bibtex-completion-bibliography '("~/documents/doraemon/org/reference/references.bib")
@@ -274,10 +281,10 @@
       reftex-default-bibliography '("~/documents/doraemon/org/reference/references.bib")
 
       org-noter-default-notes-file-names '("references.org")
-      org-noter-notes-search-path '("~/documents/doraemon/org/note")
+      org-noter-notes-search-path '("~/documents/doraemon/org/note/")
       org-noter-separate-notes-from-heading t
 
-      org-roam-directory "~/documents/doraemon/org/note/")
+      org-roam-directory "~/documents/doraemon/org/roam")
 
 
 ;; open pdf with system pdf viewer
@@ -654,9 +661,10 @@ Make sure to put cursor on date heading that contains list of urls."
     ))
 
 ;; org-special-block-extras
-(use-package org-special-block-extras
-  :ensure t
-  :hook (org-mode . org-special-block-extras-mode))
+;;(use-package org-special-block-extras
+;;  :ensure t
+;;  :hook (org-mode . org-special-block-extras-mode))
+
 
 ;; org-static-blog
 (setq org-static-blog-publish-title "ZJ Blog")
@@ -776,7 +784,7 @@ Make sure to put cursor on date heading that contains list of urls."
 
 (setq org-static-blog-page-postamble
       (s-collapse-whitespace (s-replace "\n" ""
-                                        "
+"
 <center>
   <a rel=\"license\" href=\"https://creativecommons.org/licenses/by-sa/3.0/\">
      <img alt=\"Creative Commons License\" style=\"border-width:0\"
@@ -819,3 +827,95 @@ var disqus_shortname = 'zj-blog';
 (setq index-content-header
       (concat
        "Here are some of my latest thoughts...(•̀ᴗ•́)و"))
+(setq show-reading-time nil)
+
+(defun org-static-blog-assemble-multipost-page
+    (pub-filename post-filenames &optional front-matter)
+  "Assemble a page that contains multiple posts one after another.
+Posts are sorted in descending time."
+  (setq post-filenames
+        (sort post-filenames (lambda (x y)
+                               (time-less-p (org-static-blog-get-date y)
+                                            (org-static-blog-get-date x)))))
+  (with-temp-buffer
+    (insert
+     (concat
+      "#+EXPORT_FILE_NAME: " pub-filename
+      "\n#+options: toc:nil title:nil html-postamble:nil"
+      "\n#+title: " (if (equal "index" (f-base pub-filename))
+                        org-static-blog-publish-title
+                        (f-base pub-filename))
+      "\n#+begin_export html\n "
+        org-static-blog-page-preamble
+        org-static-blog-page-header
+        (if front-matter front-matter "")
+      "\n#+end_export"
+
+      "\n\n"
+      (if (equal "index" (f-base pub-filename))
+          (format "#+begin_export html\n%s\n#+end_export\n%s"
+                  org-static-blog-page-header index-content-header)
+        "")
+
+      "\n\n" ;; abstracts of posts
+      (thread-last post-filenames
+        (--map
+         (format
+          (concat
+           ;; ⟨0⟩ Title and link to article
+           "#+HTML: <h2 class=\"title\"><a href=\"%s\"> %s</a></h2>"
+           ;; ⟨1⟩ Tags and reading time
+           "\n#+begin_center\n%s\n%s\n#+end_center"
+           ;; ⟨2⟩ Article image
+           "\n@@html:%s@@"
+           ;; ⟨3⟩ Preview
+           "\n#+INCLUDE: \"%s::*Abstract\" :only-contents t"
+           ;; ⟨4⟩ “Read more” link
+           "\n@@html:<p style=\"text-align:right\">@@"
+           " badge:Read|more|green|%s|read-the-docs @@html:</p>@@")
+          ;; ⟨0⟩ Title and link to article
+          (concat org-static-blog-publish-url (f-base it))
+          (org-static-blog-get-title it)
+          ;; ⟨1⟩ Tags and reading time
+          (concat octoicon:tag " "
+                  (s-join " "
+                          (--map (format "badge:|%s|grey|%stag-%s.html"
+                                         (s-replace "-" "_" it)
+                                         org-static-blog-publish-url it)
+                                 (org-static-blog-get-tags it))))
+          (if (not show-reading-time)
+              ""
+            (format "\n%s %s mins read"
+                    octoicon:clock
+                    (with-temp-buffer (insert-file-contents it)
+                                      (org-ascii-export-as-ascii)
+                                      (setq __x
+                                            (count-words (point-min) (point-max)))
+                                      (kill-buffer "*Org ASCII Export*")
+                                      (delete-other-windows)
+                                      (/ __x 200)))) ;; 200 words per minute reading
+          ;; ⟨2⟩ Article image
+          (my/org-static-blog-assemble-image it)
+          ;; ⟨3⟩ Preview
+          it
+          ;; ⟨4⟩ “Read more” link
+          (concat org-static-blog-publish-url (f-base it))))
+        (s-join "\n\n"))
+
+      ;; bottom matter
+      "\n#+begin_export html:\n"
+      "<hr><hr> <div id=\"archive\">"
+      "<a href=\""
+      (org-static-blog-get-absolute-url org-static-blog-archive-file)
+      "\">" (org-static-blog-gettext 'other-posts) "</a>"
+      "</div>"
+      "</div>"
+      "<div id=\"postamble\" class=\"status\">"
+      org-static-blog-page-postamble
+      "</div>"
+      "\n#+end_export"))
+    (org-mode)
+    (org-html-export-to-html)))
+
+(setq org-html-table-caption-above nil
+      org-export-latex-table-caption-above nil)
