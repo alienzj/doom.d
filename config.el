@@ -282,25 +282,25 @@
 
       ;;org-noter-default-notes-file-names '("references.org")
       org-noter-notes-search-path '("~/documents/doraemon/org/ref/")
-      org-noter-separate-notes-from-heading t
+      ;;org-noter-separate-notes-from-heading t
 
       org-roam-directory "~/documents/doraemon/org/")
 
 
-(defun org-ref-noter-at-point ()
-      "Open the pdf for bibtex key under point if it exists."
-      (interactive)
-      (let* ((results (org-ref-get-bibtex-key-and-file))
-             (key (car results))
-             (pdf-file (funcall org-ref-get-pdf-filename-function key)))
-        (if (file-exists-p pdf-file)
-            (progn
-              (find-file-other-window pdf-file)
-              (org-noter))
-          (message "no pdf found for %s" key))))
+;;(defun org-ref-noter-at-point ()
+;;      "Open the pdf for bibtex key under point if it exists."
+;;      (interactive)
+;;      (let* ((results (org-ref-get-bibtex-key-and-file))
+;;             (key (car results))
+;;             (pdf-file (funcall org-ref-get-pdf-filename-function key)))
+;;        (if (file-exists-p pdf-file)
+;;            (progn
+;;              (find-file-other-window pdf-file)
+;;              (org-noter))
+;;          (message "no pdf found for %s" key))))
 
-(add-to-list 'org-ref-helm-user-candidates
-             '("Org-Noter notes" . org-ref-noter-at-point))
+;;(add-to-list 'org-ref-helm-user-candidates
+;;             '("Org-Noter notes" . org-ref-noter-at-point))
 
 
 ;; open pdf with system pdf viewer
