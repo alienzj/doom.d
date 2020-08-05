@@ -271,20 +271,36 @@
       org-directory "~/documents/doraemon/org/"
 
       org-download-screenshot-method "flameshot gui --raw > %s"
-      org-download-image-dir "~/documents/doraemon/org/images"
+      org-download-image-dir "~/documents/doraemon/org/images/"
 
-      bibtex-completion-bibliography '("~/documents/doraemon/org/reference/references.bib")
-      bibtex-completion-library-path "~/documents/doraemon/org/reference/pdf"
+      bibtex-completion-bibliography '("~/documents/doraemon/org/references.bib")
+      bibtex-completion-library-path "~/documents/doraemon/org/pdf/"
       bibtex-completion-pdf-field "File"
-      bibtex-completion-notes-path "~/documents/doraemon/org/note/references.org"
+      ;;bibtex-completion-notes-path "~/documents/doraemon/org/references.org"
 
-      reftex-default-bibliography '("~/documents/doraemon/org/reference/references.bib")
+      reftex-default-bibliography '("~/documents/doraemon/org/references.bib")
 
-      org-noter-default-notes-file-names '("references.org")
-      org-noter-notes-search-path '("~/documents/doraemon/org/note/")
+      ;;org-noter-default-notes-file-names '("references.org")
+      org-noter-notes-search-path '("~/documents/doraemon/org/ref/")
       org-noter-separate-notes-from-heading t
 
       org-roam-directory "~/documents/doraemon/org/")
+
+
+(defun org-ref-noter-at-point ()
+      "Open the pdf for bibtex key under point if it exists."
+      (interactive)
+      (let* ((results (org-ref-get-bibtex-key-and-file))
+             (key (car results))
+             (pdf-file (funcall org-ref-get-pdf-filename-function key)))
+        (if (file-exists-p pdf-file)
+            (progn
+              (find-file-other-window pdf-file)
+              (org-noter))
+          (message "no pdf found for %s" key))))
+
+(add-to-list 'org-ref-helm-user-candidates
+             '("Org-Noter notes" . org-ref-noter-at-point))
 
 
 ;; open pdf with system pdf viewer
@@ -301,11 +317,11 @@
   :custom
   (ebib-bibtex-dialect 'biblatex)
   (ebib-index-window-size 10)
-  (ebib-preload-bib-files '("~/documents/doraemon/org/reference/references.bib"))
-  (ebib-notes-use-single-file "~/documents/doraemon/org/note/references.org")
-  (ebib-file-search-dirs '("~/documents/doraemon/org/reference/pdf/"))
-  (ebib-reading-list-file "~/documents/doraemon/org/note/toread_list.org")
-  (ebib-keywords-file "~/documents/doraemon/org/reference/ebib_keywords.txt")
+  (ebib-preload-bib-files '("~/documents/doraemon/org/references.bib"))
+  ;;(ebib-notes-use-single-file "~/documents/doraemon/org/references.org")
+  (ebib-file-search-dirs '("~/documents/doraemon/org/pdf/"))
+  (ebib-reading-list-file "~/documents/doraemon/org/toread_list.org")
+  (ebib-keywords-file "~/documents/doraemon/org/ebib_keywords.txt")
   (ebib-keywords-field-keep-sorted t)
   (ebib-keywords-file-save-on-exit 'always)
   (ebib-file-associations '(("pdf")) "using Emacs to open pdf")
@@ -335,9 +351,10 @@
   ;;   ("d" doi-add-bibtex-entry "doi"))))
   :custom
   (bibtex-dialect 'biblatex)
-  (org-ref-bibliography-notes "~/documents/doraemon/org/note/references.org")
-  (org-ref-default-bibliography '("~/documents/doraemon/org/reference/references.bib"))
-  (org-ref-pdf-directory "~/documents/doraemon/org/reference/pdf/")
+  ;;(org-ref-bibliography-notes "~/documents/doraemon/org/references.org")
+  ;;(setq org-ref-notes-function #'org-ref-notes-function-one-file)
+  (org-ref-default-bibliography '("~/documents/doraemon/org/references.bib"))
+  (org-ref-pdf-directory "~/documents/doraemon/org/pdf/")
   (org-ref-show-broken-links nil)
   (org-ref-default-ref-type "eqref")
   (org-ref-default-citation-link "citet")
@@ -390,7 +407,7 @@
 
 
 ;; elfeed
-(setq rmh-elfeed-org-files (list "~/.doom.d/elfeed.org"))
+(setq rmh-elfeed-org-files (list "~/documents/doraemon/org/elfeed.org"))
 
 
 ;; lookup
