@@ -96,7 +96,7 @@
        direnv
        docker
        editorconfig      ; let someone else argue about tabs vs spaces
-       ein               ; tame Jupyter notebooks with emacs
+       ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)              ; run code, run (also, repls)
        gist              ; interacting with github gists
        (lookup           ; helps you navigate your code and documentation
@@ -143,7 +143,7 @@
        (json +lsp)
        (java +lsp) ; the poster child for carpal tunnel syndrome
        (javascript +lsp)     ; all(hope(abandon(ye(who(enter(here))))))
-       (julia +lsp)            ; a better, faster MATLAB
+       ;;(julia +lsp)            ; a better, faster MATLAB
        (kotlin +lsp)           ; a better, slicker Java(Script)
        (latex +latexmk             ; writing papers in Emacs has never been so fun
               +cdlatex

@@ -94,9 +94,9 @@
 
 
 (setq url-proxy-services
-      '(("http" . "127.0.0.1:9910")
-        ("https" . "127.0.0.1:9910")
-        ("socks5" . "127.0.0.1:9909")))
+      '(("http" . "127.0.0.1:8118")
+        ("https" . "127.0.0.1:8118")
+        ("socks5" . "127.0.0.1:1080")))
 
 
 ;; dad-joke
@@ -212,7 +212,8 @@
 
 
 ;;; :ui doom-dashboard
-(setq fancy-splash-image "~/projects/doom.d/splash.png")
+;;(setq fancy-splash-image "~/projects/doom.d/splash.png")
+(setq fancy-splash-image "~/projects/doom.d/lige.png")
 
 
 
