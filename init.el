@@ -70,8 +70,8 @@
        :checkers
        (syntax
         +childframe)
-       (spell +everywhere +aspell +hunspell)
-       grammar
+       ;(spell +everywhere +aspell +hunspell)
+       ;grammar
 
        :emacs
        (dired             ; making dired pretty [functional]
