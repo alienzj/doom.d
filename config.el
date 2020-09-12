@@ -409,6 +409,8 @@
 
 ;; elfeed
 (setq rmh-elfeed-org-files (list "~/documents/doraemon/org/elfeed.org"))
+;;(setq-default elfeed_search-filter "@8-week-ago +unread ")
+(setq-default elfeed_search-filter "@8-week-ago")
 
 
 ;; lookup
