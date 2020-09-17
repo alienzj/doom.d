@@ -54,8 +54,7 @@
    ;;company-idle-delay nil
    company-idle-delay 0.2
    company-minimum-prefix-length 3
-   company-show-numbers t)
-  (add-hook 'evil-normal-state-entry-hook #'company-abort))
+   company-show-numbers t))
 
 (set-company-backend! '(text-mode
                         markdown-mode
@@ -440,11 +439,13 @@
 
 
 ;; conda
-;;(require 'conda)
-;;(setq conda-anaconda-home "~/.conda/envs/bioenv")
-;;(conda-env-initialize-interactive-shells)
-;;(conda-env-initialize-eshell)
-;;(conda-env-autoactivate-mode t)
+(require 'conda)
+(setq conda-anaconda-home "/home/zhujie/.conda/envs/bioenv")
+(setq conda-env-home-directory "/home/zhujie/.conda/envs/bioenv")
+(setq conda-env-subdirectory "../")
+(conda-env-initialize-interactive-shells)
+(conda-env-initialize-eshell)
+(conda-env-autoactivate-mode t)
 
 
 ;; tramp
@@ -456,7 +457,8 @@
 
 
 ;; rust
-(setq rustic-lsp-server 'rust-analyzer)
+(after! rustic
+  (setq rustic-lsp-server 'rust-analyzer))
 
 
 ;; calibre-mode
@@ -726,7 +728,7 @@ Make sure to put cursor on date heading that contains list of urls."
 </div>")
 
 (setq org-static-blog-page-postamble
-"<center><button id=\"disqus_button\" onclick=\"load_disqus()\">Load Disqus Comments</button></center>
+      "<center><button id=\"disqus_button\" onclick=\"load_disqus()\">Load Disqus Comments</button></center>
 <div id=\"disqus_thread\"></div>
 <script type=\"text/javascript\">
     function load_disqus() {
@@ -739,3 +741,36 @@ Make sure to put cursor on date heading that contains list of urls."
     };
 </script>
 <center><a rel=\"license\" href=\"https://creativecommons.org/licenses/by-sa/3.0/\"><img alt=\"Creative Commons License\" style=\"border-width:0\" src=\"https://i.creativecommons.org/l/by-sa/3.0/88x31.png\" /></a><br /><span xmlns:dct=\"https://purl.org/dc/terms/\" href=\"https://purl.org/dc/dcmitype/Text\" property=\"dct:title\" rel=\"dct:type\">ZJ Org Blog</span> by <a xmlns:cc=\"https://creativecommons.org/ns#\" href=\"https://alienzj.github.io\" property=\"cc:attributionName\" rel=\"cc:attributionURL\">Jie Zhu</a> is licensed under a <a rel=\"license\" href=\"https://creativecommons.org/licenses/by-sa/3.0/\">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</center>")
+
+
+(defun yank-html-from-clipboard ()
+  "Yank HTML from clipboard as Org or Markdown code."
+  (interactive)
+  (let* ((result
+          (condition-case err
+              ;; hex-encoded string:
+              ;;           < m e t a ......>
+              ;; «data HTML3C6D657461......3E»
+              (do-applescript "the clipboard as «class HTML»")
+            (error
+             ;; assume it's user's fault
+             (user-error "Can't get HTML data from the clipboard: %s"
+                         (error-message-string err)))))
+         (data (substring result 10 -1))
+         (html (decode-coding-string
+                (apply #'unibyte-string
+                       (mapcar (lambda (x) (string-to-number x 16))
+                               (seq-partition data 2)))
+                'utf-8))
+         (target (if (derived-mode-p 'org-mode)
+                     "org"
+                   ;; the official Markdown doesn't support table?
+                   "gfm")))
+    (insert
+     (with-temp-buffer
+       (if (zerop (call-process-region html nil "pandoc" nil t nil
+                                       ;; https://stackoverflow.com/a/35812743/2999892
+                                       "-f" "html-native_divs-native_spans"
+                                       "-t" target))
+           (buffer-string)
+         (error "pandoc failed: %s" (buffer-string)))))))
