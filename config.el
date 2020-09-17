@@ -743,3 +743,7 @@ Make sure to put cursor on date heading that contains list of urls."
     };
 </script>
 <center><a rel=\"license\" href=\"https://creativecommons.org/licenses/by-sa/3.0/\"><img alt=\"Creative Commons License\" style=\"border-width:0\" src=\"https://i.creativecommons.org/l/by-sa/3.0/88x31.png\" /></a><br /><span xmlns:dct=\"https://purl.org/dc/terms/\" href=\"https://purl.org/dc/dcmitype/Text\" property=\"dct:title\" rel=\"dct:type\">ZJ Org Blog</span> by <a xmlns:cc=\"https://creativecommons.org/ns#\" href=\"https://alienzj.github.io\" property=\"cc:attributionName\" rel=\"cc:attributionURL\">Jie Zhu</a> is licensed under a <a rel=\"license\" href=\"https://creativecommons.org/licenses/by-sa/3.0/\">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</center>")
+
+;; emacs-jupyter
+(setq org-babel-default-header-args:jupyter-python '((:async . "yes")
+                                                     (:session . "py")))
