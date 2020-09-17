@@ -1,9 +1,15 @@
 ;;; .doom.d/config.el -*- lexical-binding: t; -*-
 
 ;; user information
-(setq user-full-name "alienzj"
+(setq user-full-name user-login-name
       user-mail-address "alienchuj@gmail.com"
-      epa-file-encrypt-to user-mail-address)
+      epa-file-encrypt-to user-mail-address
+      zj-home (concat "/home/" user-login-name "/")
+      zj-project-dir (concat zj-home "projects/")
+      zj-document-dir (concat zj-home "documents/")
+      zj-doraemon-dir (concat zj-document-dir "doraemon/")
+      zj-org-dir (concat zj-doraemon-dir "org/")
+      zj-blog-dir (concat zj-org-dir "blog/alienzj.github.io/"))
 
 
 ;; better defaults
@@ -212,8 +218,7 @@
 
 ;;; :ui doom-dashboard
 ;;(setq fancy-splash-image "~/projects/doom.d/splash.png")
-(setq fancy-splash-image "~/projects/doom.d/lige.png")
-
+(setq fancy-splash-image (concat zj-project-dir "doom.d/lige.png"))
 
 
 ;;(add-hook 'completion-list-mode-hook #'hide-mode-line-mode)
@@ -233,7 +238,7 @@
 ;; magit
 (after! magit
   (magit-delta-mode +1)
-  (setq magit-repository-directories '(("~/projects" .2))
+  (setq magit-repository-directories '((zj-project-dir .2))
         magit-save-repository-buffers nil
         magit-inhibit-save-previous-winconf t))
 
@@ -268,23 +273,23 @@
 
       ;;org-superstar-headline-bullets-list '("#")
       ;;org-hide-emphasis-markers t
-      org-directory "~/documents/doraemon/org/"
+      org-directory zj-org-dir
 
       org-download-screenshot-method "flameshot gui --raw > %s"
-      org-download-image-dir "~/documents/doraemon/org/images/"
+      org-download-image-dir (concat zj-org-dir "images/")
 
-      bibtex-completion-bibliography '("~/documents/doraemon/org/references.bib")
-      bibtex-completion-library-path "~/documents/doraemon/org/pdf/"
+      bibtex-completion-bibliography '((concat zj-org-dir "references.bib"))
+      bibtex-completion-library-path  (concat zj-org-dir "pdf/")
       bibtex-completion-pdf-field "File"
-      ;;bibtex-completion-notes-path "~/documents/doraemon/org/references.org"
+      ;;bibtex-completion-notes-path (concat zj-org-dir "references.org")
 
-      reftex-default-bibliography '("~/documents/doraemon/org/references.bib")
+      reftex-default-bibliography bibtex-completion-bibliography
 
       ;;org-noter-default-notes-file-names '("references.org")
-      org-noter-notes-search-path '("~/documents/doraemon/org/ref/")
+      org-noter-notes-search-path '((concat zj-org-dir "ref/"))
       ;;org-noter-separate-notes-from-heading t
 
-      org-roam-directory "~/documents/doraemon/org/")
+      org-roam-directory org-directory)
 
 
 ;;(defun org-ref-noter-at-point ()
@@ -317,11 +322,11 @@
   :custom
   (ebib-bibtex-dialect 'biblatex)
   (ebib-index-window-size 10)
-  (ebib-preload-bib-files '("~/documents/doraemon/org/references.bib"))
-  ;;(ebib-notes-use-single-file "~/documents/doraemon/org/references.org")
-  (ebib-file-search-dirs '("~/documents/doraemon/org/pdf/"))
-  (ebib-reading-list-file "~/documents/doraemon/org/toread_list.org")
-  (ebib-keywords-file "~/documents/doraemon/org/ebib_keywords.txt")
+  (ebib-preload-bib-files '((concat zj-org-dir "references.bib")))
+  ;;(ebib-notes-use-single-file (concat zj-org-dir "references.org"))
+  (ebib-file-search-dirs '((concat zj-org-dir "pdf/")))
+  (ebib-reading-list-file (concat zj-org-dir "toread_list.org"))
+  (ebib-keywords-file (concat zj-org-dir "ebib_keywords.txt"))
   (ebib-keywords-field-keep-sorted t)
   (ebib-keywords-file-save-on-exit 'always)
   (ebib-file-associations '(("pdf")) "using Emacs to open pdf")
@@ -351,10 +356,10 @@
   ;;   ("d" doi-add-bibtex-entry "doi"))))
   :custom
   (bibtex-dialect 'biblatex)
-  ;;(org-ref-bibliography-notes "~/documents/doraemon/org/references.org")
+  ;;(org-ref-bibliography-notes (concat zj-org-dir "references.org"))
   ;;(setq org-ref-notes-function #'org-ref-notes-function-one-file)
-  (org-ref-default-bibliography '("~/documents/doraemon/org/references.bib"))
-  (org-ref-pdf-directory "~/documents/doraemon/org/pdf/")
+  (org-ref-default-bibliography '((concat zj-org-dir "references.bib")))
+  (org-ref-pdf-directory (concat zj-org-dir "pdf/"))
   (org-ref-show-broken-links nil)
   (org-ref-default-ref-type "eqref")
   (org-ref-default-citation-link "citet")
@@ -402,12 +407,12 @@
 
 ;; deft
 (setq deft-extensions '("txt" "tex" "org")
-      deft-directory "~/documents/doraemon/org"
+      deft-directory zj-org-dir
       deft-recursive t)
 
 
 ;; elfeed
-(setq rmh-elfeed-org-files (list "~/documents/doraemon/org/elfeed.org"))
+(setq rmh-elfeed-org-files (list (concat zj-org-dir "elfeed.org")))
 ;;(setq-default elfeed_search-filter "@8-week-ago +unread ")
 (setq-default elfeed_search-filter "@8-week-ago")
 
@@ -417,7 +422,7 @@
 
 
 ;; ddragon
-(setq ddragon-dir "~/documents/database/lol")
+(setq ddragon-dir (concat zj-document-dir "database/lol"))
 
 
 ;; vscode
@@ -440,8 +445,8 @@
 
 ;; conda
 (require 'conda)
-(setq conda-anaconda-home "/home/zhujie/.conda/envs/bioenv")
-(setq conda-env-home-directory "/home/zhujie/.conda/envs/bioenv")
+(setq conda-anaconda-home (concat zj-home ".conda/envs/bioenv"))
+(setq conda-env-home-directory (concat zj-home ".conda/envs/bioenv"))
 (setq conda-env-subdirectory "../")
 (conda-env-initialize-interactive-shells)
 (conda-env-initialize-eshell)
@@ -465,7 +470,7 @@
 ;;(def-package! calibre-mode
 ;;  :config
 ;;  (setq sql-sqlite-program "/usr/bin/sqlite3"
-;;        calibre-root-dir (expand-file-name "~/documents/doraemon/books/calibre")
+;;        calibre-root-dir (expand-file-name (concat zj-home "documents/doraemon/books/calibre"))
 ;;        calibre-db (concat calibre-root-dir "/metadata.db")))
 
 
@@ -689,17 +694,14 @@ Make sure to put cursor on date heading that contains list of urls."
 
 
 ;; org-static-blog
-(setq org-static-blog-publish-title "ZJ Org Blog")
-(setq org-static-blog-publish-url "https://alienzj.github.io/")
-(setq org-static-blog-publish-directory
-      "~/documents/doraemon/org/blog/alienzj.github.io/")
-(setq org-static-blog-posts-directory
-      "~/documents/doraemon/org/blog/alienzj.github.io/posts/")
-(setq org-static-blog-drafts-directory
-      "~/documents/doraemon/org/blog/alienzj.github.io/drafts/")
-(setq org-static-blog-enable-tags t)
-(setq org-export-with-toc nil)
-(setq org-export-with-section-numbers nil)
+(setq org-static-blog-publish-title "ZJ Org Blog"
+      org-static-blog-publish-url "https://alienzj.github.io/"
+      org-static-blog-publish-directory zj-blog-dir
+      org-static-blog-posts-directory (concat zj-blog-dir "posts/")
+      org-static-blog-drafts-directory (concat zj-blog-dir "drafts/")
+      org-static-blog-enable-tags t
+      org-export-with-toc nil
+      org-export-with-section-numbers nil)
 
 ;; page-header
 ;; page-preamble
@@ -741,36 +743,3 @@ Make sure to put cursor on date heading that contains list of urls."
     };
 </script>
 <center><a rel=\"license\" href=\"https://creativecommons.org/licenses/by-sa/3.0/\"><img alt=\"Creative Commons License\" style=\"border-width:0\" src=\"https://i.creativecommons.org/l/by-sa/3.0/88x31.png\" /></a><br /><span xmlns:dct=\"https://purl.org/dc/terms/\" href=\"https://purl.org/dc/dcmitype/Text\" property=\"dct:title\" rel=\"dct:type\">ZJ Org Blog</span> by <a xmlns:cc=\"https://creativecommons.org/ns#\" href=\"https://alienzj.github.io\" property=\"cc:attributionName\" rel=\"cc:attributionURL\">Jie Zhu</a> is licensed under a <a rel=\"license\" href=\"https://creativecommons.org/licenses/by-sa/3.0/\">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</center>")
-
-
-(defun yank-html-from-clipboard ()
-  "Yank HTML from clipboard as Org or Markdown code."
-  (interactive)
-  (let* ((result
-          (condition-case err
-              ;; hex-encoded string:
-              ;;           < m e t a ......>
-              ;; «data HTML3C6D657461......3E»
-              (do-applescript "the clipboard as «class HTML»")
-            (error
-             ;; assume it's user's fault
-             (user-error "Can't get HTML data from the clipboard: %s"
-                         (error-message-string err)))))
-         (data (substring result 10 -1))
-         (html (decode-coding-string
-                (apply #'unibyte-string
-                       (mapcar (lambda (x) (string-to-number x 16))
-                               (seq-partition data 2)))
-                'utf-8))
-         (target (if (derived-mode-p 'org-mode)
-                     "org"
-                   ;; the official Markdown doesn't support table?
-                   "gfm")))
-    (insert
-     (with-temp-buffer
-       (if (zerop (call-process-region html nil "pandoc" nil t nil
-                                       ;; https://stackoverflow.com/a/35812743/2999892
-                                       "-f" "html-native_divs-native_spans"
-                                       "-t" target))
-           (buffer-string)
-         (error "pandoc failed: %s" (buffer-string)))))))
