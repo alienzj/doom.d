@@ -428,8 +428,8 @@
 ;; elfeed
 (setq rmh-elfeed-org-files (list (concat zj-org-dir "elfeed.org")))
 ;;(setq-default elfeed_search-filter "@8-week-ago +unread ")
-(setq-default elfeed_search-filter "@8-week-ago")
-
+(setq-default elfeed-search-filter "@10-week-ago")
+(setf url-queue-timeout 120)
 
 ;; lookup
 ;;(setq +lookup-open-url-fn #'eww)
@@ -744,19 +744,58 @@ Make sure to put cursor on date heading that contains list of urls."
 </div>")
 
 (setq org-static-blog-page-postamble
-      "<center><button id=\"disqus_button\" onclick=\"load_disqus()\">Load Disqus Comments</button></center>
-<div id=\"disqus_thread\"></div>
-<script type=\"text/javascript\">
-    function load_disqus() {
+"        <center>
+            <button id=\"disqus_button\" onclick=\"load_disqus()\">Load
+            Disqus Comments</button>
+        </center>
+        <div id=\"disqus_thread\"></div>
+        <script type=\"text/javascript\">
+        function load_disqus() {
         var dsq = document.createElement('script');
         dsq.type = 'text/javascript';
         dsq.async = true;
         dsq.src = 'https://alienzj.disqus.com/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         document.getElementById('disqus_button').style.visibility = 'hidden';
-    };
-</script>
-<center><a rel=\"license\" href=\"https://creativecommons.org/licenses/by-sa/3.0/\"><img alt=\"Creative Commons License\" style=\"border-width:0\" src=\"https://i.creativecommons.org/l/by-sa/3.0/88x31.png\" /></a><br /><span xmlns:dct=\"https://purl.org/dc/terms/\" href=\"https://purl.org/dc/dcmitype/Text\" property=\"dct:title\" rel=\"dct:type\">ZJ Org Blog</span> by <a xmlns:cc=\"https://creativecommons.org/ns#\" href=\"https://alienzj.github.io\" property=\"cc:attributionName\" rel=\"cc:attributionURL\">Jie Zhu</a> is licensed under a <a rel=\"license\" href=\"https://creativecommons.org/licenses/by-sa/3.0/\">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</center>")
+        };
+        </script>
+        <center>
+            <a rel=\"license\" href=
+            \"https://creativecommons.org/licenses/by-sa/3.0/\"><img alt=\"Creative Commons License\"
+            style=\"border-width:0\" src=
+            \"https://i.creativecommons.org/l/by-sa/3.0/88x31.png\"></a><br>
+
+            <span xmlns:dct=\"https://purl.org/dc/terms/\" href=
+            \"https://purl.org/dc/dcmitype/Text\" property=
+            \"dct:title\" rel=\"dct:type\">ZJ Org Blog</span> by
+            <a xmlns:cc=\"https://creativecommons.org/ns#\" href=
+            \"https://alienzj.github.io\" property=
+            \"cc:attributionName\" rel=\"cc:attributionURL\">Jie
+            Zhu</a> is licensed under a <a rel=\"license\" href=
+            \"https://creativecommons.org/licenses/by-sa/3.0/\">Creative
+            Commons Attribution-ShareAlike 3.0 Unported
+            License</a>.
+        </center>
+
+    <script type=\"text/javascript\">
+        var CoronaBarOptions = {\"position\":\"bottom\",
+                         \"displayCases\":true,
+                         \"textHeadline\":\"Spread the message. Stop the virus.\",
+                         \"textStepOneTitle\":\"Hands\",
+                         \"textStepOneDesc\":\"Wash often\",
+                         \"textStepTwoTitle\":\"Elbow\",
+                         \"textStepTwoDesc\":\"Cough into\",
+                         \"textStepThreeTitle\":\"Face\",
+                         \"textStepThreeDesc\":\"Don't touch\",
+                         \"textStepFourTitle\":\"Space\",
+                         \"textStepFourDesc\":\"Avoid crowds\",
+                         \"textStepFiveTitle\":\"Home\",
+                         \"textStepFiveDesc\":\"Stay inside\",
+                         \"textConfirmed\":\"Confirmed\",
+                         \"textRecovered\":\"Recovered\"};
+    </script>
+    <script type=\"text/javascript\" src=
+    \"https://coronabar-53eb.kxcdn.com/coronabar.min.js\" async></script>")
 
 ;; emacs-jupyter
 (setq org-babel-default-header-args:jupyter-python '((:async . "yes")
@@ -778,42 +817,42 @@ Make sure to put cursor on date heading that contains list of urls."
 (let ((org-super-agenda-groups
        '(;; Each group has an implicit boolean OR operator between its selectors.
          (:name "Today"  ; Optionally specify section name
-                :time-grid t  ; Items that appear on the time grid
-                :todo "TODAY")  ; Items that have this TODO keyword
+          :time-grid t  ; Items that appear on the time grid
+          :todo "TODAY")  ; Items that have this TODO keyword
          (:name "Important"
-                ;; Single arguments given alone
-                :tag "bills"
-                :priority "A")
+          ;; Single arguments given alone
+          :tag "bills"
+          :priority "A")
          ;; Set order of multiple groups at once
          (:order-multi (2 (:name "Shopping in town"
-                                 ;; Boolean AND group matches items that match all subgroups
-                                 :and (:tag "shopping" :tag "@town"))
+                           ;; Boolean AND group matches items that match all subgroups
+                           :and (:tag "shopping" :tag "@town"))
                           (:name "Food-related"
-                                 ;; Multiple args given in list with implicit OR
-                                 :tag ("food" "dinner"))
+                           ;; Multiple args given in list with implicit OR
+                           :tag ("food" "dinner"))
                           (:name "Personal"
-                                 :habit t
-                                 :tag "personal")
+                           :habit t
+                           :tag "personal")
                           ;;(:name "Space-related (non-moon-or-planet-related)"
-                                 ;; Regexps match case-insensitively on the entire entry
+                          ;; Regexps match case-insensitively on the entire entry
                           ;;       :and (:regexp ("space" "NASA")
-                                               ;; Boolean NOT also has implicit OR between selectors
+                          ;; Boolean NOT also has implicit OR between selectors
                           ;;             :not (:regexp "moon" :tag "planet")))
                           ))
          ;; Groups supply their own section names when none are given
          (:todo "WAITING" :order 8)  ; Set order of this section
          (:todo ("SOMEDAY" "TO-READ" "CHECK" "TO-WATCH" "WATCHING")
-                ;; Show this group at the end of the agenda (since it has the
-                ;; highest number). If you specified this group last, items
-                ;; with these todo keywords that e.g. have priority A would be
-                ;; displayed in that group instead, because items are grouped
-                ;; out in the order the groups are listed.
-                :order 9)
+          ;; Show this group at the end of the agenda (since it has the
+          ;; highest number). If you specified this group last, items
+          ;; with these todo keywords that e.g. have priority A would be
+          ;; displayed in that group instead, because items are grouped
+          ;; out in the order the groups are listed.
+          :order 9)
          (:priority<= "B"
-                      ;; Show this section after "Today" and "Important", because
-                      ;; their order is unspecified, defaulting to 0. Sections
-                      ;; are displayed lowest-number-first.
-                      :order 1)
+          ;; Show this section after "Today" and "Important", because
+          ;; their order is unspecified, defaulting to 0. Sections
+          ;; are displayed lowest-number-first.
+          :order 1)
          ;; After the last group, the agenda will display items that didn't
          ;; match any of these groups, with the default order position of 99
          )))
@@ -835,3 +874,7 @@ Make sure to put cursor on date heading that contains list of urls."
 (global-set-key [f8] (lambda () (interactive) (sanityinc/adjust-opacity nil -2)))
 (global-set-key [f9] (lambda () (interactive) (sanityinc/adjust-opacity nil 2)))
 (global-set-key [f7] (lambda () (interactive) (modify-frame-parameters nil `((alpha . 100)))))
+
+
+;; set proxy
+(setenv "ALL_PROXY" "socks5h://127.0.0.1:9909")
