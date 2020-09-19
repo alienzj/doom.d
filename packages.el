@@ -59,9 +59,17 @@
 (package! org-special-block-extras)
 (package! ebib)
 (package! org-roam-server)
+(package! org-alert)
+(package! org-ql)
+(package! org-super-agenda)
 (package! writeroom-mode)
 
 (package! systemd)
 
 (package! google-translate)
 (package! dad-joke)
+
+(package! kana :recipe (:host github :repo "chenyanming/kana"))
+(package! proxy-mode :recipe (:host github :repo "stardiviner/proxy-mode"))
+(package! emacs-rainbow-fart :recipe (:host github :repo "stardiviner/emacs-rainbow-fart"))
+(package! elgantt :recipe (:host github :repo "legalnonsense/elgantt"))

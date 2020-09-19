@@ -170,6 +170,7 @@
         +present
         +pandoc
         +pomodoro
+        +pretty
         +present
         +roam)        ; using org-mode for presentations
        (raku +lsp)            ; write code no one else can comprehend
@@ -228,10 +229,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-files
-   (quote
-    ("~/documents/doraemon/org/idea.org"
-     "~/documents/doraemon/org/workflow.org")))
+ ;;'(org-agenda-files
+ ;;  (quote
+ ;;   ("~/documents/doraemon/org/idea.org"
+ ;;    "~/documents/doraemon/org/workflow.org")))
 
  ;;'(conda-anaconda-home "~/.conda/envs/bioenv")
  )
