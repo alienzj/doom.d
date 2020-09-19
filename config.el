@@ -818,3 +818,20 @@ Make sure to put cursor on date heading that contains list of urls."
          ;; match any of these groups, with the default order position of 99
          )))
   (org-agenda nil "a"))
+
+
+;; https://emacs-china.org/t/topic/2405/20
+;; @purcell
+(defun sanityinc/adjust-opacity (frame incr)
+  "Adjust the background opacity of FRAME by increment INCR."
+  (unless (display-graphic-p frame)
+    (error "Cannot adjust opacity of this frame"))
+  (let* ((oldalpha (or (frame-parameter frame 'alpha) 100))
+         (oldalpha (if (listp oldalpha) (car oldalpha) oldalpha))
+         (newalpha (+ incr oldalpha)))
+    (when (and (<= frame-alpha-lower-limit newalpha) (>= 100 newalpha))
+      (modify-frame-parameters frame (list (cons 'alpha newalpha))))))
+
+(global-set-key [f8] (lambda () (interactive) (sanityinc/adjust-opacity nil -2)))
+(global-set-key [f9] (lambda () (interactive) (sanityinc/adjust-opacity nil 2)))
+(global-set-key [f7] (lambda () (interactive) (modify-frame-parameters nil `((alpha . 100)))))
