@@ -1,59 +1,31 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; .doom.d/packages.el
 
-
-(package! snakemake-mode)
-
+;; disabled packages
+(disable-packages! solaire-mode
+                   anaconda-mode
+                   company-anaconda
+                   lsp-python-ms
+                   pyimport)
+;; prog
 (package! pkgbuild-mode)
-
+(package! snakemake-mode)
 (package! wdl-mode)
-
 (package! polymode)
 (package! poly-markdown)
 (package! poly-R)
 (package! poly-wdl)
 (package! ess-view)
-
-(package! ddragon :recipe (:host github :repo "xuchunyang/ddragon.el" :files ("*")))
-
-(package! anki-editor)
-
-;;(package! darkplus :recipe (:host github :repo "popcorn4dinner/darkplus-emacs" :files ("*")))
-
-;;(package! awesome-tab :recipe (:host github :repo "manateelazycat/awesome-tab" :files ("*")))
-
-(package! tldr)
-(package! esup)
-(package! calibre-mode :recipe (:host github :repo "whacked/calibre-mode" :files ("*")))
-(package! rainbow-identifiers)
-(package! nyan-mode)
-
-;;(package! darkplus :recipe (:host github :repo "popcorn4dinner/darkplus-emacs" :files ("*")))
-;;(package! awesome-tab :recipe (:host github :repo "manateelazycat/awesome-tab" :files ("*")))
-
-(package! graphviz-dot-mode)
-(package! hungry-delete)
-
-(package! atomic-chrome)
-
-(package! mermaid-mode :recipe (:host github :repo "abrochard/mermaid-mode" :files("*")))
-
-(package! ob-mermaid :recipe (:host github :repo "arnm/ob-mermaid" :files("*")))
-
-(package! interleave :recipe (:host github :repo "rudolfochrist/interleave" :files("*")))
-
-;; Air Quality Index(AQI)
-;;(package! aqi :recipe (:host github :repo "zzkt/aqi" :files("*")))
-
-;; BNF Mode for GNU Emacs
 (package! bnf-mode)
-
-;;(package! lsp-treemacs)
-
 (package! magit-delta :recipe (:host github :repo "dandavison/magit-delta"))
+(package! bazel-mode :recipe (:host github :repo "bazelbuild/emacs-bazel-mode"))
+(package! import-js)
+;; (package! importmagic)
+(package! py-isort)
+(package! flycheck-mypy)
+(package! flycheck-google-cpplint :recipe (:host github :repo "flycheck/flycheck-google-cpplint"))
 
-(package! info-colors)
-
+;; org
 (package! org-ref)
 (package! org-static-blog)
 (package! org-special-block-extras)
@@ -64,11 +36,46 @@
 (package! org-super-agenda)
 (package! writeroom-mode)
 
-(package! systemd)
+;; text
+(package! adoc-mode)
+(package! edit-indirect)
+(package! youdao-dictionary)
+(package! link-hint)
+(package! symbol-overlay)
 
+;; ui
+(package! rainbow-identifiers)
+(package! nyan-mode)
+;;(package! darkplus :recipe (:host github :repo "popcorn4dinner/darkplus-emacs" :files ("*")))
+;;(package! awesome-tab :recipe (:host github :repo "manateelazycat/awesome-tab" :files ("*")))
+(package! info-colors)
+
+;; misc
+(package! helm)
+(package! dired-narrow)
+(package! atomic-chrome)
+(package! git-link)
+(package! wucuo)
+(package! counsel-etags)
+(package! imenu-list)
+(package! tmux-pane)
+(package! lsp-docker)
+(package! rime :recipe (:host github :repo "DogLooksGood/emacs-rime" :files ("*.el" "Makefile" "lib.c")))
+(package! color-rg :recipe (:host github :repo "manateelazycat/color-rg"))
+(package! snails :recipe (:host github :repo "manateelazycat/snails"))
+(package! fuz :recipe (:host github :repo "rustify-emacs/fuz.el"))
+(package! highlight-indent-guides)
+
+;; doraemon
+(package! calibre-mode :recipe (:host github :repo "whacked/calibre-mode" :files ("*")))
+(package! ddragon :recipe (:host github :repo "xuchunyang/ddragon.el" :files ("*")))
+(package! anki-editor)
+(package! esup)
+(package! graphviz-dot-mode)
+(package! hungry-delete)
+(package! systemd)
 (package! google-translate)
 (package! dad-joke)
-
 (package! kana :recipe (:host github :repo "chenyanming/kana"))
 (package! proxy-mode :recipe (:host github :repo "stardiviner/proxy-mode"))
 (package! emacs-rainbow-fart :recipe (:host github :repo "stardiviner/emacs-rainbow-fart"))

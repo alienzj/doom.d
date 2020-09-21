@@ -105,7 +105,8 @@
         +offline
         +docsets)        ; ...or in Dash docsets locally
        (lsp +peek)
-       ;;macos             ; MacOS-specific commands
+       (:if IS-MAC macos)             ; MacOS-specific commands
+       (tty +osc)
        (magit             ; a git porcelain for Emacs
         +forge)
        make              ; run make tasks from Emacs
