@@ -14,6 +14,7 @@
 
        :completion
        (company           ; the ultimate code completion backend
+        +auto
         +childframe
        ;;+tng
        )
@@ -182,7 +183,8 @@
         +conda
         +lsp
         +cython
-        +poetry)           ; beautiful is better than ugly
+        +poetry
+        +pyright)           ; beautiful is better than ugly
        qt               ; the 'cutest' gui framework ever
        racket            ; a DSL for DSLs
        raku
