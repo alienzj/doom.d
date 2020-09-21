@@ -798,8 +798,16 @@ Make sure to put cursor on date heading that contains list of urls."
     \"https://coronabar-53eb.kxcdn.com/coronabar.min.js\" async></script>")
 
 ;; emacs-jupyter
-(setq org-babel-default-header-args:jupyter-python '((:async . "yes")
-                                                     (:session . "py")))
+;;(setq org-babel-default-header-args:jupyter-python '((:async . "yes")
+;;                                                     (:session . "py")))
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (julia . t)
+   (python . t)
+   (R . t)
+   (rust . t)
+   (jupyter . t)))
 
 ;; org-alert
 (setq alert-default-style 'libnotify)
