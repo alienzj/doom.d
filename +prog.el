@@ -1,4 +1,4 @@
-;;; ../projects/doom.d/+code.el -*- lexical-binding: t; -*-
+;;; ../projects/doom.d/+prog.el -*- lexical-binding: t; -*-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

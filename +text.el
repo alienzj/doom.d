@@ -1,4 +1,4 @@
-;;; ../projects/doom.d/autoload/+text.el -*- lexical-binding: t; -*-
+;;; ../projects/doom.d/+text.el -*- lexical-binding: t; -*-
 
 (add-hook! 'text-mode-hook (setq-local truncate-lines nil))
 

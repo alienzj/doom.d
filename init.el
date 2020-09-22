@@ -30,7 +30,7 @@
        deft              ; notational velocity for Emacs
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
-       ;;doom-quit         ; DOOM quit-message prompts when you quit Emacs
+       doom-quit         ; DOOM quit-message prompts when you quit Emacs
        ;;fill-column       ; a `fill-column' indicator
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
@@ -60,7 +60,7 @@
        file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
        format ;;+onsave) ;;+onsave)  ; automated prettiness
-       ;;lispy             ; vim for lisp, for people who dont like vim
+       lispy             ; vim for lisp, for people who dont like vim
        multiple-cursors  ; editing in many places at once
        ;;objed             ; text object editing for the innocent
        ;;parinfer          ; turn lisp into python, sort of
@@ -71,8 +71,8 @@
        :checkers
        (syntax
         +childframe)
-       ;(spell +everywhere +aspell +hunspell)
-       ;grammar
+       (spell +aspell)
+       grammar
 
        :emacs
        (dired             ; making dired pretty [functional]

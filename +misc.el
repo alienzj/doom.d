@@ -316,7 +316,11 @@
 
 
 (after! magit
-  (setq magit-repository-directories '(("~/projects" . 2) ("~/projects/aur" . 2))
+  (setq magit-repository-directories '(("~/projects" . 2)
+                                       ("~/projects/aur" . 2)
+                                       ("~/documents/doraemon/courses" . 2)
+                                       ("~/documents/doraemon/org/blog" . 2)
+                                       ("~/documents/doraemon/projects" . 2))
         magit-save-repository-buffers nil
         git-commit-style-convention-checks nil
         magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
