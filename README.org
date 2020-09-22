@@ -1,0 +1,19 @@
+#+TITLE:   DOOM-EMACS config
+#+DATE:    September 22, 2020
+#+SINCE:   <replace with next tagged release version>
+#+STARTUP: inlineimages nofold
+
+#+html: <p align="center"> <img src="emacs.png"/> </p>
+
+* Table of Contents :TOC_3:noexport:
+- [[#description][Description]]
+
+* Description
++ DOOM-EMACS config file
++ Reference
+  - https://github.com/hlissner/doom-emacs
+  - https://github.com/hlissner/doom-emacs-private
+  - https://github.com/ztlevi/doom-config
+  - https://github.com/tecosaur/emacs-config
+  - https://github.com/fuxialexander/doom-emacs-private-xfu
+  - https://github.com/alhassy/emacs.d
