@@ -83,13 +83,15 @@
   (ebib-index-default-sort '("timestamp" . descend)))
 
 ;; org-ref
-(after! org-ref
-  (bibtex-dialet 'BibTex)
-  (org-ref-default-bibliography '("~/documents/doraemon/org/references.bib"))
-  (org-ref-pdf-directory (concat zj-org-dir "pdf/"))
-  (org-ref-show-broken-links nil)
-  (org-ref-default-ref-type "eqref")
-  (org-ref-default-citation-link "citet"))
+;; (use-package! org-ref
+;; (after! org-ref
+;; (bibtex-set-dialet 'BibTex)
+;;  (org-ref-default-bibliography '("~/documents/doraemon/org/references.bib"))
+;;  (org-ref-pdf-directory (concat zj-org-dir "pdf/"))
+;;  (org-ref-show-broken-links nil)
+;;  (org-ref-default-ref-type "eqref")
+;;  (org-ref-default-citation-link "citet"))
+;; )
 
 ;; org-super-agenda
 (let ((org-super-agenda-groups

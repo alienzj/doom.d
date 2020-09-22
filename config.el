@@ -12,9 +12,9 @@
       zj-blog-dir (concat zj-org-dir "blog/alienzj.github.io/"))
 
 (load! "+os")
-(load! "+misc")
 (load! "+ui")
 (load! "+text")
+(load! "+misc")
 (load! "+prog")
 (load! "+blog")
 (load! "+doraemon")
