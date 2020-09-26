@@ -318,6 +318,7 @@
 (after! magit
   (setq magit-repository-directories '(("~/projects" . 2)
                                        ("~/projects/aur" . 2)
+                                       ("~/documents/doraemon" . 2)
                                        ("~/documents/doraemon/courses" . 2)
                                        ("~/documents/doraemon/org/blog" . 2)
                                        ("~/documents/doraemon/projects" . 2))

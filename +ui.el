@@ -81,6 +81,44 @@
 ;;   `(ediff-current-diff-Ancestor :foreground ,(doom-color 'teal)  :background ,(doom-darken (doom-color 'teal) 0.8))
 ;;   `(markdown-code-face :background ,(doom-color 'base2)))
 
+(use-package! lsp-ui
+  :commands lsp-ui-mode
+  :config
+  (setq
+   lsp-ui-sideline-enable nil
+   lsp-ui-sideline-ignore-duplicate t
+   lsp-ui-doc-header nil
+   lsp-ui-doc-include-signature nil
+   lsp-ui-doc-background (doom-color 'base4)
+   lsp-ui-doc-border (doom-color 'fg)
+
+   lsp-ui-peek-force-fontify nil
+   lsp-ui-peek-expand-function (lambda (xs) (mapcar #'car xs)))
+
+  (custom-set-faces
+   '(ccls-sem-global-variable-face ((t (:underline t :weight extra-bold))))
+   '(lsp-face-highlight-read ((t (:background "sea green"))))
+   '(lsp-face-highlight-write ((t (:background "brown4"))))
+   '(lsp-ui-sideline-current-symbol ((t (:foreground "grey38" :box nil))))
+   '(lsp-ui-sideline-symbol ((t (:foreground "grey30" :box nil)))))
+
+  (defhydra hydra/ref (evil-normal-state-map "x")
+    "reference"
+    ("p" (-let [(i . n) (lsp-ui-find-prev-reference)]
+           (if (> n 0) (message "%d/%d" i n))) "prev")
+    ("n" (-let [(i . n) (lsp-ui-find-next-reference)]
+           (if (> n 0) (message "%d/%d" i n))) "next")
+    ("R" (-let [(i . n) (lsp-ui-find-prev-reference '(:role 8))]
+           (if (> n 0) (message "read %d/%d" i n))) "prev read" :bind nil)
+    ("r" (-let [(i . n) (lsp-ui-find-next-reference '(:role 8))]
+           (if (> n 0) (message "read %d/%d" i n))) "next read" :bind nil)
+    ("W" (-let [(i . n) (lsp-ui-find-prev-reference '(:role 16))]
+           (if (> n 0) (message "write %d/%d" i n))) "prev write" :bind nil)
+    ("w" (-let [(i . n) (lsp-ui-find-next-reference '(:role 16))]
+           (if (> n 0) (message "write %d/%d" i n))) "next write" :bind nil)
+    )
+  )
+
 ;; for terminal
 (unless (display-graphic-p)
   (custom-set-faces!

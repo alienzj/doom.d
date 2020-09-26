@@ -24,6 +24,7 @@
 (package! py-isort)
 (package! flycheck-mypy)
 (package! flycheck-google-cpplint :recipe (:host github :repo "flycheck/flycheck-google-cpplint"))
+(package! tablegen-mode :ignore t)
 
 ;; org
 (package! org-ref)
