@@ -326,7 +326,9 @@
 
 ;; rust
 (after! rustic
-  (setq rustic-lsp-server 'rust-analyzer))
+  (setq rustic-lsp-server 'rust-analyzer)
+  (setq lsp-rust-analyzer-server-command '("/usr/bin/rust-analyzer")))
+
 
 ;; format-all
 ;; clang-format
