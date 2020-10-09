@@ -60,7 +60,8 @@
       bibtex-completion-library-path  (concat zj-org-dir "pdf/")
       bibtex-completion-pdf-field "File"
       reftex-default-bibliography bibtex-completion-bibliography
-      org-noter-notes-search-path '((concat zj-org-dir "ref/"))
+      ;; org-noter-notes-search-path '((concat zj-org-dir "ref/"))
+      org-noter-notes-search-path '("~/documents/doraemon/org/ref/")
       org-roam-directory org-directory)
 
 ;; ebib
