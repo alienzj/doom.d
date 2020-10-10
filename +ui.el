@@ -102,21 +102,21 @@
    '(lsp-ui-sideline-current-symbol ((t (:foreground "grey38" :box nil))))
    '(lsp-ui-sideline-symbol ((t (:foreground "grey30" :box nil)))))
 
-  (defhydra hydra/ref (evil-normal-state-map "x")
-    "reference"
-    ("p" (-let [(i . n) (lsp-ui-find-prev-reference)]
-           (if (> n 0) (message "%d/%d" i n))) "prev")
-    ("n" (-let [(i . n) (lsp-ui-find-next-reference)]
-           (if (> n 0) (message "%d/%d" i n))) "next")
-    ("R" (-let [(i . n) (lsp-ui-find-prev-reference '(:role 8))]
-           (if (> n 0) (message "read %d/%d" i n))) "prev read" :bind nil)
-    ("r" (-let [(i . n) (lsp-ui-find-next-reference '(:role 8))]
-           (if (> n 0) (message "read %d/%d" i n))) "next read" :bind nil)
-    ("W" (-let [(i . n) (lsp-ui-find-prev-reference '(:role 16))]
-           (if (> n 0) (message "write %d/%d" i n))) "prev write" :bind nil)
-    ("w" (-let [(i . n) (lsp-ui-find-next-reference '(:role 16))]
-           (if (> n 0) (message "write %d/%d" i n))) "next write" :bind nil)
-    )
+  ;; (defhydra hydra/ref (evil-normal-state-map "x")
+  ;;   "reference"
+  ;;   ("p" (-let [(i . n) (lsp-ui-find-prev-reference)]
+  ;;          (if (> n 0) (message "%d/%d" i n))) "prev")
+  ;;   ("n" (-let [(i . n) (lsp-ui-find-next-reference)]
+  ;;          (if (> n 0) (message "%d/%d" i n))) "next")
+  ;;   ("R" (-let [(i . n) (lsp-ui-find-prev-reference '(:role 8))]
+  ;;          (if (> n 0) (message "read %d/%d" i n))) "prev read" :bind nil)
+  ;;   ("r" (-let [(i . n) (lsp-ui-find-next-reference '(:role 8))]
+  ;;          (if (> n 0) (message "read %d/%d" i n))) "next read" :bind nil)
+  ;;   ("W" (-let [(i . n) (lsp-ui-find-prev-reference '(:role 16))]
+  ;;          (if (> n 0) (message "write %d/%d" i n))) "prev write" :bind nil)
+  ;;   ("w" (-let [(i . n) (lsp-ui-find-next-reference '(:role 16))]
+  ;;          (if (> n 0) (message "write %d/%d" i n))) "next write" :bind nil)
+  ;;   )
   )
 
 ;; for terminal
