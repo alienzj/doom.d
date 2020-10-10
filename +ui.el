@@ -239,12 +239,12 @@ mouse-3: Describe current input method")
                                               font-lock-keyword-face
                                               font-lock-function-name-face
                                               font-lock-variable-name-face))
-;; (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
+(add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
 
 ;; nyancat
-;; (setq nyan-wavy-trail t)
-;; (setq nyan-animate-nyancat t)
-;; (nyan-mode)
+(setq nyan-wavy-trail t)
+(setq nyan-animate-nyancat t)
+(nyan-mode)
 
 ;; info-colors
 (use-package! info-colors
