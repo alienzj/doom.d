@@ -8,202 +8,202 @@
   (define-key input-decode-map "\C-i" [C-i])
   (map! "<C-i>" #'better-jumper-jump-forward))
 
-(map!
- ;; overrides other minor mode keymaps (just for non-evil)
- (:map override ;; general-override-mode-map
-  "M-q"   (if (daemonp) #'delete-frame #'save-buffers-kill-terminal)
-  "M-p"   #'+ivy/projectile-find-file
-  "M-y"   #'helm-show-kill-ring
-  "C-h m" #'describe-mode
-  "C-]"   #'yas-expand
-  "M-;"   #'+my/insert-semicolon-at-the-end-of-this-line
-  "C-M-;" #'+my/delete-semicolon-at-the-end-of-this-line)
- "M-`"   #'other-frame
- "C-M-o" #'other-frame
- ;; fix OS window/frame navigation/manipulation keys
- "M-w" #'delete-window
- "M-W" #'delete-frame
- "M-n" #'+default/new-buffer
- "M-N" #'make-frame
- "C-M-f" #'toggle-frame-fullscreen
- "M-t" #'transpose-words
- :gn "C-t" nil
- ;; Restore OS undo, save, copy, & paste keys (without cua-mode, because
- ;; it imposes some other functionality and overhead we don't need)
- "M-z" #'undo
- "M-Z" #'redo
- "M-c" (if (featurep 'evil) #'evil-yank #'copy-region-as-kill)
- "M-v" #'yank-with-delete-region
- "M-s" #'evil-write-all
- ;; Buffer-local font scaling
- "M-0" (cmd! (text-scale-set 0))
- "M-=" #'text-scale-increase
- "M--" #'text-scale-decrease
- ;; Conventional text-editing keys & motions
- "M-a" #'mark-whole-buffer
- :gni [M-RET]    #'+default/newline-below
- :gni [M-S-RET]  #'+default/newline-above
- :gi  [M-backspace] #'backward-kill-word
- :gi  [M-left]      #'backward-word
- :gi  [M-right]     #'forward-word
- ;; Swiper
- "M-f" #'swiper
- "C-s" #'swiper
- ;; Help
- "C-h h"   nil
- "C-h C-k" #'find-function-on-key
- "C-h C-f" #'find-function-at-point
- "C-h C-v" #'find-variable-at-point
- "<f8>"    #'describe-mode
- ;; Others
- "M-P"    #'+ivy/project-search-specific-files
- "M-e"    #'+ivy/switch-workspace-buffer
- "C-M-\\" #'indent-region-or-buffer
- "M-m"    #'kmacro-call-macro
- "M-/"    #'doom/toggle-comment-region-or-line)
+;; (map!
+;;  ;; overrides other minor mode keymaps (just for non-evil)
+;;  (:map override ;; general-override-mode-map
+;;   "M-q"   (if (daemonp) #'delete-frame #'save-buffers-kill-terminal)
+;;   "M-p"   #'+ivy/projectile-find-file
+;;   "M-y"   #'helm-show-kill-ring
+;;   "C-h m" #'describe-mode
+;;   "C-]"   #'yas-expand
+;;   "M-;"   #'+my/insert-semicolon-at-the-end-of-this-line
+;;   "C-M-;" #'+my/delete-semicolon-at-the-end-of-this-line)
+;;  "M-`"   #'other-frame
+;;  "C-M-o" #'other-frame
+;;  ;; fix OS window/frame navigation/manipulation keys
+;;  "M-w" #'delete-window
+;;  "M-W" #'delete-frame
+;;  "M-n" #'+default/new-buffer
+;;  "M-N" #'make-frame
+;;  "C-M-f" #'toggle-frame-fullscreen
+;;  "M-t" #'transpose-words
+;;  :gn "C-t" nil
+;;  ;; Restore OS undo, save, copy, & paste keys (without cua-mode, because
+;;  ;; it imposes some other functionality and overhead we don't need)
+;;  "M-z" #'undo
+;;  "M-Z" #'redo
+;;  "M-c" (if (featurep 'evil) #'evil-yank #'copy-region-as-kill)
+;;  "M-v" #'yank-with-delete-region
+;;  "M-s" #'evil-write-all
+;;  ;; Buffer-local font scaling
+;;  "M-0" (cmd! (text-scale-set 0))
+;;  "M-=" #'text-scale-increase
+;;  "M--" #'text-scale-decrease
+;;  ;; Conventional text-editing keys & motions
+;;  "M-a" #'mark-whole-buffer
+;;  :gni [M-RET]    #'+default/newline-below
+;;  :gni [M-S-RET]  #'+default/newline-above
+;;  :gi  [M-backspace] #'backward-kill-word
+;;  :gi  [M-left]      #'backward-word
+;;  :gi  [M-right]     #'forward-word
+;;  ;; Swiper
+;;  "M-f" #'swiper
+;;  "C-s" #'swiper
+;;  ;; Help
+;;  "C-h h"   nil
+;;  "C-h C-k" #'find-function-on-key
+;;  "C-h C-f" #'find-function-at-point
+;;  "C-h C-v" #'find-variable-at-point
+;;  "<f8>"    #'describe-mode
+;;  ;; Others
+;;  "M-P"    #'+ivy/project-search-specific-files
+;;  "M-e"    #'+ivy/switch-workspace-buffer
+;;  "C-M-\\" #'indent-region-or-buffer
+;;  "M-m"    #'kmacro-call-macro
+;;  "M-/"    #'doom/toggle-comment-region-or-line)
 
-(map!
- ;; Unix text-editing keys & motions
- :gi "C-n" #'next-line
- :gi "C-p" #'previous-line
- :gi "C-b" #'backward-char
- :gi "C-f" #'forward-char
- :gi "C-k" #'kill-line
- :gi "C-d" #'delete-forward-char
+;; (map!
+;;  ;; Unix text-editing keys & motions
+;;  :gi "C-n" #'next-line
+;;  :gi "C-p" #'previous-line
+;;  :gi "C-b" #'backward-char
+;;  :gi "C-f" #'forward-char
+;;  :gi "C-k" #'kill-line
+;;  :gi "C-d" #'delete-forward-char
 
- :v "C-r"   #'+my/evil-quick-replace
- :v "DEL" (kbd "\"_d")
- :v "<del>" (kbd "\"_d")
- :v "<backspace>" (kbd "\"_d")
- :nmv "-" (cmd! (better-jumper-jump-backward 1))
- :nmv "=" (cmd! (better-jumper-jump-forward 1))
+;;  :v "C-r"   #'+my/evil-quick-replace
+;;  :v "DEL" (kbd "\"_d")
+;;  :v "<del>" (kbd "\"_d")
+;;  :v "<backspace>" (kbd "\"_d")
+;;  :nmv "-" (cmd! (better-jumper-jump-backward 1))
+;;  :nmv "=" (cmd! (better-jumper-jump-forward 1))
 
- :gnmvi "C-e" #'doom/forward-to-last-non-comment-or-eol
- :gnmvi "C-a" #'doom/backward-to-bol-or-indent
- :gnmvi "M-." #'+lookup/definition
- :nv "ge"  #'counsel-etags-find-tag-at-point
- :nv "gE"  #'counsel-etags-find-tag
+;;  :gnmvi "C-e" #'doom/forward-to-last-non-comment-or-eol
+;;  :gnmvi "C-a" #'doom/backward-to-bol-or-indent
+;;  :gnmvi "M-." #'+lookup/definition
+;;  :nv "ge"  #'counsel-etags-find-tag-at-point
+;;  :nv "gE"  #'counsel-etags-find-tag
 
- (:prefix "C-x"
-  :n "e"  #'pp-eval-last-sexp)
- (:prefix "C-c"
-  :desc "Text properties at point" :nmv "f" (cmd! (message "%S" (text-properties-at (point))))))
+;;  (:prefix "C-x"
+;;   :n "e"  #'pp-eval-last-sexp)
+;;  (:prefix "C-c"
+;;   :desc "Text properties at point" :nmv "f" (cmd! (message "%S" (text-properties-at (point))))))
 
 ;; leader/localleader is not compatible with :gnvmi
-(map! :leader
-      :desc "Snails" :nmv "RET" #'snails
-      :desc "counsel-M-x" :nmv "SPC" #'counsel-M-x
-      :desc "lispyville" :n "L" (+my/prefix-M-x "lispyville ")
+;; (map! :leader
+;;       :desc "Snails" :nmv "RET" #'snails
+;;       :desc "counsel-M-x" :nmv "SPC" #'counsel-M-x
+;;       :desc "lispyville" :n "L" (+my/prefix-M-x "lispyville ")
 
-      (:prefix-map ("a" . "app")
-       "s" #'prodigy
-       "b" #'blog-admin-start
-       :desc "List process" "p" #'list-processes
-       :desc "Kill process" "P" #'counsel-list-processes
-       "x" #'align-regexp)
-      (:prefix "b"                      ; buffer
-       :desc "Switch buffer" "b" #'ivy-switch-buffer
-       :desc "Switch workspace buffer" "B" #'+ivy/switch-workspace-buffer
-       "h" #'+doom-dashboard/open
-       "r" #'revert-buffer-no-confirm
-       "R" #'reload-buffer-no-confirm
-       "U" #'+my/untabify-buffer)
-      (:prefix "c"                      ; code
-       :desc "Toggle Comment"         "/" #'doom/toggle-comment-region-or-line
-       :desc "Treemacs symbols"       "i" #'lsp-treemacs-symbols
-       :desc "Format-all buffer"      "F" #'format-all-buffer
-       :desc "LSP organize imports"   "I" #'lsp-organize-imports
-       :desc "Treemacs references"    "D" #'lsp-treemacs-references
-       :desc "Cspell check buffer"    "c" #'cspell-check-buffer
-       :desc "Cspell check directory" "C" #'cspell-check-HEAD)
-      (:prefix "TAB"
-       :desc "Switch workspace" "TAB" #'+workspace/switch-to)
-      (:prefix "f"                      ; file
-       :desc "Yank relative filename" "Y" #'+default/yank-relative-buffer-filename
-       :desc "Save all" "s" #'evil-write-all
-       :desc "Deer"     "j" #'deer)
-      (:prefix "g"                      ; git
-       "s" nil
-       (:after smerge-mode
-        :desc "Smerge" "s" smerge-basic-map)
-       :desc "Browse file or region" "oo" #'git-link
-       :desc "Magit browse commit"   "oc" #'+vc/git-browse-commit
-       :desc "Magit wip worktree"    "w"  #'magit-wip-log-worktree
-       :desc "M-x magit-*" "*" (+my/prefix-M-x "magit-"))
-      (:prefix "h"                      ; help
-       "C" #'helpful-command)
-      (:prefix-map ("e" . "error")
-       :desc "Flymake next error"      "N" #'flymake-goto-next-error
-       :desc "Flymake previous error"  "P" #'flymake-goto-prev-error
-       :desc "Flymake list errors"     "L" #'flymake-show-diagnostics-buffer
-       :desc "Flycheck next error"     "n" #'flycheck-next-error
-       :desc "Flycheck previous error" "p" #'flycheck-previous-error
-       :desc "Flycheck explain error"  "e" #'flycheck-explain-error-at-point
-       :desc "Flycheck list errors"    "l" #'flycheck-list-errors
-       :desc "Flycheck verify setup"   "v" #'flycheck-verify-setup)
-      (:prefix "o"                      ; open
-       :desc "Kill ring"             "k" #'helm-show-kill-ring
-       :desc "Imenu list"            "i" #'imenu-list
-       :desc "Open link"             "x" #'link-hint-open-link
-       :desc "Open link at point"    "X" #'link-hint-open-link-at-point
-       :desc "Youdao dictionary"     "y" (if (display-graphic-p) #'youdao-dictionary-search-at-point-tooltip
-                                           #'youdao-dictionary-search-at-point)
-       :desc "Youdao play voice"     "Y" #'youdao-dictionary-play-voice-at-point
-       :desc "Docker open apps"      ";" #'+docker/reveal-in-apps
-       (:when IS-MAC
-        :desc "Reveal in default program"  "f" #'+macos/open-in-default-program
-        :desc "Reveal in Finder"           "o" #'+macos/reveal-in-finder
-        :desc "Reveal project in Finder"   "O" #'+macos/reveal-project-in-finder
-        :desc "Reveal in Terminal"         "t" #'+macos/reveal-in-terminal
-        :desc "Reveal project in Terminal" "T" #'+macos/reveal-project-in-terminal
-        :desc "Reveal file in Apps"        "," #'+shell/reveal-in-apps
-        :desc "Reveal project in Apps"     "." #'+shell/reveal-project-in-apps)
-       (:when IS-LINUX
-        :desc "Reveal in default program"  "f" #'+shell/open-in-default-program
-        :desc "Reveal in Finder"           "o" #'+shell/reveal-in-finder
-        :desc "Reveal project in Finder"   "O" #'+shell/reveal-project-in-finder
-        :desc "Reveal in Terminal"         "t" #'+shell/reveal-in-terminal
-        :desc "Reveal project in Terminal" "T" #'+shell/reveal-project-in-terminal
-        :desc "Reveal file in Apps"        "," #'+shell/reveal-in-apps
-        :desc "Reveal project in Apps"     "." #'+shell/reveal-project-in-apps))
-      (:prefix "i"                      ; insert
-       "v" #'add-dir-local-variable
-       "o" #'symbol-overlay-put
-       "q" #'symbol-overlay-remove-all)
-      (:prefix "p"                      ; project
-       "*" (+my/prefix-M-x "projectile-")
-       :desc "Update projectile list" "u" #'update-projectile-known-projects)
-      (:prefix ("d" . "debug")
-       :desc "Start dap debugger" "d" #'+my/dap-start
-       "b" #'dap-breakpoint-toggle
-       "h" #'dap-hydra
-       "l" #'dap-ui-locals
-       "q" #'dap-disconnect
-       "s" #'dap-ui-sessions
-       "k" #'dap-delete-session
-       "K" #'dap-delete-all-sessions
-       "S" #'realgud-short-key-mode)
-      (:prefix "t"                      ; toggle
-       "c" #'rainbow-mode
-       "C" #'centered-window-mode
-       "d" #'toggle-debug-on-error
-       "D" #'+my/realtime-elisp-doc
-       "L" #'toggle-truncate-lines
-       "S" #'size-indication-mode
-       "i" #'highlight-indent-guides-mode
-       "I" #'ivy-rich-mode
-       "v" #'visual-line-mode)
-      (:prefix-map ("j" . "jump")
-       "j" #'avy-goto-char-timer
-       "l" #'avy-goto-line
-       "b" #'avy-pop-mark
-       "t" #'yas-describe-tables)
-      (:prefix "s"                      ; search
-       :desc "Comments"  "c" #'counsel-imenu-comments
-       :desc "Jump to bookmark" "m" #'helm-bookmarks
-       :desc "Search project"            "p" #'+my/search-project
-       :desc "Search project customly"   "P" #'color-rg-customized-search
-       :desc "Project (hidden)" "h" #'+ivy/project-search-with-hidden-files))
+;;       (:prefix-map ("a" . "app")
+;;        "s" #'prodigy
+;;        "b" #'blog-admin-start
+;;        :desc "List process" "p" #'list-processes
+;;        :desc "Kill process" "P" #'counsel-list-processes
+;;        "x" #'align-regexp)
+;;       (:prefix "b"                      ; buffer
+;;        :desc "Switch buffer" "b" #'ivy-switch-buffer
+;;        :desc "Switch workspace buffer" "B" #'+ivy/switch-workspace-buffer
+;;        "h" #'+doom-dashboard/open
+;;        "r" #'revert-buffer-no-confirm
+;;        "R" #'reload-buffer-no-confirm
+;;        "U" #'+my/untabify-buffer)
+;;       (:prefix "c"                      ; code
+;;        :desc "Toggle Comment"         "/" #'doom/toggle-comment-region-or-line
+;;        :desc "Treemacs symbols"       "i" #'lsp-treemacs-symbols
+;;        :desc "Format-all buffer"      "F" #'format-all-buffer
+;;        :desc "LSP organize imports"   "I" #'lsp-organize-imports
+;;        :desc "Treemacs references"    "D" #'lsp-treemacs-references
+;;        :desc "Cspell check buffer"    "c" #'cspell-check-buffer
+;;        :desc "Cspell check directory" "C" #'cspell-check-HEAD)
+;;       (:prefix "TAB"
+;;        :desc "Switch workspace" "TAB" #'+workspace/switch-to)
+;;       (:prefix "f"                      ; file
+;;        :desc "Yank relative filename" "Y" #'+default/yank-relative-buffer-filename
+;;        :desc "Save all" "s" #'evil-write-all
+;;        :desc "Deer"     "j" #'deer)
+;;       (:prefix "g"                      ; git
+;;        "s" nil
+;;        (:after smerge-mode
+;;         :desc "Smerge" "s" smerge-basic-map)
+;;        :desc "Browse file or region" "oo" #'git-link
+;;        :desc "Magit browse commit"   "oc" #'+vc/git-browse-commit
+;;        :desc "Magit wip worktree"    "w"  #'magit-wip-log-worktree
+;;        :desc "M-x magit-*" "*" (+my/prefix-M-x "magit-"))
+;;       (:prefix "h"                      ; help
+;;        "C" #'helpful-command)
+;;       (:prefix-map ("e" . "error")
+;;        :desc "Flymake next error"      "N" #'flymake-goto-next-error
+;;        :desc "Flymake previous error"  "P" #'flymake-goto-prev-error
+;;        :desc "Flymake list errors"     "L" #'flymake-show-diagnostics-buffer
+;;        :desc "Flycheck next error"     "n" #'flycheck-next-error
+;;        :desc "Flycheck previous error" "p" #'flycheck-previous-error
+;;        :desc "Flycheck explain error"  "e" #'flycheck-explain-error-at-point
+;;        :desc "Flycheck list errors"    "l" #'flycheck-list-errors
+;;        :desc "Flycheck verify setup"   "v" #'flycheck-verify-setup)
+;;       (:prefix "o"                      ; open
+;;        :desc "Kill ring"             "k" #'helm-show-kill-ring
+;;        :desc "Imenu list"            "i" #'imenu-list
+;;        :desc "Open link"             "x" #'link-hint-open-link
+;;        :desc "Open link at point"    "X" #'link-hint-open-link-at-point
+;;        :desc "Youdao dictionary"     "y" (if (display-graphic-p) #'youdao-dictionary-search-at-point-tooltip
+;;                                            #'youdao-dictionary-search-at-point)
+;;        :desc "Youdao play voice"     "Y" #'youdao-dictionary-play-voice-at-point
+;;        :desc "Docker open apps"      ";" #'+docker/reveal-in-apps
+;;        (:when IS-MAC
+;;         :desc "Reveal in default program"  "f" #'+macos/open-in-default-program
+;;         :desc "Reveal in Finder"           "o" #'+macos/reveal-in-finder
+;;         :desc "Reveal project in Finder"   "O" #'+macos/reveal-project-in-finder
+;;         :desc "Reveal in Terminal"         "t" #'+macos/reveal-in-terminal
+;;         :desc "Reveal project in Terminal" "T" #'+macos/reveal-project-in-terminal
+;;         :desc "Reveal file in Apps"        "," #'+shell/reveal-in-apps
+;;         :desc "Reveal project in Apps"     "." #'+shell/reveal-project-in-apps)
+;;        (:when IS-LINUX
+;;         :desc "Reveal in default program"  "f" #'+shell/open-in-default-program
+;;         :desc "Reveal in Finder"           "o" #'+shell/reveal-in-finder
+;;         :desc "Reveal project in Finder"   "O" #'+shell/reveal-project-in-finder
+;;         :desc "Reveal in Terminal"         "t" #'+shell/reveal-in-terminal
+;;         :desc "Reveal project in Terminal" "T" #'+shell/reveal-project-in-terminal
+;;         :desc "Reveal file in Apps"        "," #'+shell/reveal-in-apps
+;;         :desc "Reveal project in Apps"     "." #'+shell/reveal-project-in-apps))
+;;       (:prefix "i"                      ; insert
+;;        "v" #'add-dir-local-variable
+;;        "o" #'symbol-overlay-put
+;;        "q" #'symbol-overlay-remove-all)
+;;       (:prefix "p"                      ; project
+;;        "*" (+my/prefix-M-x "projectile-")
+;;        :desc "Update projectile list" "u" #'update-projectile-known-projects)
+;;       (:prefix ("d" . "debug")
+;;        :desc "Start dap debugger" "d" #'+my/dap-start
+;;        "b" #'dap-breakpoint-toggle
+;;        "h" #'dap-hydra
+;;        "l" #'dap-ui-locals
+;;        "q" #'dap-disconnect
+;;        "s" #'dap-ui-sessions
+;;        "k" #'dap-delete-session
+;;        "K" #'dap-delete-all-sessions
+;;        "S" #'realgud-short-key-mode)
+;;       (:prefix "t"                      ; toggle
+;;        "c" #'rainbow-mode
+;;        "C" #'centered-window-mode
+;;        "d" #'toggle-debug-on-error
+;;        "D" #'+my/realtime-elisp-doc
+;;        "L" #'toggle-truncate-lines
+;;        "S" #'size-indication-mode
+;;        "i" #'highlight-indent-guides-mode
+;;        "I" #'ivy-rich-mode
+;;        "v" #'visual-line-mode)
+;;       (:prefix-map ("j" . "jump")
+;;        "j" #'avy-goto-char-timer
+;;        "l" #'avy-goto-line
+;;        "b" #'avy-pop-mark
+;;        "t" #'yas-describe-tables)
+;;       (:prefix "s"                      ; search
+;;        :desc "Comments"  "c" #'counsel-imenu-comments
+;;        :desc "Jump to bookmark" "m" #'helm-bookmarks
+;;        :desc "Search project"            "p" #'+my/search-project
+;;        :desc "Search project customly"   "P" #'color-rg-customized-search
+;;        :desc "Project (hidden)" "h" #'+ivy/project-search-with-hidden-files))
 
 (map!
  (:map prog-mode-map
