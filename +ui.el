@@ -30,7 +30,7 @@
         ;; My mac vsplit screen won't fit
         doom-modeline-window-width-limit (- fill-column 10)))
 
-(setq +workspaces-on-switch-project-behavior t)
+;; (setq +workspaces-on-switch-project-behavior t)
 
 (remove-hook 'doom-init-ui-hook #'blink-cursor-mode)
 
