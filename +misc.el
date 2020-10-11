@@ -593,3 +593,6 @@ Make sure to put cursor on date heading that contains list of urls."
   "Ding after a pomodoro time"
   (interactive)
   (run-at-time "25 min" nil 'ding-ding-ding))
+
+
+(setq browse-url-generic-program "firefox")
