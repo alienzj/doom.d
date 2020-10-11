@@ -39,6 +39,7 @@
               "~/.emacs.d/bin"
               "~/.perl5/bin"
               ))
+  (setq tramp-inline-compress-start-size 4096000)
   )
 
 ;; calibre-mode
