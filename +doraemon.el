@@ -30,15 +30,14 @@
 ;; tramp
 (after! tramp
   (setenv "SHELL" "/bin/bash")
+  (setq doom-projectile-fd-binary (executable-find "fd"))
   (setq tramp-shell-prompt-pattern "\\(?:^\\|\\)[^]#$%>\n]*#?[]#$%>] *\\(\\[[0-9;]*[a-zA-Z] *\\)*")
-  (appendq! tramp-remote-path
-            '("~/.conda/envs/bioenv/bin"
-              "~/.cargo/bin"
-              "~/.nodejs/bin"
-              "~/.go/bin"
-              "~/.emacs.d/bin"
-              "~/.perl5/bin"
-              ))
+  (add-to-list 'tramp-remote-path "~/.emacs.d/bin")
+  (add-to-list 'tramp-remote-path "~/.perl5/bin")
+  (add-to-list 'tramp-remote-path "~/.go/bin")
+  (add-to-list 'tramp-remote-path "~/.nodejs/bin")
+  (add-to-list 'tramp-remote-path "~/.cargo/bin")
+  (add-to-list 'tramp-remote-path "~/.conda/envs/bioenv/bin")
   (setq tramp-inline-compress-start-size 4096000)
   )
 

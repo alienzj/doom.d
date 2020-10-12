@@ -289,8 +289,12 @@
                                     :test "ctest")
 
   ;; set projectile-known-projects after magit
-  (after! magit
-    (update-projectile-known-projects))
+  (update-projectile-known-projects)
+  ;; https://github.com/hlissner/doom-emacs/issues/1087
+  (advice-remove #'projectile-locate-dominating-file #'doom*projectile-locate-dominating-file)
+  (defadvice projectile-project-root (around ignore-remote first activate)
+    ;; https://github.com/bbatsov/projectile/issues/1232
+    (unless (file-remote-p default-directory) ad-do-it))
   )
 
 
@@ -445,47 +449,47 @@
     'normal)
 
   (prodigy-define-tag
-    :name 'jekyll
-    :env '(("LANG" "en_US.UTF-8")
-           ("LC_ALL" "en_US.UTF-8")))
+   :name 'jekyll
+   :env '(("LANG" "en_US.UTF-8")
+          ("LC_ALL" "en_US.UTF-8")))
   ;; define service
   (prodigy-define-service
-    :name "ML Gitbook Publish"
-    :command "npm"
-    :args '("run" "docs:publish")
-    :cwd "~/projects/Machine_Learning_Questions"
-    :tags '(npm gitbook)
-    :kill-signal 'sigkill
-    :kill-process-buffer-on-stop t)
+   :name "ML Gitbook Publish"
+   :command "npm"
+   :args '("run" "docs:publish")
+   :cwd "~/projects/Machine_Learning_Questions"
+   :tags '(npm gitbook)
+   :kill-signal 'sigkill
+   :kill-process-buffer-on-stop t)
 
   (prodigy-define-service
-    :name "ML Gitbook Start"
-    :command "npm"
-    :args '("start")
-    :cwd "~/projects/Machine_Learning_Questions"
-    :tags '(npm gitbook)
-    :init (lambda () (browse-url "http://localhost:4000"))
-    :kill-signal 'sigkill
-    :kill-process-buffer-on-stop t)
+   :name "ML Gitbook Start"
+   :command "npm"
+   :args '("start")
+   :cwd "~/projects/Machine_Learning_Questions"
+   :tags '(npm gitbook)
+   :init (lambda () (browse-url "http://localhost:4000"))
+   :kill-signal 'sigkill
+   :kill-process-buffer-on-stop t)
 
   (prodigy-define-service
-    :name "Hexo Blog Server"
-    :command "hexo"
-    :args '("server" "-p" "4000")
-    :cwd blog-admin-backend-path
-    :tags '(hexo server)
-    :init (lambda () (browse-url "http://localhost:4000"))
-    :kill-signal 'sigkill
-    :kill-process-buffer-on-stop t)
+   :name "Hexo Blog Server"
+   :command "hexo"
+   :args '("server" "-p" "4000")
+   :cwd blog-admin-backend-path
+   :tags '(hexo server)
+   :init (lambda () (browse-url "http://localhost:4000"))
+   :kill-signal 'sigkill
+   :kill-process-buffer-on-stop t)
 
   (prodigy-define-service
-    :name "Hexo Blog Deploy"
-    :command "hexo"
-    :args '("deploy" "--generate")
-    :cwd blog-admin-backend-path
-    :tags '(hexo deploy)
-    :kill-signal 'sigkill
-    :kill-process-buffer-on-stop t)
+   :name "Hexo Blog Deploy"
+   :command "hexo"
+   :args '("deploy" "--generate")
+   :cwd blog-admin-backend-path
+   :tags '(hexo deploy)
+   :kill-signal 'sigkill
+   :kill-process-buffer-on-stop t)
 
   (defun refresh-chrome-current-tab (beg end length-before)
     (call-interactively '+my/browser-refresh--chrome-applescript))
