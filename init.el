@@ -180,7 +180,7 @@
        plantuml          ; diagrams for confusing people more
        (purescript +lsp)       ; javascript, but functional
        (python
-        +pyenv
+        ;;+pyenv
         +conda
         +lsp
         +cython
