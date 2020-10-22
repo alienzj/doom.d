@@ -69,10 +69,10 @@
        ;;word-wrap         ; soft wrapping with language-aware indent
 
        :checkers
-       (syntax
-        +childframe)
-       (spell +aspell)
-       grammar
+       ;;(syntax
+       ;; +childframe)
+       ;;(spell +aspell)
+       ;;grammar
 
        :emacs
        (dired             ; making dired pretty [functional]
@@ -88,11 +88,11 @@
        :term
        eshell            ; a consistent, cross-platform shell (WIP)
        shell             ; a terminal REPL for Emacs
-       term              ; terminals in Emacs
-       vterm             ; another terminals in Emacs
+       ;;term              ; terminals in Emacs
+       ;;vterm             ; another terminals in Emacs
 
        :tools
-       ansible
+       ;;ansible
        (debugger +lsp)          ; FIXME stepping through code, to help you add bugs
        direnv
        docker
@@ -105,8 +105,8 @@
         +offline
         +docsets)        ; ...or in Dash docsets locally
        (lsp +peek)
-       (:if IS-MAC macos)             ; MacOS-specific commands
-       (tty +osc)
+       ;;(:if IS-MAC macos)             ; MacOS-specific commands
+       ;;(tty +osc)
        (magit             ; a git porcelain for Emacs
         +forge)
        make              ; run make tasks from Emacs
@@ -143,10 +143,10 @@
        ;;(hy +lsp)               ; readability of scheme w/ speed of python
        ;;(idris +lsp)             ;
        (json +lsp)
-       (java +lsp) ; the poster child for carpal tunnel syndrome
+       ;;(java +lsp) ; the poster child for carpal tunnel syndrome
        (javascript +lsp)     ; all(hope(abandon(ye(who(enter(here))))))
        ;;(julia +lsp)            ; a better, faster MATLAB
-       (kotlin +lsp)           ; a better, slicker Java(Script)
+       ;;(kotlin +lsp)           ; a better, slicker Java(Script)
        (latex +latexmk             ; writing papers in Emacs has never been so fun
               +cdlatex
               +fold
@@ -185,7 +185,8 @@
         +lsp
         +cython
         +poetry
-        +pyright)           ; beautiful is better than ugly
+        +pyright
+        )           ; beautiful is better than ugly
        qt               ; the 'cutest' gui framework ever
        racket            ; a DSL for DSLs
        raku

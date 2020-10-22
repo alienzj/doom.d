@@ -11,7 +11,6 @@
       zj-org-dir (concat zj-doraemon-dir "org/")
       zj-blog-dir (concat zj-org-dir "blog/alienzj.github.io/"))
 
-(load! "+os")
 (load! "+ui")
 (load! "+text")
 (load! "+misc")
