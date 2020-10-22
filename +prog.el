@@ -13,7 +13,7 @@
         conda-env-home-directory (concat zj-home ".conda/envs/bioenv")
         importmagic-python-interpreter "python3"
         flycheck-python-pylint-executable "pylint"
-        flycheck-python-flake8-executable "flake8")
+        flycheck-python-flake8-executable "flake8"))
 
 
 ;; dap

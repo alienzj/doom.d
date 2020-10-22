@@ -1,19 +1,5 @@
 ;;; ../projects/doom.d/+misc.el -*- lexical-binding: t; -*-
 
-;; projectile
-(after! projectile
-  (setq compilation-read-command nil)   ; no prompt in projectile-compile-project
-  ;; . -> Build
-  (projectile-register-project-type 'cmake '("CMakeLists.txt")
-                                    :configure "cmake %s"
-                                    :compile "cmake --build Debug"
-                                    :test "ctest")
-
-  ;; set projectile-known-projects after magit
-  (after! magit
-    (update-projectile-known-projects))
-  )
-
 
 ;; magit
 (after! magit
