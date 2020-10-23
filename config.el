@@ -28,7 +28,8 @@
  auto-save-default t
  inhibit-compacting-font-caches t
  fill-column 120
- delete-trailing-lines t)
+ ;; delete-trailing-lines t
+ )
 
 ;; Delete the selection when pasting
 (delete-selection-mode 1)
