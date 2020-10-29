@@ -7,8 +7,8 @@
        ((find-font (font-spec :name  "monospace")) "monospace")
        ((find-font (font-spec :name  "Droid Sans Mono")) "Droid Sans Mono")
        ((find-font (font-spec :name  "Droid Sans Fallback")) "Droid Sans Fallback")))
-(setq doom-font (font-spec :family user-font :size 23)
-      doom-big-font (font-spec :family user-font :size 23)
+(setq doom-font (font-spec :family user-font :size 24)
+      doom-big-font (font-spec :family user-font :size 24)
       doom-modeline-height 10)
 
 

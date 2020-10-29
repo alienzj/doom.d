@@ -86,8 +86,8 @@
         +tree)
 
        :term
-       eshell            ; a consistent, cross-platform shell (WIP)
-       shell             ; a terminal REPL for Emacs
+       ;;eshell            ; a consistent, cross-platform shell (WIP)
+       ;;shell             ; a terminal REPL for Emacs
        ;;term              ; terminals in Emacs
        vterm             ; another terminals in Emacs
 
@@ -185,7 +185,7 @@
         +lsp
         +cython
         +poetry
-        +pyright
+        ;;+pyright
         )           ; beautiful is better than ugly
        qt               ; the 'cutest' gui framework ever
        racket            ; a DSL for DSLs

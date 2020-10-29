@@ -84,3 +84,8 @@ Make sure to put cursor on date heading that contains list of urls."
 
 ;; browser
 (setq browse-url-generic-program "firefox")
+
+;; proxy
+(setq url-proxy-services
+      '(("http" . "127.0.0.1:9910")
+        ("https" . "127.0.0.1:9910")))
