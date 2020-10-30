@@ -15,6 +15,8 @@
         flycheck-python-pylint-executable "pylint"
         flycheck-python-flake8-executable "flake8"))
 
+(after! lsp-pyright
+  (setq lsp-pyright-python-executable-cmd "python3"))
 
 ;; dap
 (defun +my/dap-start ()

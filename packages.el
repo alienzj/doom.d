@@ -1,6 +1,10 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; .doom.d/packages.el
 
+;; disabled packages
+(disable-packages! anaconda-mode
+                   lsp-python-ms)
+
 ;; prog
 (package! pkgbuild-mode)
 (package! snakemake-mode)

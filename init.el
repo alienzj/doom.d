@@ -180,12 +180,12 @@
        plantuml          ; diagrams for confusing people more
        (purescript +lsp)       ; javascript, but functional
        (python
-        +pyenv
+        ;; +pyenv
         +conda
         +lsp
         +cython
         +poetry
-        ;;+pyright
+        +pyright
         )           ; beautiful is better than ugly
        qt               ; the 'cutest' gui framework ever
        racket            ; a DSL for DSLs
