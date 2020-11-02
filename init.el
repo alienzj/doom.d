@@ -185,7 +185,6 @@
         +lsp
         +cython
         +poetry
-        +pyright
         )           ; beautiful is better than ugly
        qt               ; the 'cutest' gui framework ever
        racket            ; a DSL for DSLs
