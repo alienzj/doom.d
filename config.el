@@ -51,6 +51,8 @@
                     ((lambda (buf _) (with-current-buffer buf (eq major-mode 'forge-topic-mode))) :size 0.35)
                     ))
 
+;; proxy
+(setenv "ALL_PROXY" "socks5h://127.0.0.1:9909")
 
 (let ((profile "~/.doom.d/profile.el"))
   (when (file-exists-p profile)
