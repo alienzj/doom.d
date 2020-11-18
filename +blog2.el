@@ -1,7 +1,7 @@
 ;;; ../projects/doom.d/+blog.el -*- lexical-binding: t; -*-
 
 ;; org-static-blog
-(setq org-static-blog-publish-title "Ohmeta Blog"
+(setq org-static-blog-publish-title "Metagenomics Research Blog"
       org-static-blog-publish-url "https://ohmeta.github.io/"
       org-static-blog-publish-directory zj-blog-dir
       org-static-blog-posts-directory (concat zj-blog-dir "posts/")
@@ -15,7 +15,7 @@
 ;; page-postamble
 
 (setq org-static-blog-page-header
-      "<meta name=\"author\" content=\"Jie Zhu\">
+      "<meta name=\"author\" content=\"Ohmeta\">
 <meta name=\"referrer\" content=\"no-referrer\">
 <link href= \"static/style.css\" rel=\"stylesheet\" type=\"text/css\" />
 <link rel=\"icon\" href=\"images/org_logo.png\">
@@ -28,7 +28,7 @@
 
 (setq org-static-blog-page-preamble
       "<div class=\"header\">
-  <a href=\"https://ohmeta.github.io/\" class=\"logo\">ZJ Org Blog</a>
+  <a href=\"https://ohmeta.github.io/\" class=\"logo\">Metagenomics Research Blog</a>
   <br>
     <a href=\"https://ohmeta.github.io/archive\">Archive</a>
     <a href=\"https://ohmeta.github.io/tags\">Tags</a>
@@ -60,11 +60,11 @@
 
             <span xmlns:dct=\"https://purl.org/dc/terms/\" href=
             \"https://purl.org/dc/dcmitype/Text\" property=
-            \"dct:title\" rel=\"dct:type\">ZJ Org Blog</span> by
+            \"dct:title\" rel=\"dct:type\">Metagenomics Research Blog</span> by
             <a xmlns:cc=\"https://creativecommons.org/ns#\" href=
             \"https://ohmeta.github.io\" property=
-            \"cc:attributionName\" rel=\"cc:attributionURL\">Jie
-            Zhu</a> is licensed under a <a rel=\"license\" href=
+            \"cc:attributionName\" rel=\"cc:attributionURL\">Ohmeta
+            </a> is licensed under a <a rel=\"license\" href=
             \"https://creativecommons.org/licenses/by-sa/3.0/\">Creative
             Commons Attribution-ShareAlike 3.0 Unported
             License</a>.

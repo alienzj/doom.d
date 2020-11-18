@@ -12,7 +12,7 @@
 
 (cond
  ((string= user-login-name "alienzj")
-  (setq zj-blog-dir (concat zj-org-dir "blog/alienzj.github.io"))
+  (setq zj-blog-dir (concat zj-org-dir "blog/alienzj.github.io/"))
   (load! "+blog"))
 
  ((string= user-login-name "zhujie")
