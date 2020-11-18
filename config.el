@@ -8,14 +8,21 @@
       zj-project-dir (concat zj-home "projects/")
       zj-document-dir (concat zj-home "documents/")
       zj-doraemon-dir (concat zj-document-dir "doraemon/")
-      zj-org-dir (concat zj-doraemon-dir "org/")
-      zj-blog-dir (concat zj-org-dir "blog/alienzj.github.io/"))
+      zj-org-dir (concat zj-doraemon-dir "org/"))
+
+(cond
+ ((string= user-login-name "alienzj")
+  (setq zj-blog-dir (concat zj-org-dir "blog/alienzj.github.io"))
+  (load! "+blog"))
+
+ ((string= user-login-name "zhujie")
+  (setq  zj-blog-dir (concat zj-org-dir "blog/ohmeta.github.io/"))
+  (load! "+blog2")))
 
 (load! "+ui")
 (load! "+text")
 (load! "+misc")
 (load! "+prog")
-(load! "+blog")
 (load! "+doraemon")
 
 ;; better defaults
@@ -52,7 +59,7 @@
                     ))
 
 ;; proxy
-(setenv "ALL_PROXY" "socks5h://127.0.0.1:9909")
+(setenv "ALL_PROXY" "socks5h://127.0.0.1:1080")
 
 (let ((profile "~/.doom.d/profile.el"))
   (when (file-exists-p profile)
