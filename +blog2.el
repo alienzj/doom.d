@@ -18,7 +18,7 @@
       "<meta name=\"author\" content=\"Ohmeta\">
 <meta name=\"referrer\" content=\"no-referrer\">
 <link href= \"static/style.css\" rel=\"stylesheet\" type=\"text/css\" />
-<link rel=\"icon\" href=\"images/org_logo.png\">
+<link rel=\"icon\" href=\"images/meta_logo.png\">
 <script src=\"static/katex.min.js\"></script>
 <script src=\"static/auto-render.min.js\"></script>
 <link rel=\"stylesheet\" href=\"static/katex.min.css\">
