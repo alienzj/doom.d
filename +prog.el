@@ -165,5 +165,20 @@
   (map!
    :map tablegen-mode-map
    (:leader
-     :n "=" #'clang-format-region
-     )))
+    :n "=" #'clang-format-region
+    )))
+
+
+;; tex
+(after! tex
+  (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
+  (setq TeX-command-default "XeLaTeX"
+        TeX-save-query nil
+        TeX-show-compilation t)
+  )
+
+
+;; lsp
+;; (setq lsp-enable-text-document-color nil)
+;; (setq lsp-enable-semantic-highlighting nil)
+;; (setq lsp-enable-symbol-highlighting nil)
