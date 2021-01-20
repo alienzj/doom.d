@@ -26,3 +26,7 @@
 ;; ui
 (package! rainbow-identifiers)
 (package! nyan-mode)
+
+;; doraemon
+(package! gscholar-bibtex
+  :recipe (:host github :repo "cute-jumper/gscholar-bibtex" :files ("*.el")))
