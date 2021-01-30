@@ -2,8 +2,8 @@
 ;;; .doom.d/packages.el
 
 ;; disabled packages
-(disable-packages! anaconda-mode
-                   lsp-python-ms)
+;; (disable-packages! anaconda-mode
+;;                    lsp-python-ms)
 
 ;; prog
 (package! pkgbuild-mode)
@@ -21,6 +21,7 @@
 (package! org-ref)
 (package! org-static-blog)
 (package! ebib)
+(package! citeproc-org)
 (package! org-roam-server)
 
 ;; ui

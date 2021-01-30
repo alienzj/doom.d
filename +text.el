@@ -9,12 +9,17 @@
       org-bullets-bullet-list '("#")
       org-download-screenshot-method "flameshot gui --raw > %s"
       org-download-image-dir (concat zj-org-dir "images/")
+
       bibtex-completion-bibliography '((concat zj-org-dir "references.bib"))
       bibtex-completion-library-path  (concat zj-org-dir "pdf/")
       bibtex-completion-pdf-field "File"
+
       reftex-default-bibliography bibtex-completion-bibliography
+      helm-bibtex-bibliography bibtex-completion-bibliography
+
       ;; org-noter-notes-search-path '((concat zj-org-dir "ref/"))
       org-noter-notes-search-path '("~/documents/doraemon/org/ref/")
+
       org-roam-directory org-directory)
 
 ;; ebib
@@ -37,12 +42,12 @@
   (ebib-index-default-sort '("timestamp" . descend)))
 
 ;; org-ref
-;; (use-package! org-ref
-;; (after! org-ref
-;; (bibtex-set-dialet 'BibTex)
-;;  (org-ref-default-bibliography '("~/documents/doraemon/org/references.bib"))
-;;  (org-ref-pdf-directory (concat zj-org-dir "pdf/"))
-;;  (org-ref-show-broken-links nil)
-;;  (org-ref-default-ref-type "eqref")
-;;  (org-ref-default-citation-link "citet"))
-;; )
+;;(use-package! org-ref
+;;  (after! org-ref
+;;    (bibtex-set-dialet 'BibTex)
+;;    (org-ref-default-bibliography '("~/documents/doraemon/org/references.bib"))
+;;    (org-ref-pdf-directory (concat zj-org-dir "pdf/"))
+;;    (org-ref-show-broken-links nil)
+;;    (org-ref-default-ref-type "eqref")
+;;    (org-ref-default-citation-link "citet"))
+;;  )

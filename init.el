@@ -21,23 +21,24 @@
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        (ivy               ; a search engine for love and life
-        +fuzzy
-        +icons
-        +prescient
-        +childframe)
+        ;;+fuzzy
+        ;;+icons
+        ;;+prescient
+        ;;+childframe
+	)
 
        :ui
-       deft              ; notational velocity for Emacs
+       ;;deft              ; notational velocity for Emacs
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
-       doom-quit         ; DOOM quit-message prompts when you quit Emacs
+       ;;doom-quit         ; DOOM quit-message prompts when you quit Emacs
        ;;fill-column       ; a `fill-column' indicator
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
        ;;indent-guides     ; highlighted indent columns
-       minimap
-       (modeline)          ; snazzy, Atom-inspired modeline, plus API
-       nav-flash         ; blink the current line after jumping
+       ;;minimap
+       (modeline +light)          ; snazzy, Atom-inspired modeline, plus API
+       ;;nav-flash         ; blink the current line after jumping
        ;;neotree           ; a project drawer, like NERDTree for vim
        ophints           ; highlight the region an operation acts on
        (popup            ; tame sudden yet inevitable temporary windows
@@ -45,7 +46,8 @@
         +defaults)       ; default popup rules
        ;;pretty-code       ; replace bits of code with pretty symbols
        tabs              ; an tab bar for Emacs
-       treemacs          ; a project drawer, like neotree but cooler
+       ;;treemacs          ; a project drawer, like neotree but cooler
+       tree-sitter
        ;;unicode           ; extended unicode support for various languages
        vc-gutter         ; vcs diff in the fringe
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
@@ -53,7 +55,7 @@
         +switch-window
         +numbers)
        workspaces        ; tab emulation, persistence & separate workspaces
-       zen
+       ;;zen
 
        :editor
        (evil +everywhere); come to the dark side, we have cookies
@@ -69,21 +71,22 @@
        ;;word-wrap         ; soft wrapping with language-aware indent
 
        :checkers
-       ;;(syntax
+       syntax
        ;; +childframe)
-       ;;(spell +aspell)
+       spell
+       ;(spell +aspell)
        ;;grammar
 
        :emacs
-       (dired             ; making dired pretty [functional]
-        +ranger
-        +icons)
+       dired             ; making dired pretty [functional]
+        ;+ranger
+        ;+icons)
        electric          ; smarter, keyword-based electric-indent
        vc                ; version-control and Emacs, sitting in a tree
-       (ibuffer
-        +icons)
-       (undo
-        +tree)
+       ibuffer
+        ;+icons)
+       undo
+        ;+tree)
 
        :term
        ;;eshell            ; a consistent, cross-platform shell (WIP)
@@ -110,7 +113,7 @@
        (magit             ; a git porcelain for Emacs
         +forge)
        make              ; run make tasks from Emacs
-       (pass +auth)             ; password manager for nerds
+       ;;(pass +auth)             ; password manager for nerds
        pdf               ; pdf enhancements
        ;;prodigy           ; FIXME managing external services & code builders
        rgb               ; creating color strings
@@ -119,11 +122,18 @@
        upload            ; map local to remote projects via ssh/ftp
        ;;wakatime
 
+       :os
+       arch
+       (:if IS-MAC macos)
+       ;;nixos
+       tty
+
        :lang
-       (agda +local)       ; types of types of types of types...
+       ;;(agda +local)       ; types of types of types of types...
+       assembly
        (cc +lsp)                ; C/C++/Obj-C madness
        ;;(clojure +lsp)           ; java with a lisp
-       (common-lisp +lsp)      ; if you've seen one lisp, you've seen them all
+       ;;(common-lisp +lsp)      ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
        ;;(crystal +lsp)          ; ruby at the speed of c
        ;;(csharp +lsp +unity)           ; unity, .NET, and mono shenanigans
@@ -145,7 +155,7 @@
        (json +lsp)
        ;;(java +lsp) ; the poster child for carpal tunnel syndrome
        (javascript +lsp)     ; all(hope(abandon(ye(who(enter(here))))))
-       ;;(julia +lsp)            ; a better, faster MATLAB
+       (julia +lsp)            ; a better, faster MATLAB
        ;;(kotlin +lsp)           ; a better, slicker Java(Script)
        (latex +latexmk             ; writing papers in Emacs has never been so fun
               +cdlatex
@@ -157,7 +167,7 @@
        ;;(lua +monoscript)              ; one-based indices? one-based indices
        (markdown +grip)         ; writing docs for people to ignore
        (nim +lsp)               ; python + lisp at the speed of c
-       (nix +lsp)              ; I hereby declare "nix geht mehr!"
+       ;;(nix +lsp)              ; I hereby declare "nix geht mehr!"
        (ocaml +lsp)            ; an objective camel
        (org              ; organize your plain life in plain text
         +brain
@@ -170,15 +180,13 @@
         +noter
         +pandoc          ; export-with-pandoc support
         +present
-        +pandoc
         +pomodoro
         +pretty
-        +present
         +roam)        ; using org-mode for presentations
-       (raku +lsp)            ; write code no one else can comprehend
+       ;;(perl +lsp)            ; write code no one else can comprehend
        (php +lsp)               ; perl's insecure younger brother
        plantuml          ; diagrams for confusing people more
-       (purescript +lsp)       ; javascript, but functional
+       ;;(purescript +lsp)       ; javascript, but functional
        (python
         ;; +pyenv
         +conda
@@ -186,19 +194,19 @@
         +cython
         +poetry
         )           ; beautiful is better than ugly
-       qt               ; the 'cutest' gui framework ever
-       racket            ; a DSL for DSLs
-       raku
-       rest            ; Emacs as a REST client
-       rst
+       ;;qt               ; the 'cutest' gui framework ever
+       ;;racket            ; a DSL for DSLs
+       (raku +lsp)
+       ;;rest            ; Emacs as a REST client
+       ;;rst
        (ruby +lsp +rvm +rbenv +rails +chruby)   ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        (rust +lsp)             ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
-       (scala +lsp)           ; java, but good
+       ;;(scala +lsp)           ; java, but good
        scheme           ; a fully conniving family of lisps
        (sh +lsp +fish)               ; she sells {ba,z,fi}sh shells on the C xor
        ;;sml
        ;;solidity          ; do you need a blockchain? No.
-       (swift +lsp)            ; who asked for emoji variables?
+       ;;(swift +lsp)            ; who asked for emoji variables?
        ;;terra             ; Earth and Moon in alignment for performance.
        (web +lsp)              ; the tubes
        (yaml +lsp)
