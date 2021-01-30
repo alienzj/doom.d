@@ -37,7 +37,9 @@
        ;;hydra
        ;;indent-guides     ; highlighted indent columns
        ;;minimap
-       (modeline +light)          ; snazzy, Atom-inspired modeline, plus API
+       (modeline
+        ;; +light
+        )          ; snazzy, Atom-inspired modeline, plus API
        ;;nav-flash         ; blink the current line after jumping
        ;;neotree           ; a project drawer, like NERDTree for vim
        ophints           ; highlight the region an operation acts on
