@@ -11,8 +11,6 @@
       org-download-image-dir (concat zj-org-dir "images/")
       org-roam-directory org-directory)
 
-(setq reftex-default-bibliography bibtex-completion-bibliography)
-
 ;; org-ref
 (setq org-ref-default-bibliography '((concat zj-org-dir "references.bib"))
       org-ref-pdf-directory (concat zj-org-dir "pdf/")
@@ -24,6 +22,8 @@
 (setq bibtex-completion-bibliography '((concat zj-org-dir "references.bib"))
       bibtex-completion-library-path  (concat zj-org-dir "pdf/")
       bibtex-completion-pdf-field "File")
+
+(setq reftex-default-bibliography bibtex-completion-bibliography)
 
 (setq bibtex-completion-pdf-open-function
       (lambda (fpath)
