@@ -11,42 +11,32 @@
       org-download-image-dir (concat zj-org-dir "images/")
       org-roam-directory org-directory)
 
-(setq bibtex-completion-bibliography '((concat zj-org-dir "references.bib"))
-      bibtex-completion-library-path  (concat zj-org-dir "pdf/")
-      bibtex-completion-pdf-field "File"
-
-      reftex-default-bibliography bibtex-completion-bibliography
-      helm-bibtex-bibliography bibtex-completion-bibliography
-
-      ;; org-noter-notes-search-path '((concat zj-org-dir "ref/"))
-      org-noter-notes-search-path '("~/documents/doraemon/org/ref/")
-
-      )
-
-;; ebib
-(after! ebib
-  ([f5] 'ebib)
-  ;; (ebib-bibtex-dialect 'biblatex)
-  (ebib-index-window-size 10)
-  (ebib-preload-bib-files '((concat zj-org-dir "references.bib")))
-  (ebib-file-search-dirs '((concat zj-org-dir "pdf/")))
-  (ebib-reading-list-file (concat zj-org-dir "toread_list.org"))
-  (ebib-keywords-file (concat zj-org-dir "ebib_keywords.txt"))
-  (ebib-keywords-field-keep-sorted t)
-  (ebib-keywords-file-save-on-exit 'always)
-  (ebib-file-associations '(("pdf")) "using Emacs to open pdf")
-  (ebib-use-timestamp t "recording the time that entries are added")
-  (ebib-index-columns '(("Entry Key" 20 t)
-                        ("Author/Editor" 40 nil)
-                        ("Year" 6 t)
-                        ("Title" 50 t)))
-  (ebib-index-default-sort '("timestamp" . descend)))
+(setq reftex-default-bibliography bibtex-completion-bibliography)
 
 ;; org-ref
-(use-package! org-ref
+(setq org-ref-default-bibliography '((concat zj-org-dir "references.bib"))
+      org-ref-pdf-directory (concat zj-org-dir "pdf/")
+      org-ref-show-broken-links nil
+      org-ref-default-ref-type "eqref"
+      org-ref-default-citation-link "citet")
+
+;; helm-bibtex
+(setq bibtex-completion-bibliography '((concat zj-org-dir "references.bib"))
+      bibtex-completion-library-path  (concat zj-org-dir "pdf/")
+      bibtex-completion-pdf-field "File")
+
+(setq bibtex-completion-pdf-open-function
+      (lambda (fpath)
+        (start-process "open" "*open*" "open" fpath)))
+
+;; org-noter
+(setq org-noter-notes-search-path '("~/documents/doraemon/org/ref/"))
+
+;; ebib
+(use-package ebib
+  :ensure t
+  :init
   :config
-  (setq org-ref-default-bibliography '((concat zj-org-dir "references.bib"))
-        org-ref-pdf-directory (concat zj-org-dir "pdf/")
-        org-ref-show-broken-links nil
-        org-ref-default-ref-type "eqref"
-        org-ref-default-citation-link "citet"))
+  (setq ebib-file-search-dirs '((concat zj-org-dir "pdf/")))
+  (setq ebib-notes-directory '((concat zj-org-dir "ref/")))
+  (ebib-preload-bib-files '((concat zj-org-dir "references.bib"))))
