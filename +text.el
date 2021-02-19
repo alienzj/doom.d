@@ -12,14 +12,14 @@
       org-roam-directory org-directory)
 
 ;; org-ref
-(setq org-ref-default-bibliography '((concat zj-org-dir "references.bib"))
+(setq org-ref-default-bibliography (concat zj-org-dir "references.bib")
       org-ref-pdf-directory (concat zj-org-dir "pdf/")
       org-ref-show-broken-links nil
       org-ref-default-ref-type "eqref"
       org-ref-default-citation-link "citet")
 
 ;; helm-bibtex
-(setq bibtex-completion-bibliography '((concat zj-org-dir "references.bib"))
+(setq bibtex-completion-bibliography (concat zj-org-dir "references.bib")
       bibtex-completion-library-path  (concat zj-org-dir "pdf/")
       bibtex-completion-pdf-field "File")
 
@@ -30,13 +30,25 @@
         (start-process "open" "*open*" "open" fpath)))
 
 ;; org-noter
-(setq org-noter-notes-search-path '("~/documents/doraemon/org/ref/"))
+(setq org-noter-notes-search-path  '("~/documents/doraemon/org/ref/"))
 
 ;; ebib
 (use-package ebib
-  :ensure t
-  :init
   :config
-  (setq ebib-file-search-dirs '((concat zj-org-dir "pdf/")))
-  (setq ebib-notes-directory '((concat zj-org-dir "ref/")))
-  (setq ebib-preload-bib-files '((concat zj-org-dir "references.bib"))))
+  (setq ebib-file-search-dirs (concat zj-org-dir "pdf/"))
+  (setq ebib-notes-directory (concat zj-org-dir "ref/"))
+  (setq ebib-preload-bib-files (concat zj-org-dir "references.bib")))
+
+;; org-media-note
+;; https://github.com/yuchen-lea/org-media-note/blob/master/README_CN.org
+(use-package org-media-note
+  :hook (org-mode .  org-media-note-setup-org-ref)
+  :bind (
+         ("H-v" . org-media-note-hydra/body)) ;; 主功能入口
+  :config
+  (setq org-media-note-screenshot-image-dir (concat zj-org-dir "images/")) ;; 用于存储视频截图的目录
+  (setq org-media-note-use-refcite-first t))
+
+;; plantuml
+(setq plantuml-jar-path  "/usr/share/java/plantuml/plantuml.jar"
+      org-plantuml-jar-path plantuml-jar-path)

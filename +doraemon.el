@@ -42,7 +42,6 @@
   (quit-window))
 
 (use-package elfeed
-  :ensure t
   :config
   (elfeed-org)
   (setq rmh-elfeed-org-files (list (concat zj-org-dir "elfeed.org")))

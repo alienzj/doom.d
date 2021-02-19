@@ -13,17 +13,20 @@
 
 
 ;; pixel scroll
-(pixel-scroll-mode)
-(when (display-graphic-p)
-  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))
-        mouse-wheel-progressive-speed nil))
-(setq scroll-step 1
-      scroll-margin 0
-      scroll-conservatively 100000)
-(setq scroll-step 1
-      scroll-margin 0
-      scroll-conservatively 100000)
-
+;; (pixel-scroll-mode)
+;; (when (display-graphic-p)
+;;   (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))
+;;         mouse-wheel-progressive-speed nil))
+;; (setq scroll-step 1
+;;       scroll-margin 0
+;;       scroll-conservatively 100000)
+;; (setq scroll-step 1
+;;       scroll-margin 0
+;;       scroll-conservatively 100000)
+;;
+;; The built-in pixel-scroll does implement pixel line scrolling,
+;; but, unlike good-scroll, does not support dynamic scrolling velocity.
+(good-scroll-mode 1)
 
 ;; https://emacs-china.org/t/topic/2405/20
 ;; @purcell

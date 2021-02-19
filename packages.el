@@ -27,7 +27,13 @@
 ;; ui
 (package! rainbow-identifiers)
 (package! nyan-mode)
+(package! good-scroll)
 
 ;; doraemon
 (package! gscholar-bibtex
   :recipe (:host github :repo "cute-jumper/gscholar-bibtex" :files ("*.el")))
+
+
+;; note
+(package! mpv)
+(package! org-media-note :recipe (:host github :repo "yuchen-lea/org-media-note"))
