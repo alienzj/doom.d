@@ -16,7 +16,8 @@
 (setq references_pdf (concat zj-org-dir "pdf_bib/"))
 (setq references_note (concat zj-org-dir "ref/"))
 
-(setq org-ref-pdf-to-bibtex-function 'rename-file)
+;; (setq org-ref-pdf-to-bibtex-function 'link-file)
+(setq org-ref-pdf-to-bibtex-function 'copy-file)
 
 ;; https://github.com/jkitchin/org-ref/issues/731
 ;; (bibtex-set-dialect 'BibTex)
