@@ -16,6 +16,10 @@
 (setq references_pdf (concat zj-org-dir "pdf/"))
 (setq references_note (concat zj-org-dir "ref/"))
 
+;; https://github.com/jkitchin/org-ref/issues/731
+;; (bibtex-set-dialect 'BibTex)
+(setq bibtex-dialect 'Bibtex)
+
 (setq reftex-default-bibliography (list references_bib))
 
 (setq org-ref-default-bibliography (list references_bib)
