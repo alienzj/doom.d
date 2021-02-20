@@ -28,11 +28,11 @@
 (package! rainbow-identifiers)
 (package! nyan-mode)
 (package! good-scroll)
+(package! pretty-hydra)
 
 ;; doraemon
 (package! gscholar-bibtex
   :recipe (:host github :repo "cute-jumper/gscholar-bibtex" :files ("*.el")))
-
 
 ;; note
 (package! mpv)

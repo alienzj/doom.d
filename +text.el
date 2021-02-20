@@ -44,9 +44,9 @@
 (use-package org-media-note
   :hook (org-mode .  org-media-note-setup-org-ref)
   :bind (
-         ("H-v" . org-media-note-hydra/body)) ;; 主功能入口
+         ("H-v" . org-media-note-hydra/body))
   :config
-  (setq org-media-note-screenshot-image-dir (concat zj-org-dir "images/")) ;; 用于存储视频截图的目录
+  (setq org-media-note-screenshot-image-dir (concat zj-org-dir "images/"))
   (setq org-media-note-use-refcite-first t))
 
 ;; plantuml
