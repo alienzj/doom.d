@@ -16,20 +16,20 @@
 (setq references_pdf (concat zj-org-dir "pdf_bib/"))
 (setq references_note (concat zj-org-dir "ref/"))
 
-;; (setq org-ref-pdf-to-bibtex-function 'link-file)
-(setq org-ref-pdf-to-bibtex-function 'copy-file)
+(use-package! org-ref
+  :config
+  ;; (setq org-ref-pdf-to-bibtex-function 'link-file)
+  (setq org-ref-pdf-to-bibtex-function 'copy-file
+        org-ref-default-bibliography (list references_bib)
+        org-ref-pdf-directory references_pdf
+        org-ref-show-broken-links nil
+        org-ref-default-ref-type "eqref"
+        org-ref-default-citation-link "citet"))
 
 ;; https://github.com/jkitchin/org-ref/issues/731
 ;; (bibtex-set-dialect 'BibTex)
 (setq bibtex-dialect 'Bibtex)
-
 (setq reftex-default-bibliography (list references_bib))
-
-(setq org-ref-default-bibliography (list references_bib)
-      org-ref-pdf-directory references_pdf
-      org-ref-show-broken-links nil
-      org-ref-default-ref-type "eqref"
-      org-ref-default-citation-link "citet")
 
 ;; helm-bibtex
 (setq bibtex-completion-bibliography references_bib
