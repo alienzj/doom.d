@@ -16,9 +16,9 @@
 (setq references_pdf (concat zj-org-dir "pdf/"))
 (setq references_note (concat zj-org-dir "ref/"))
 
-(setq reftex-default-bibliography '(references_bib))
+(setq reftex-default-bibliography (list references_bib))
 
-(setq org-ref-default-bibliography '(references_bib)
+(setq org-ref-default-bibliography (list references_bib)
       org-ref-pdf-directory references_pdf
       org-ref-show-broken-links nil
       org-ref-default-ref-type "eqref"
@@ -33,19 +33,19 @@
 ;;         (start-process "open" "*open*" "open" fpath)))
 
 ;; org-noter
-(setq org-noter-notes-search-path '(references_note))
+(setq org-noter-notes-search-path (list references_note))
 
 ;; ebib
 (use-package! ebib
   :config
   (setq ebib-file-search-dirs references_pdf)
   (setq ebib-notes-directory references_note)
-  (setq ebib-preload-bib-files '(references_bib)))
+  (setq ebib-preload-bib-files (list references_bib)))
 
 ;; org-media-note
 ;; https://github.com/yuchen-lea/org-media-note/blob/master/README_CN.org
 (use-package! org-media-note
-  :hook (org-mode .  org-media-note-setup-org-ref)
+  :hook (org-mode . org-media-note-setup-org-ref)
   :bind (
          ("H-v" . org-media-note-hydra/body))
   :config
