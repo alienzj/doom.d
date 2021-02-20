@@ -36,7 +36,7 @@
 
 (use-package! org-ref
   :after org-roam
-  :bind (("cc" . 'org-ref-cite-hydra/body))
+  :bind (("H-c" . 'org-ref-cite-hydra/body))
   :init
   ;; (setq org-ref-pdf-to-bibtex-function 'link-file)
   (setq ;; org-ref-pdf-to-bibtex-function 'copy-file
