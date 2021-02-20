@@ -14,6 +14,7 @@
 ;; org-ref
 (setq references_bib (concat zj-org-dir "references.bib"))
 (setq references_pdf (concat zj-org-dir "pdf_bib/"))
+(setq references_pdf_source (concat zj-org-dir "pdf/"))
 (setq references_note (concat zj-org-dir "ref/"))
 
 (use-package! org-ref
@@ -32,12 +33,12 @@
 (setq reftex-default-bibliography (list references_bib))
 
 ;; helm-bibtex
-(setq bibtex-completion-bibliography references_bib
-      bibtex-completion-library-path references_pdf
+(setq bibtex-completion-bibliography (list references_bib)
+      bibtex-completion-library-path (list references_pdf references_pdf_source)
       bibtex-completion-pdf-field "File")
-;; (setq bibtex-completion-pdf-open-function
-;;       (lambda (fpath)
-;;         (start-process "open" "*open*" "open" fpath)))
+(setq bibtex-completion-pdf-open-function
+       (lambda (fpath)
+         (start-process "okular" nil 0 nil fpath)))
 
 ;; org-noter
 (setq org-noter-notes-search-path (list references_note))
