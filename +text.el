@@ -48,6 +48,7 @@
 
 ;; org-media-note
 ;; https://github.com/yuchen-lea/org-media-note/blob/master/README_CN.org
+(require 'org-attach)
 (use-package! org-media-note
   :hook (org-mode . org-media-note-setup-org-ref)
   :bind (
@@ -75,3 +76,8 @@
         org-roam-server-network-label-truncate t
         org-roam-server-network-label-truncate-length 60
         org-roam-server-network-label-wrap-length 20))
+
+;; org-roam-bibtex
+(use-package! org-roam-bibtex
+  :after org-roam
+  :hook (org-roam-mode . org-roam-bibtex-mode))
