@@ -20,7 +20,7 @@
 ;; org
 (package! org-ref)
 (package! org-static-blog)
-(package! ebib)
+;; (package! ebib)
 (package! citeproc-org)
 (package! org-roam-server)
 
@@ -42,3 +42,6 @@
 ;; note
 (package! mpv)
 (package! org-media-note :recipe (:host github :repo "yuchen-lea/org-media-note"))
+
+;; zotero
+(package! zotxt)

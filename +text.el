@@ -13,8 +13,10 @@
 
 ;; org-ref
 (setq references_bib (concat zj-org-dir "references.bib"))
-(setq references_pdf (concat zj-org-dir "pdf/"))
+(setq references_pdf (concat zj-org-dir "pdf_bib/"))
 (setq references_note (concat zj-org-dir "ref/"))
+
+(setq org-ref-pdf-to-bibtex-function 'rename-file)
 
 ;; https://github.com/jkitchin/org-ref/issues/731
 ;; (bibtex-set-dialect 'BibTex)
@@ -40,11 +42,11 @@
 (setq org-noter-notes-search-path (list references_note))
 
 ;; ebib
-(use-package! ebib
-  :config
-  (setq ebib-file-search-dirs references_pdf)
-  (setq ebib-notes-directory references_note)
-  (setq ebib-preload-bib-files (list references_bib)))
+;; (use-package! ebib
+;;   :config
+;;   (setq ebib-file-search-dirs references_pdf)
+;;   (setq ebib-notes-directory references_note)
+;;   (setq ebib-preload-bib-files (list references_bib)))
 
 ;; org-media-note
 ;; https://github.com/yuchen-lea/org-media-note/blob/master/README_CN.org
