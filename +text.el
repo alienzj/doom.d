@@ -17,10 +17,23 @@
 (setq references_pdf_source (concat zj-org-dir "pdf/"))
 (setq references_note (concat zj-org-dir "ref/"))
 
+;; https://github.com/jkitchin/org-ref/issues/656
+(defun my/org-ref-move-buffer-file (oldname newname)
+  "moves both current buffer and file it's visiting to DIR."
+  (interactive "DNew directory: ")
+  (progn
+    (copy-file oldname newname 1)
+    (delete-file oldname)
+    (set-visited-file-name newname)
+    (set-buffer-modified-p nil)
+    t))
+
 (use-package! org-ref
-  :config
+  :after org-roam
+  :init
   ;; (setq org-ref-pdf-to-bibtex-function 'link-file)
-  (setq org-ref-pdf-to-bibtex-function 'copy-file
+  (setq ;; org-ref-pdf-to-bibtex-function 'copy-file
+        org-ref-pdf-to-bibtex-function 'my/org-ref-move-buffer-file
         org-ref-default-bibliography (list references_bib)
         org-ref-pdf-directory references_pdf
         org-ref-show-broken-links nil
@@ -37,8 +50,8 @@
       bibtex-completion-library-path (list references_pdf references_pdf_source)
       bibtex-completion-pdf-field "File")
 (setq bibtex-completion-pdf-open-function
-       (lambda (fpath)
-         (start-process "okular" nil 0 nil fpath)))
+      (lambda (fpath)
+        (start-process "okular" nil 0 nil fpath)))
 
 ;; org-noter
 (setq org-noter-notes-search-path (list references_note))
