@@ -41,7 +41,7 @@
   ;; (elfeed-db-save)
   (quit-window))
 
-(use-package elfeed
+(use-package! elfeed
   :config
   (elfeed-org)
   (setq rmh-elfeed-org-files (list (concat zj-org-dir "elfeed.org")))

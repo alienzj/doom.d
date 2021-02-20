@@ -172,7 +172,7 @@
        ;;(lean +lsp)
        ;;factor
        ;;(ledger +lsp)           ; an accounting system in Emacs
-       ;;(lua +monoscript)              ; one-based indices? one-based indices
+       (lua +monoscript)              ; one-based indices? one-based indices
        (markdown +grip)                 ; writing docs for people to ignore
        (nim +lsp)                       ; python + lisp at the speed of c
        ;;(nix +lsp)              ; I hereby declare "nix geht mehr!"
@@ -206,7 +206,7 @@
        ;;racket            ; a DSL for DSLs
        (raku +lsp)
        ;;rest            ; Emacs as a REST client
-       ;;rst
+       rst
        (ruby +lsp +rvm +rbenv +rails +chruby) ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        (rust +lsp)                            ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;(scala +lsp)           ; java, but good

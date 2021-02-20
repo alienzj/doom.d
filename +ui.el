@@ -69,7 +69,7 @@
 
 
 ;; centaur-tabs
-(use-package centaur-tabs
+(use-package! centaur-tabs
   :demand
   :config
   (centaur-tabs-mode t)
