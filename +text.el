@@ -17,16 +17,48 @@
 (setq references_pdf_source (concat zj-org-dir "pdf/"))
 (setq references_note (concat zj-org-dir "ref/"))
 
+
+;; https://github.com/jkitchin/org-ref/pull/763
+(defun orcb-add-file-field ()
+  "Add a file field pointing to the PDF for this entry."
+  (bibtex-beginning-of-entry)
+  (let* ((entry (bibtex-parse-entry))
+         (key (cdr (assoc "=key=" entry)))
+         (pdf (org-ref-get-pdf-filename key)))
+    ;; (doi-utils-get-bibtex-entry-pdf)
+    (when (file-exists-p pdf)
+      (message pdf)
+      (bibtex-set-field "file" pdf))))
+
+;; (add-hook 'org-ref-clean-bibtex-entry-hook 'orcb-add-file-field t)
+
 ;; https://github.com/jkitchin/org-ref/issues/656
 (defun my/org-ref-move-buffer-file (oldname newname)
   "moves both current buffer and file it's visiting to DIR."
   (interactive "DNew directory: ")
   (progn
     (copy-file oldname newname 1)
-    (delete-file oldname)
     (set-visited-file-name newname)
     (set-buffer-modified-p nil)
     t))
+
+(defun my/link-pdf-file (oldname newname)
+  (interactive "link pdf ")
+  (progn
+    (make-symbolic-link oldname newname)
+    t)
+  (org-ref-clean-bibtex-entry)
+  (save-buffer))
+
+(defun my/org-ref-open-pdf-at-point ()
+  "Open the pdf for bibtex key under point if it exists."
+  (interactive)
+  (let* ((results (org-ref-get-bibtex-key-and-file))
+         (key (car results))
+         (pdf-file (car (bibtex-completion-find-pdf key))))
+    (if (file-exists-p pdf-file)
+        (org-open-file pdf-file)
+      (message "No PDF found for %s" key))))
 
 (require 'org-ref-wos)
 (require 'org-ref-scopus)
@@ -36,42 +68,43 @@
 
 (use-package! org-ref
   :after org-roam
+  :hook (org-ref-clean-bibtex-entry . orcb-add-file-field)
   :bind (("H-c" . 'org-ref-cite-hydra/body))
   :init
-  ;; (setq org-ref-pdf-to-bibtex-function 'link-file)
-  (setq ;; org-ref-pdf-to-bibtex-function 'copy-file
+  (setq
+   ;; org-ref-pdf-to-bibtex-function 'copy-file
+   org-ref-pdf-to-bibtex-function 'my/link-pdf-file
+   ;; org-ref-open-pdf-function 'my/org-ref-open-pdf-at-point
+   )
+  :config
+  (setq
+   ;; org-ref-pdf-to-bibtex-function 'link-file
+   ;; org-ref-pdf-to-bibtex-function 'copy-file
+   bibtex-dialect 'Bibtex
    org-ref-completion-library 'org-ref-ivy-cite
-   org-ref-pdf-to-bibtex-function 'my/org-ref-move-buffer-file
+   reftex-default-bibliography (list references_bib)
    org-ref-default-bibliography (list references_bib)
    org-ref-pdf-directory references_pdf
    org-ref-show-broken-links nil
    org-ref-default-ref-type "eqref"
-   org-ref-default-citation-link "citet"))
-
-(defun my/org-ref-open-pdf-at-point ()
-  "Open the pdf for bibtex key under point if it exists."
-  (interactive)
-  (let* ((results (org-ref-get-bibtex-key-and-file))
-         (key (car results))
-	 (pdf-file (car (bibtex-completion-find-pdf key))))
-    (if (file-exists-p pdf-file)
-	(org-open-file pdf-file)
-      (message "No PDF found for %s" key))))
-
-(setq org-ref-open-pdf-function 'my/org-ref-open-pdf-at-point)
-
-;; https://github.com/jkitchin/org-ref/issues/731
-;; (bibtex-set-dialect 'BibTex)
-(setq bibtex-dialect 'Bibtex)
-(setq reftex-default-bibliography (list references_bib))
-
-;; helm-bibtex
-(setq bibtex-completion-bibliography (list references_bib)
-      bibtex-completion-library-path (list references_pdf references_pdf_source)
-      bibtex-completion-pdf-field "File")
-(setq bibtex-completion-pdf-open-function
-      (lambda (fpath)
-        (start-process "okular" nil 0 nil fpath)))
+   org-ref-default-citation-link "citet")
+  ;; since we use ivy-bibtex
+  (setq bibtex-completion-bibliography (list references_bib)
+        bibtex-completion-library-path (list references_pdf references_pdf_source)
+        bibtex-completion-find-additional-pdfs t
+        bibtex-completion-pdf-field "File")
+  ;; format how we generate keys
+  (setq bibtex-autokey-year-length 4
+        bibtex-autokey-name-year-separator "-"
+        bibtex-autokey-year-title-separator "-"
+        bibtex-autokey-titleword-separator "-"
+        bibtex-autokey-titlewords 2
+        bibtex-autokey-titlewords-stretch 1
+        bibtex-autokey-titleword-length 5)
+  (setq bibtex-completion-pdf-open-function
+        (lambda (fpath)
+          (start-process "okular" nil 0 nil fpath)))
+  )
 
 ;; org-noter
 (setq org-noter-notes-search-path (list references_note))
