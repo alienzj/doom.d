@@ -37,7 +37,8 @@
   :config
   (setq ebib-file-search-dirs (concat zj-org-dir "pdf/"))
   (setq ebib-notes-directory (concat zj-org-dir "ref/"))
-  (setq ebib-preload-bib-files (concat zj-org-dir "references.bib")))
+  ;; (setq ebib-preload-bib-files (concat zj-org-dir "references.bib"))
+  (setq ebib-preload-bib-files '("~/documents/doraemon/org/references.bib")))
 
 ;; org-media-note
 ;; https://github.com/yuchen-lea/org-media-note/blob/master/README_CN.org
