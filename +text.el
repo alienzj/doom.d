@@ -28,17 +28,37 @@
     (set-buffer-modified-p nil)
     t))
 
+(require 'org-ref-wos)
+(require 'org-ref-scopus)
+(require 'org-ref-pubmed)
+(require 'org-ref-arxiv)
+(require 'org-ref-sci-id)
+
 (use-package! org-ref
   :after org-roam
+  :bind (("cc" . 'org-ref-cite-hydra/body))
   :init
   ;; (setq org-ref-pdf-to-bibtex-function 'link-file)
   (setq ;; org-ref-pdf-to-bibtex-function 'copy-file
-        org-ref-pdf-to-bibtex-function 'my/org-ref-move-buffer-file
-        org-ref-default-bibliography (list references_bib)
-        org-ref-pdf-directory references_pdf
-        org-ref-show-broken-links nil
-        org-ref-default-ref-type "eqref"
-        org-ref-default-citation-link "citet"))
+   org-ref-completion-library 'org-ref-ivy-cite
+   org-ref-pdf-to-bibtex-function 'my/org-ref-move-buffer-file
+   org-ref-default-bibliography (list references_bib)
+   org-ref-pdf-directory references_pdf
+   org-ref-show-broken-links nil
+   org-ref-default-ref-type "eqref"
+   org-ref-default-citation-link "citet"))
+
+(defun my/org-ref-open-pdf-at-point ()
+  "Open the pdf for bibtex key under point if it exists."
+  (interactive)
+  (let* ((results (org-ref-get-bibtex-key-and-file))
+         (key (car results))
+	 (pdf-file (car (bibtex-completion-find-pdf key))))
+    (if (file-exists-p pdf-file)
+	(org-open-file pdf-file)
+      (message "No PDF found for %s" key))))
+
+(setq org-ref-open-pdf-function 'my/org-ref-open-pdf-at-point)
 
 ;; https://github.com/jkitchin/org-ref/issues/731
 ;; (bibtex-set-dialect 'BibTex)
@@ -68,8 +88,7 @@
 (require 'org-attach)
 (use-package! org-media-note
   :hook (org-mode . org-media-note-setup-org-ref)
-  :bind (
-         ("H-v" . org-media-note-hydra/body))
+  :bind (("H-v" . org-media-note-hydra/body))
   :config
   (setq org-media-note-screenshot-image-dir (concat zj-org-dir "images/"))
   (setq org-media-note-use-refcite-first t))
