@@ -12,37 +12,39 @@
       org-roam-directory org-directory)
 
 ;; org-ref
-(setq org-ref-default-bibliography (concat zj-org-dir "references.bib")
-      org-ref-pdf-directory (concat zj-org-dir "pdf/")
+(setq references_bib (concat zj-org-dir "references.bib"))
+(setq references_pdf (concat zj-org-dir "pdf/"))
+(setq references_note (concat zj-org-dir "ref/"))
+
+(setq reftex-default-bibliography '(references_bib))
+
+(setq org-ref-default-bibliography '(references_bib)
+      org-ref-pdf-directory references_pdf
       org-ref-show-broken-links nil
       org-ref-default-ref-type "eqref"
       org-ref-default-citation-link "citet")
 
 ;; helm-bibtex
-(setq bibtex-completion-bibliography (concat zj-org-dir "references.bib")
-      bibtex-completion-library-path  (concat zj-org-dir "pdf/")
+(setq bibtex-completion-bibliography references_bib
+      bibtex-completion-library-path references_pdf
       bibtex-completion-pdf-field "File")
-
-(setq reftex-default-bibliography bibtex-completion-bibliography)
-
-(setq bibtex-completion-pdf-open-function
-      (lambda (fpath)
-        (start-process "open" "*open*" "open" fpath)))
+;; (setq bibtex-completion-pdf-open-function
+;;       (lambda (fpath)
+;;         (start-process "open" "*open*" "open" fpath)))
 
 ;; org-noter
-(setq org-noter-notes-search-path  '("~/documents/doraemon/org/ref/"))
+(setq org-noter-notes-search-path '(references_note))
 
 ;; ebib
-(use-package ebib
+(use-package! ebib
   :config
-  (setq ebib-file-search-dirs (concat zj-org-dir "pdf/"))
-  (setq ebib-notes-directory (concat zj-org-dir "ref/"))
-  ;; (setq ebib-preload-bib-files (concat zj-org-dir "references.bib"))
-  (setq ebib-preload-bib-files '("~/documents/doraemon/org/references.bib")))
+  (setq ebib-file-search-dirs references_pdf)
+  (setq ebib-notes-directory references_note)
+  (setq ebib-preload-bib-files '(references_bib)))
 
 ;; org-media-note
 ;; https://github.com/yuchen-lea/org-media-note/blob/master/README_CN.org
-(use-package org-media-note
+(use-package! org-media-note
   :hook (org-mode .  org-media-note-setup-org-ref)
   :bind (
          ("H-v" . org-media-note-hydra/body))
