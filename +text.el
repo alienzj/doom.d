@@ -11,26 +11,32 @@
       org-download-image-dir (concat zj-org-dir "images/")
       org-roam-directory org-directory)
 
+;; org-pdftools
+;; PDF links for org-mode
+(use-package! org-pdftools
+  :after pdf-tools
+  :config
+  ;; https://lists.gnu.org/archive/html/emacs-orgmode/2016-11/msg00169.html
+  ;; Before adding, remove it (to avoid clogging)
+  (delete '("\\.pdf\\'" . default) org-file-apps)
+  ;; https://lists.gnu.org/archive/html/emacs-orgmode/2016-11/msg00176.html
+  (add-to-list 'org-file-apps
+               '("\\.pdf\\'" . (lambda (file link)
+                                 (org-pdftools-open link)))))
+
 ;; org-ref
+;; https://github.com/jkitchin/org-ref/blob/master/org-ref.org
 (setq references_bib (concat zj-org-dir "references.bib"))
 (setq references_pdf (concat zj-org-dir "pdf_bib/"))
 (setq references_pdf_source (concat zj-org-dir "pdf/"))
 (setq references_note (concat zj-org-dir "ref/"))
 
-
-;; https://github.com/jkitchin/org-ref/pull/763
-(defun orcb-add-file-field ()
-  "Add a file field pointing to the PDF for this entry."
-  (bibtex-beginning-of-entry)
-  (let* ((entry (bibtex-parse-entry))
-         (key (cdr (assoc "=key=" entry)))
-         (pdf (org-ref-get-pdf-filename key)))
-    ;; (doi-utils-get-bibtex-entry-pdf)
-    (when (file-exists-p pdf)
-      (message pdf)
-      (bibtex-set-field "file" pdf))))
-
-;; (add-hook 'org-ref-clean-bibtex-entry-hook 'orcb-add-file-field t)
+(require 'org-ref)
+(require 'org-ref-wos)
+(require 'org-ref-scopus)
+(require 'org-ref-pubmed)
+(require 'org-ref-arxiv)
+(require 'org-ref-sci-id)
 
 ;; https://github.com/jkitchin/org-ref/issues/656
 (defun my/org-ref-move-buffer-file (oldname newname)
@@ -42,13 +48,25 @@
     (set-buffer-modified-p nil)
     t))
 
+;; https://github.com/jkitchin/org-ref/pull/763
+(defun orcb-add-file-field ()
+  "Add a file field pointing to the PDF for this entry."
+  (bibtex-beginning-of-entry)
+  (let* ((entry (bibtex-parse-entry))
+         (key (cdr (assoc "=key=" entry)))
+         (pdf (org-ref-get-pdf-filename key)))
+    ;; (doi-utils-get-bibtex-entry-pdf)
+    (interactive (format "orcb-add-file-field: key is %s" key))
+    (message (format "orcb-add-file-field: key is %s" key))
+    (interctive (format "orcb-add-file-field: pdf is %s" pdf))
+    (message (format "orcb-add-file-field: pdf is %s" pdf))
+    (bibtex-set-field "file" pdf)))
+;; (add-hook 'org-ref-clean-bibtex-entry-hook 'orcb-add-file-field t)
+
 (defun my/link-pdf-file (oldname newname)
-  (interactive "link pdf ")
-  (progn
-    (make-symbolic-link oldname newname)
-    t)
-  (org-ref-clean-bibtex-entry)
-  (save-buffer))
+  (interactive (format "link pdf %s to %s" oldname newname))
+  (message (format "link pdf %s to %s" oldname newname))
+  (make-symbolic-link oldname newname))
 
 (defun my/org-ref-open-pdf-at-point ()
   "Open the pdf for bibtex key under point if it exists."
@@ -60,34 +78,31 @@
         (org-open-file pdf-file)
       (message "No PDF found for %s" key))))
 
-(require 'org-ref-wos)
-(require 'org-ref-scopus)
-(require 'org-ref-pubmed)
-(require 'org-ref-arxiv)
-(require 'org-ref-sci-id)
+;; https://github.com/jkitchin/org-ref/issues/731
+(require 'bibtex)
+(bibtex-set-dialect 'BibTeX)
 
 (use-package! org-ref
   :after org-roam
-  :hook (org-ref-clean-bibtex-entry . orcb-add-file-field)
-  :bind (("H-c" . 'org-ref-cite-hydra/body))
+  ;; :hook (org-ref-clean-bibtex-entry . orcb-add-file-field)
+  ;; (add-hook 'org-ref-clean-bibtex-entry-hook 'orcb-add-file-field)
+  :bind (("s-c" . 'org-ref-cite-hydra/body))
   :init
   (setq
+   ;; org-ref-pdf-to-bibtex-function 'rename-file
    ;; org-ref-pdf-to-bibtex-function 'copy-file
-   org-ref-pdf-to-bibtex-function 'my/link-pdf-file
-   ;; org-ref-open-pdf-function 'my/org-ref-open-pdf-at-point
-   )
+   org-ref-open-pdf-function 'my/org-ref-open-pdf-at-point
+   org-ref-pdf-to-bibtex-function 'my/link-pdf-file)
   :config
   (setq
-   ;; org-ref-pdf-to-bibtex-function 'link-file
-   ;; org-ref-pdf-to-bibtex-function 'copy-file
-   bibtex-dialect 'Bibtex
    org-ref-completion-library 'org-ref-ivy-cite
    reftex-default-bibliography (list references_bib)
    org-ref-default-bibliography (list references_bib)
    org-ref-pdf-directory references_pdf
-   org-ref-show-broken-links nil
-   org-ref-default-ref-type "eqref"
-   org-ref-default-citation-link "citet")
+   ;; org-ref-show-broken-links nil
+   ;; org-ref-default-ref-type "eqref"
+   ;; org-ref-default-citation-link "citet"
+   )
   ;; since we use ivy-bibtex
   (setq bibtex-completion-bibliography (list references_bib)
         bibtex-completion-library-path (list references_pdf references_pdf_source)
@@ -101,10 +116,35 @@
         bibtex-autokey-titlewords 2
         bibtex-autokey-titlewords-stretch 1
         bibtex-autokey-titleword-length 5)
-  (setq bibtex-completion-pdf-open-function
-        (lambda (fpath)
-          (start-process "okular" nil 0 nil fpath)))
+  ;; (setq bibtex-completion-pdf-open-function
+  ;;       (lambda (fpath)
+  ;;         (start-process "okular" nil 0 nil fpath)))
   )
+
+(require 'helm-bibtex)
+(require 'ivy-bibtex)
+(defun bibtex-completion-open-pdf-external (keys &optional fallback-action)
+  (let ((bibtex-completion-pdf-open-function
+         (lambda (fpath) (start-process "okular" "*helm-bibtex-okular*" "/usr/bin/okular" fpath))))
+    (bibtex-completion-open-pdf keys fallback-action)))
+
+(ivy-bibtex-ivify-action bibtex-completion-open-pdf-external ivy-bibtex-open-pdf-external)
+
+(ivy-add-actions
+ 'ivy-bibtex
+ '(("P" ivy-bibtex-open-pdf-external "Open PDF file in external viewer (if present)")))
+
+;; (let ((org-export-with-broken-links t)
+;;       (org-latex-pdf-process
+;;        '("pdflatex -interaction nonstopmode -shell-escape -output-directory %o %f"
+;;          "bibtex %b"
+;;          "makeindex %b"
+;;          "pdflatex -interaction nonstopmode -shell-escape -output-directory %o %f"
+;;          "pdflatex -interaction nonstopmode -shell-escape -output-directory %o %f")))
+;;   (org-open-file (org-latex-export-to-pdf)))
+
+;; (let ((org-export-with-broken-links t))
+;;   (browse-url (org-html-export-to-html)))
 
 ;; org-noter
 (setq org-noter-notes-search-path (list references_note))
@@ -121,7 +161,7 @@
 (require 'org-attach)
 (use-package! org-media-note
   :hook (org-mode . org-media-note-setup-org-ref)
-  :bind (("H-v" . org-media-note-hydra/body))
+  :bind (("s-v" . org-media-note-hydra/body))
   :config
   (setq org-media-note-screenshot-image-dir (concat zj-org-dir "images/"))
   (setq org-media-note-use-refcite-first t))
