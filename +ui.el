@@ -2,6 +2,14 @@
 
 ;; doom-theme
 (setq doom-theme 'doom-one)
+
+(if (display-graphic-p)
+    (progn
+      (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
+      (doom-themes-treemacs-config)
+      ))
+(doom-themes-org-config)
+
 (setq user-font
       (cond
        ((find-font (font-spec :name  "monospace")) "monospace")
@@ -46,6 +54,20 @@
 
 
 ;; rainbow color
+;; (use-package! rainbow-mode
+;;   :config
+;;   (progn
+;;     (defun @-enable-rainbow ()
+;;       (rainbow-mode t))
+;;     (add-hook 'prog-mode-hook '@-enable-rainbow)
+;; ))
+;; (use-package! rainbow-delimiters
+;;   :config
+;;   (progn
+;;     (defun @-enable-rainbow-delimiters ()
+;;       (rainbow-delimiters-mode t))
+;;     (add-hook 'prog-mode-hook '@-enable-rainbow-delimiters)))
+
 (defun colorit ()
   (interactive)
   (rainbow-delimiters-mode)
@@ -97,65 +119,110 @@
   )
 
 ;; treemacs
-(use-package! treemacs
-  :config
-  (progn
-    (setq treemacs-collapse-dirs                 (if treemacs-python-executable 3 0)
-          treemacs-deferred-git-apply-delay      0.5
-          treemacs-directory-name-transformer    #'identity
-          treemacs-display-in-side-window        t
-          treemacs-eldoc-display                 t
-          treemacs-file-event-delay              5000
-          treemacs-file-extension-regex          treemacs-last-period-regex-value
-          treemacs-file-follow-delay             0.2
-          treemacs-file-name-transformer         #'identity
-          treemacs-git-command-pipe              ""
-          treemacs-goto-tag-strategy             'refetch-index
-          treemacs-indentation                   2
-          treemacs-indentation-string            " "
-          treemacs-max-git-entries               5000
-          treemacs-missing-project-action        'ask
-          treemacs-move-forward-on-expand        nil
-          treemacs-no-png-images                 nil
-          treemacs-no-delete-other-windows       t
-          treemacs-project-follow-cleanup        nil
-          treemacs-position                      'left
-          treemacs-read-string-input             'from-child-frame
-          treemacs-recenter-distance             0.1
-          treemacs-recenter-after-file-follow    nil
-          treemacs-recenter-after-tag-follow     nil
-          treemacs-recenter-after-project-jump   'always
-          treemacs-recenter-after-project-expand 'on-distance
-          treemacs-show-cursor                   nil
-          treemacs-show-hidden-files             t
-          treemacs-silent-filewatch              nil
-          treemacs-silent-refresh                nil
-          treemacs-space-between-root-nodes      t
-          treemacs-tag-follow-cleanup            t
-          treemacs-tag-follow-delay              1.5
-          treemacs-user-mode-line-format         nil
-          treemacs-user-header-line-format       nil
-          treemacs-width                         35
-          treemacs-workspace-switch-cleanup      nil)
+(after! treemacs
+  (defvar treemacs-file-ignore-extensions '()
+    "File extension which `treemacs-ignore-filter' will ensure are ignored")
+  (defvar treemacs-file-ignore-globs '()
+    "Globs which will are transformed to `treemacs-file-ignore-regexps' which `treemacs-ignore-filter' will ensure are ignored")
+  (defvar treemacs-file-ignore-regexps '()
+    "RegExps to be tested to ignore files, generated from `treeemacs-file-ignore-globs'")
+  (defun treemacs-file-ignore-generate-regexps ()
+    "Generate `treemacs-file-ignore-regexps' from `treemacs-file-ignore-globs'"
+    (setq treemacs-file-ignore-regexps (mapcar 'dired-glob-regexp treemacs-file-ignore-globs)))
+  (if (equal treemacs-file-ignore-globs '()) nil (treemacs-file-ignore-generate-regexps))
+  (defun treemacs-ignore-filter (file full-path)
+    "Ignore files specified by `treemacs-file-ignore-extensions', and `treemacs-file-ignore-regexps'"
+    (or (member (file-name-extension file) treemacs-file-ignore-extensions)
+        (let ((ignore-file nil))
+          (dolist (regexp treemacs-file-ignore-regexps ignore-file)
+            (setq ignore-file (or ignore-file (if (string-match-p regexp full-path) t nil)))))))
+  (add-to-list 'treemacs-ignored-file-predicates #'treemacs-ignore-filter))
 
-    ;; The default width and height of the icons is 22 pixels. If you are
-    ;; using a Hi-DPI display, uncomment this to double the icon size.
-    ;;(treemacs-resize-icons 44)
+(setq treemacs-file-ignore-extensions
+      '(;; LaTeX
+        "aux"
+        "ptc"
+        "fdb_latexmk"
+        "fls"
+        "synctex.gz"
+        "toc"
+        ;; LaTeX - glossary
+        "glg"
+        "glo"
+        "gls"
+        "glsdefs"
+        "ist"
+        "acn"
+        "acr"
+        "alg"
+        ;; LaTeX - pgfplots
+        "mw"
+        ;; LaTeX - pdfx
+        "pdfa.xmpi"
+        ;; syncthing
+        "stfolder"
+        "stfolder (1)"
+        ;; org-attach
+        "attach"
+        ))
+(setq treemacs-file-ignore-globs
+      '(;; LaTeX
+        "*/_minted-*"
+        ;; AucTeX
+        "*/.auctex-auto"
+        "*/_region_.log"
+        "*/_region_.tex"))
 
-    (treemacs-follow-mode t)
-    (treemacs-filewatch-mode t)
-    (treemacs-fringe-indicator-mode 'always)
-    (pcase (cons (not (null (executable-find "git")))
-                 (not (null treemacs-python-executable)))
-      (`(t . t)
-       (treemacs-git-mode 'deferred))
-      (`(t . _)
-       (treemacs-git-mode 'simple))))
+(after! treemacs
+  (setq treemacs-collapse-dirs                 (if treemacs-python-executable 3 0)
+        treemacs-deferred-git-apply-delay      0.5
+        treemacs-directory-name-transformer    #'identity
+        treemacs-display-in-side-window        t
+        treemacs-eldoc-display                 t
+        treemacs-file-event-delay              5000
+        treemacs-file-extension-regex          treemacs-last-period-regex-value
+        treemacs-file-follow-delay             0.2
+        treemacs-file-name-transformer         #'identity
+        treemacs-git-command-pipe              ""
+        treemacs-goto-tag-strategy             'refetch-index
+        treemacs-indentation                   2
+        treemacs-indentation-string            " "
+        treemacs-max-git-entries               5000
+        treemacs-missing-project-action        'ask
+        treemacs-move-forward-on-expand        nil
+        treemacs-no-png-images                 nil
+        treemacs-no-delete-other-windows       t
+        treemacs-project-follow-cleanup        nil
+        treemacs-position                      'left
+        treemacs-read-string-input             'from-child-frame
+        treemacs-recenter-distance             0.1
+        treemacs-recenter-after-file-follow    nil
+        treemacs-recenter-after-tag-follow     nil
+        treemacs-recenter-after-project-jump   'always
+        treemacs-recenter-after-project-expand 'on-distance
+        treemacs-show-cursor                   nil
+        treemacs-show-hidden-files             t
+        treemacs-silent-filewatch              nil
+        treemacs-silent-refresh                nil
+        treemacs-space-between-root-nodes      t
+        treemacs-tag-follow-cleanup            t
+        treemacs-tag-follow-delay              1.5
+        treemacs-user-mode-line-format         nil
+        treemacs-user-header-line-format       nil
+        treemacs-width                         35
+        treemacs-workspace-switch-cleanup      nil)
+
+  ;; The default width and height of the icons is 22 pixels. If you are
+  ;; using a Hi-DPI display, uncomment this to double the icon size.
+  ;; (treemacs-resize-icons 44)
+
+  (treemacs-filewatch-mode t)
+  (treemacs-fringe-indicator-mode 'always)
   :bind
   (:map global-map
-        ("M-0"       . treemacs-select-window)
-        ("C-x t 1"   . treemacs-delete-other-windows)
-        ("C-x t t"   . treemacs)
-        ("C-x t B"   . treemacs-bookmark)
-        ("C-x t C-t" . treemacs-find-file)
-        ("C-x t M-t" . treemacs-find-tag)))
+   ("M-0"       . treemacs-select-window)
+   ("C-x t 1"   . treemacs-delete-other-windows)
+   ("C-x t t"   . treemacs)
+   ("C-x t B"   . treemacs-bookmark)
+   ("C-x t C-t" . treemacs-find-file)
+   ("C-x t M-t" . treemacs-find-tag)))
