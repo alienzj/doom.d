@@ -174,6 +174,7 @@
         "*/_region_.tex"))
 
 (use-package! treemacs
+  :config
   (setq treemacs-collapse-dirs                 (if treemacs-python-executable 3 0)
         treemacs-deferred-git-apply-delay      0.5
         treemacs-directory-name-transformer    #'identity
