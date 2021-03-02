@@ -6,6 +6,7 @@
 (if (display-graphic-p)
     (progn
       (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
+      (setq doom-themes-treemacs-theme "Default")
       (doom-themes-treemacs-config)
       ))
 (doom-themes-org-config)
@@ -218,7 +219,7 @@
 
   ;; The default width and height of the icons is 22 pixels. If you are
   ;; using a Hi-DPI display, uncomment this to double the icon size.
-  (treemacs-resize-icons 44)
+  ;; (treemacs-resize-icons 44)
 
   (treemacs-filewatch-mode t)
   (treemacs-fringe-indicator-mode 'always)
