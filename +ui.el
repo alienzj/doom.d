@@ -217,7 +217,7 @@
   ;; (defvar treemacs-custom-snakemake-icon (all-the-icons-icon-for-file "images/name.python"))
   ;; (treemacs-define-custom-icon "smk" "snakefiles")
 
-  (treemacs-define-custom-image-icon "~/.doom.d/images/snakemake-22.png" "smk" "snakefiles")
+  (treemacs-define-custom-image-icon "~/.doom.d/images/logo-snake-22.png" "smk" "snakefiles")
 
   ;; (treemacs-define-custom-icon "images/snakemake.png" "smk" "snakefiles")
 
