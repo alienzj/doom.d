@@ -29,8 +29,7 @@
         ;;+fuzzy
         +icons
         ;;+prescient
-        +childframe
-	)
+        +childframe)
 
        :ui
        ;;deft              ; notational velocity for Emacs
@@ -162,7 +161,7 @@
        (json +lsp)
        ;;(java +lsp) ; the poster child for carpal tunnel syndrome
        (javascript +lsp)                ; all(hope(abandon(ye(who(enter(here))))))
-       ;; (julia +lsp)
+       (julia +lsp)
                                         ; a better, faster MATLAB
        ;;(kotlin +lsp)           ; a better, slicker Java(Script)
        (latex +latexmk                  ; writing papers in Emacs has never been so fun
@@ -199,6 +198,7 @@
         ;; +pyenv
         +conda
         +lsp
+        +pyright
         +cython
         +poetry
         )                               ; beautiful is better than ugly
