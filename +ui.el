@@ -214,8 +214,12 @@
         treemacs-width                         35
         treemacs-workspace-switch-cleanup      nil)
 
-  (defvar treemacs-custom-snakemake-icon (all-the-icons-icon-for-file "images/snakemake.png"))
-  (treemacs-define-custom-icon treemacs-custom-snakemake-icon "smk" "snakefiles")
+  ;; (defvar treemacs-custom-snakemake-icon (all-the-icons-icon-for-file "images/name.python"))
+  ;; (treemacs-define-custom-icon "smk" "snakefiles")
+
+  (treemacs-define-custom-image-icon "~/.doom.d/images/snakemake-22.png" "smk" "snakefiles")
+
+  ;; (treemacs-define-custom-icon "images/snakemake.png" "smk" "snakefiles")
 
   ;; The default width and height of the icons is 22 pixels. If you are
   ;; using a Hi-DPI display, uncomment this to double the icon size.

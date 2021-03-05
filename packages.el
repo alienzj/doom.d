@@ -34,6 +34,7 @@
 (package! nyan-mode)
 (package! good-scroll)
 (package! pretty-hydra)
+;; (unpin! treemacs)
 
 ;; doraemon
 (package! gscholar-bibtex
