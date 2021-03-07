@@ -97,7 +97,7 @@
   :config
   (centaur-tabs-mode t)
   (setq centaur-tabs-style "bar"
-        centaur-tabs-height 30
+        ;; centaur-tabs-height 30
         centaur-tabs-set-icons t
         centaur-tabs-set-modified-marker t
         centaur-tabs-show-navigation-buttons t

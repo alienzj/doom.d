@@ -1,6 +1,6 @@
 ;;; ../projects/doom.d/+text.el -*- lexical-binding: t; -*-
 
-;; org
+;;; org
 (setq org-journal-encrypt-journal t
       org-directory zj-org-dir
       org-agenda-files (list org-directory)
@@ -11,8 +11,29 @@
       org-download-image-dir (concat zj-org-dir "images/")
       org-roam-directory org-directory)
 
+;; hide PROPERTIES
+;; https://emacs-china.org/t/emacs-org-mode-drawer-help-wanted/15207/20
+;; (defun org-hide-properties ()
+;;   "Hide org headline's properties using overlay."
+;;   (save-excursion
+;;     (goto-char (point-min))
+;;     (while (re-search-forward
+;;             "^ *:PROPERTIES:\n\\( *:.+?:.*\n\\)+ *:END:\n" nil t)
+;;       (overlay-put (make-overlay
+;;                     (match-beginning 0) (match-end 0))
+;;                    'display ""))))
+;; (add-hook 'org-mode-hook #'org-hide-properties)
+
 ;; org-pdftools
 ;; PDF links for org-mode
+;; https://github.com/manateelazycat/emacs-application-framework/wiki/Org
+(defun eaf-org-open-file (file &optional link)
+  "An wrapper function on `eaf-open'."
+  (eaf-open file))
+
+;; use `emacs-application-framework' to open PDF file: link
+;; (add-to-list 'org-file-apps '("\\.pdf\\'" . eaf-org-open-file))
+
 (use-package! org-pdftools
   :after pdf-tools
   :config
@@ -22,7 +43,9 @@
   ;; https://lists.gnu.org/archive/html/emacs-orgmode/2016-11/msg00176.html
   (add-to-list 'org-file-apps
                '("\\.pdf\\'" . (lambda (file link)
-                                 (org-pdftools-open link)))))
+                                 ;; (org-pdftools-open link)
+                                 (eaf-org-open-file link)
+                                 ))))
 
 ;; org-ref
 ;; https://github.com/jkitchin/org-ref/blob/master/org-ref.org

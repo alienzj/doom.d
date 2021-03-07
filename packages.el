@@ -4,16 +4,31 @@
 ;; disabled packages
 ;; (disable-packages! anaconda-mode
 ;;                    lsp-python-ms)
+;;
+;; eaf
+(package! eaf
+  :recipe (:host github
+           :repo "manateelazycat/emacs-application-framework"
+           :files ("*")
+           :build (:not compile)))
+(package! ctable)
+(package! epc)
+
+;; snails
+(package! fuz)
+(package! snails :recipe (:host github :repo "manateelazycat/snails" :build (:not compile)))
 
 ;; prog
 (package! pkgbuild-mode)
 (package! snakemake-mode)
 (package! wdl-mode)
+
 (package! polymode)
 (package! poly-markdown)
 (package! poly-R)
 (package! poly-wdl)
 (package! ess-view)
+
 (package! bnf-mode)
 (package! tablegen-mode :ignore t)
 
@@ -28,6 +43,9 @@
 (package! org-roam-bibtex :recipe (:host github :repo "org-roam/org-roam-bibtex"))
 (unpin! org-roam company-org-roam)
 (unpin! bibtex-completion helm-bibtex ivy-bibtex)
+
+;; elfeed
+(package! elfeed-dashboard)
 
 ;; ui
 (package! rainbow-identifiers)
