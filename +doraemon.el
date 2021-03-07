@@ -68,3 +68,18 @@
               ))
   (setq tramp-inline-compress-start-size 4096000)
   )
+
+;; refnoter
+;; call ivy-bibtex, select paper, read and note
+(defun =refnoter ()
+  "Activate (or switch to) `ivy-bibtex' in its workspace."
+  (interactive)
+  (if (featurep! :ui workspaces)
+      (progn
+        (+workspace-switch "refnoter" t)
+        (doom/switch-to-scratch-buffer)
+        (ivy-bibtex)
+        (+workspace/display))
+    (delete-other-windows)
+    (switch-to-buffer (doom-fallback-buffer))
+    (ivy-bibtex)))
