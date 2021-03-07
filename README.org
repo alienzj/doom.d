@@ -17,3 +17,4 @@
   - https://github.com/tecosaur/emacs-config
   - https://github.com/fuxialexander/doom-emacs-private-xfu
   - https://github.com/alhassy/emacs.d
+  - https://github.com/loyalpartner/doom-config
