@@ -119,7 +119,6 @@
         :desc "eaf open history" "eh" 'eaf-open-browser-with-history
         :desc "eaf open terminal" "et" 'eaf-open-terminal
         :desc "eaf open rss" "er" 'eaf-open-rss-reader)
-
   :config
   (use-package! ctable)
   (use-package! deferred)
@@ -127,6 +126,8 @@
   (setq eaf-proxy-type "socks5"
         eaf-proxy-host "127.0.0.1"
         eaf-proxy-port "9909")
+  (eaf-setq eaf-browser-default-zoom "1.5")
+  ;; (eaf-setq eaf-browser-font-family . "monospace")
   (eaf-setq eaf-browser-chrome-history-file "~/.config/chromium/Default/History")
   (eaf-bind-key insert_or_copy_text "y" eaf-browser-keybinding)
   (eaf-bind-key copy_text "y" eaf-browser-caret-mode-keybinding)
@@ -266,7 +267,7 @@
    elfeed-search-filter "@10-week-ago")
   :bind (:map elfeed-search-mode-map
          ;; https://github.com/manateelazycat/emacs-application-framework/wiki/EAF%20Elfeed
-         ("t" . eaf-elfeed-open-url)
+         ;; ("t" . eaf-elfeed-open-url)
          ("r" . bjm/elfeed-show-all)
          ("D" . bjm/elfeed-show-daily)
          ("E" . bjm/elfeed-show-emacs)
@@ -327,10 +328,10 @@
 ;;             (setq-local socks-server '("Default server" "127.0.0.1" 1080 5))))
 
 (map! (:when (featurep! :app rss)
-        :map elfeed-search-mode-map
-        :n "gu" #'elfeed-update
-        :n "c" #'elfeed-search-clear-filter
-        :n [remap elfeed-kill-buffer] #'+rss/quit )
+       :map elfeed-search-mode-map
+       :n "gu" #'elfeed-update
+       :n "c" #'elfeed-search-clear-filter
+       :n [remap elfeed-kill-buffer] #'+rss/quit )
       :leader "on" '=rss+)
 
 
