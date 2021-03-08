@@ -187,7 +187,7 @@
                                     (string= eaf--buffer-app-name "browser"))))
                                (split-window-no-error nil nil split-direction))))
       (set-window-buffer browser-window buf)))
-  (add-to-list 'eaf-app-display-function-alist '("browser" . eaf--browser-display))
+  ;; (add-to-list 'eaf-app-display-function-alist '("browser" . eaf--browser-display))
 
   ;; https://github.com/manateelazycat/emacs-application-framework/pull/485/files
   (defun adviser-elfeed-show-entry (orig-fn entry &rest args)
@@ -281,7 +281,7 @@
    elfeed-search-filter "@10-week-ago")
   ;; (setq elfeed-show-entry-switch
   ;;       (lambda (b)
-  ;;         (let ((w (split-window-right 60)))
+  ;;         (let ((w (split-window-right 50)))
   ;;           (set-window-buffer w b)
   ;;           (select-window w))))
   )
