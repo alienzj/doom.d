@@ -171,13 +171,12 @@
 
   ;; (add-to-list 'eaf-app-display-function-alist '("browser" . eaf--browser-display))
 
-
-
-  (defun adviser-elfeed-show-entry (orig-fn entry &rest args)
-    (if (featurep 'elfeed)
-        (eaf-open-browser (elfeed-entry-link entry))
-      (apply orig-fn entry args)))
-  (advice-add #'elfeed-show-entry :around #'adviser-elfeed-show-entry)
+  ;; https://github.com/manateelazycat/emacs-application-framework/pull/485/files
+  ;; (defun adviser-elfeed-show-entry (orig-fn entry &rest args)
+  ;;   (if (featurep 'elfeed)
+  ;;       (eaf-open-browser (elfeed-entry-link entry))
+  ;;     (apply orig-fn entry args)))
+  ;; (advice-add #'elfeed-show-entry :around #'adviser-elfeed-show-entry)
 
   ;;ivy 添加 action, 用 eaf-open 打开
   ;; (after! counsel
@@ -259,20 +258,27 @@
 
 ;; elfeed
 (use-package! elfeed
-  :init
-  (setq +rss-split-direction 'right)
   :config
   (setq
    rmh-elfeed-org-files (list (concat zj-org-dir "elfeed.org"))
-   elfeed-search-filter "@10-week-ago")
-  :bind (:map elfeed-search-mode-map
-         ;; https://github.com/manateelazycat/emacs-application-framework/wiki/EAF%20Elfeed
-         ;; ("t" . eaf-elfeed-open-url)
-         ("r" . bjm/elfeed-show-all)
-         ("D" . bjm/elfeed-show-daily)
-         ("E" . bjm/elfeed-show-emacs)
-         ("R" . bjm/elfeed-show-research)
-         ("q" . bjm/elfeed-save-db-and-bury)))
+   elfeed-search-filter "@10-week-ago"
+   )
+  (setq elfeed-show-entry-switch
+        (lambda (b)
+          (let ((w (split-window-right 80)))
+            (set-window-buffer w b)
+            (select-window w))))
+
+  :bind
+  (:map elfeed-search-mode-map
+   ;; https://github.com/manateelazycat/emacs-application-framework/wiki/EAF%20Elfeed
+   ("t" . eaf-elfeed-open-url)
+   ("r" . bjm/elfeed-show-all)
+   ("D" . bjm/elfeed-show-daily)
+   ("E" . bjm/elfeed-show-emacs)
+   ("R" . bjm/elfeed-show-research)
+   ("q" . bjm/elfeed-save-db-and-bury))
+  )
 
 ;; elfeed-dashboard
 (use-package! elfeed-dashboard
