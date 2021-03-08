@@ -27,6 +27,7 @@
 ;; org-pdftools
 ;; PDF links for org-mode
 ;; https://github.com/manateelazycat/emacs-application-framework/wiki/Org
+(require 'eaf-org)
 (defun eaf-org-open-file (file &optional link)
   "An wrapper function on `eaf-open'."
   (eaf-open file))

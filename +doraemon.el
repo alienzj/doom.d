@@ -126,11 +126,30 @@
   (setq eaf-proxy-type "socks5"
         eaf-proxy-host "127.0.0.1"
         eaf-proxy-port "9909")
+
   (eaf-setq eaf-browser-default-zoom "1.5")
-  ;; (eaf-setq eaf-browser-font-family . "monospace")
+  (eaf-setq eaf-browser-dark-mode "false")
+  (eaf-setq eaf-browser-font-family "Sans Serif")
+  (eaf-setq eaf-browser-enable-adblocker "true")
+  (eaf-setq eaf-browser-download-path "~/downloads/eaf")
   (eaf-setq eaf-browser-chrome-history-file "~/.config/chromium/Default/History")
+
+  (eaf-setq eaf-terminal-dark-mode "true")
+  (eaf-setq eaf-terminal-font-size "18")
+  (eaf-setq eaf-terminal-font-family "monospace")
+
+  (eaf-setq eaf-mindmap-dark-mode "true") ; default option
+
+  (eaf-setq eaf-pdf-dark-mode "ignore")   ; see below
+  (eaf-setq eaf-pdf-default-zoom "1.0")
+  (eaf-setq eaf-pdf-dark-exclude-image "true")
+  (eaf-setq eaf-pdf-scroll-ratio "0.05")
+
+  (eaf-setq eaf-camera-save-path "~/videos/eaf")
+
   (eaf-bind-key insert_or_copy_text "y" eaf-browser-keybinding)
   (eaf-bind-key copy_text "y" eaf-browser-caret-mode-keybinding)
+
   (map! (:when t :map eaf-pdf-outline-mode-map
          :n "RET" 'eaf-pdf-outline-jump
          :n "q" '+popup/close))
@@ -172,10 +191,10 @@
   ;; (add-to-list 'eaf-app-display-function-alist '("browser" . eaf--browser-display))
 
   ;; https://github.com/manateelazycat/emacs-application-framework/pull/485/files
-  ;; (defun adviser-elfeed-show-entry (orig-fn entry &rest args)
-  ;;   (if (featurep 'elfeed)
-  ;;       (eaf-open-browser (elfeed-entry-link entry))
-  ;;     (apply orig-fn entry args)))
+  (defun adviser-elfeed-show-entry (orig-fn entry &rest args)
+    (if (featurep 'elfeed)
+        (eaf-open-browser (elfeed-entry-link entry))
+      (apply orig-fn entry args)))
   ;; (advice-add #'elfeed-show-entry :around #'adviser-elfeed-show-entry)
 
   ;;ivy 添加 action, 用 eaf-open 打开
@@ -184,12 +203,9 @@
   ;;    't
   ;;    (append '(("e" eaf-open))
   ;;            (plist-get ivy--actions-list 't))))
-
-
-  (require 'eaf-evil)
-
   )
 
+;; snails
 (use-package! fuz)
 (use-package! snails
   :commands (snails snails-search-point)
@@ -200,7 +216,9 @@
   (setq snails-show-with-frame t)
   ;; (add-hook 'snails-mode-hook #'centaur-tabs-local-mode)
   (add-to-list 'evil-emacs-state-modes 'snails-mode))
-;; eaf
+
+;; evil-mode
+;; https://github.com/manateelazycat/emacs-application-framework/wiki/Evil_CN
 (require 'eaf-evil)
 (define-key key-translation-map (kbd "SPC")
   (lambda (prompt)
@@ -261,23 +279,12 @@
   :config
   (setq
    rmh-elfeed-org-files (list (concat zj-org-dir "elfeed.org"))
-   elfeed-search-filter "@10-week-ago"
-   )
-  (setq elfeed-show-entry-switch
-        (lambda (b)
-          (let ((w (split-window-right 80)))
-            (set-window-buffer w b)
-            (select-window w))))
-
-  :bind
-  (:map elfeed-search-mode-map
-   ;; https://github.com/manateelazycat/emacs-application-framework/wiki/EAF%20Elfeed
-   ("t" . eaf-elfeed-open-url)
-   ("r" . bjm/elfeed-show-all)
-   ("D" . bjm/elfeed-show-daily)
-   ("E" . bjm/elfeed-show-emacs)
-   ("R" . bjm/elfeed-show-research)
-   ("q" . bjm/elfeed-save-db-and-bury))
+   elfeed-search-filter "@10-week-ago")
+  ;; (setq elfeed-show-entry-switch
+  ;;       (lambda (b)
+  ;;         (let ((w (split-window-right 60)))
+  ;;           (set-window-buffer w b)
+  ;;           (select-window w))))
   )
 
 ;; elfeed-dashboard
@@ -335,6 +342,12 @@
 
 (map! (:when (featurep! :app rss)
        :map elfeed-search-mode-map
+       :n "RET" #'eaf-elfeed-open-url
+       :n "r" #'bjm/elfeed-show-all
+       :n "D" #'bjm/elfeed-show-daily
+       :n "E" #'bjm/elfeed-show-emacs
+       :n "R" #'bjm/elfeed-show-research
+       :n "q" #'bjm/elfeed-save-db-and-bury
        :n "gu" #'elfeed-update
        :n "c" #'elfeed-search-clear-filter
        :n [remap elfeed-kill-buffer] #'+rss/quit )
