@@ -140,8 +140,10 @@
 
   (eaf-setq eaf-mindmap-dark-mode "true") ; default option
 
-  (eaf-setq eaf-pdf-dark-mode "ignore")   ; see below
-  (eaf-setq eaf-pdf-default-zoom "1.0")
+  ;; (eaf-setq eaf-pdf-dark-mode "ignore")
+                                        ; see below
+  (eaf-setq eaf-pdf-dark-mode "false")   ; see below
+  (eaf-setq eaf-pdf-default-zoom "0.8")
   (eaf-setq eaf-pdf-dark-exclude-image "true")
   (eaf-setq eaf-pdf-scroll-ratio "0.05")
 
@@ -339,6 +341,7 @@
 ;;             (setq-local url-gateway-method 'socks)
 ;;             (setq-local socks-server '("Default server" "127.0.0.1" 1080 5))))
 
+(require 'eaf)
 (map! (:when (featurep! :app rss)
        :map elfeed-search-mode-map
        :n "RET" #'eaf-elfeed-open-url
