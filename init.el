@@ -13,7 +13,7 @@
       zj-document-dir (concat zj-home "documents/")
       zj-doraemon-dir (concat zj-document-dir "doraemon/")
       zj-org-dir (concat zj-doraemon-dir "org/")
-)
+      )
 
 (cond
  ((string= user-login-name "alienzj")
