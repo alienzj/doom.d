@@ -1,5 +1,6 @@
 ;;; private/blog/config.el -*- lexical-binding: t; -*-
 ;; org-static-blog
+
 (setq org-static-blog-publish-title "ZJ Org Blog"
       org-static-blog-publish-url "https://alienzj.github.io/"
       org-static-blog-publish-directory zj-blog-dir

@@ -1,23 +1,11 @@
 ;;; .doom.d/config.el -*- lexical-binding: t; -*-
 
 ;; user information
+
+
 (setq user-full-name user-login-name
       user-mail-address "alienchuj@gmail.com"
-      epa-file-encrypt-to user-mail-address
-      zj-home (concat "/home/" user-login-name "/")
-      zj-project-dir (concat zj-home "projects/")
-      zj-document-dir (concat zj-home "documents/")
-      zj-doraemon-dir (concat zj-document-dir "doraemon/")
-      zj-org-dir (concat zj-doraemon-dir "org/"))
-
-(cond
- ((string= user-login-name "alienzj")
-  (setq zj-blog-dir (concat zj-org-dir "blog/alienzj.github.io/"))
-  (load! "+blog"))
-
- ((string= user-login-name "zhujie")
-  (setq  zj-blog-dir (concat zj-org-dir "blog/ohmeta.github.io/"))
-  (load! "+blog2")))
+      epa-file-encrypt-to user-mail-address)
 
 ;; better defaults
 (setq doom-scratch-buffer-major-mode 'emacs-lisp-mode)

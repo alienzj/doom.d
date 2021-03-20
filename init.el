@@ -8,6 +8,23 @@
 ;; More information about these modules (and what flags they support) can be
 ;; found in modules/README.org.
 
+(setq zj-home (concat "/home/" user-login-name "/")
+      zj-project-dir (concat zj-home "projects/")
+      zj-document-dir (concat zj-home "documents/")
+      zj-doraemon-dir (concat zj-document-dir "doraemon/")
+      zj-org-dir (concat zj-doraemon-dir "org/")
+)
+
+(cond
+ ((string= user-login-name "alienzj")
+  (setq zj-blog-dir (concat zj-org-dir "blog/alienzj.github.io/"))
+  )
+
+ ((string= user-login-name "zhujie")
+  (setq  zj-blog-dir (concat zj-org-dir "blog/ohmeta.github.io/"))
+  )
+)
+
 (setq package-archives
       '(("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
         ("org"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
