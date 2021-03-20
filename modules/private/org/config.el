@@ -1,4 +1,4 @@
-;;; ../projects/doom.d/+text.el -*- lexical-binding: t; -*-
+;;; private/org/config.el -*- lexical-binding: t; -*-
 
 ;;; org
 (setq org-journal-encrypt-journal t
@@ -214,3 +214,19 @@
 (use-package! org-roam-bibtex
   :after org-roam
   :hook (org-roam-mode . org-roam-bibtex-mode))
+
+
+;; refnoter
+;; call ivy-bibtex, select paper, read and note
+(defun =refnoter ()
+  "Activate (or switch to) `ivy-bibtex' in its workspace."
+  (interactive)
+  (if (featurep! :ui workspaces)
+      (progn
+        (+workspace-switch "refnoter" t)
+        (doom/switch-to-scratch-buffer)
+        (ivy-bibtex)
+        (+workspace/display))
+    (delete-other-windows)
+    (switch-to-buffer (doom-fallback-buffer))
+    (ivy-bibtex)))

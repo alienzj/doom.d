@@ -1,20 +1,4 @@
-;;; ../projects/doom.d/+misc.el -*- lexical-binding: t; -*-
-
-;; projectile
-(setq projectile-project-search-path '("~/projects/" "~/documents/doraemon/" "~/documents/doraemon/org/blog"))
-
-
-;; magit
-(after! magit
-  (setq magit-repository-directories '(("~/projects" . 2))
-        magit-save-repository-buffers nil
-        git-commit-style-convention-checks nil
-        magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
-
-  (magit-wip-after-apply-mode t)
-  (magit-wip-before-change-mode t))
-
-
+;;; private/doraemon/config.el -*- lexical-binding: t; -*-
 ;; vscode
 (defun xah-open-in-vscode ()
   "Open current file or dir in vscode. Version 2019-11-04"

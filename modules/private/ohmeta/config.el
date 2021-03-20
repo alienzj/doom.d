@@ -1,5 +1,4 @@
-;;; ../projects/doom.d/+blog.el -*- lexical-binding: t; -*-
-
+;;; private/ohmeta/config.el -*- lexical-binding: t; -*-
 ;; org-static-blog
 (setq org-static-blog-publish-title "Metagenomics Research Blog"
       org-static-blog-publish-url "https://ohmeta.github.io/"

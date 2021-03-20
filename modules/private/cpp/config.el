@@ -1,63 +1,4 @@
-;;; ../projects/doom.d/+prog.el -*- lexical-binding: t; -*-
-
-;; company
-(after! company
-  (setq company-idle-delay 0.2))
-
-
-;; python
-(after! python
-  (setq python-indent-offset 4
-        python-shell-interpreter "python3"
-        pippel-python-command "python3"
-        conda-env-home-directory (concat zj-home ".conda/envs/bioenv")
-        importmagic-python-interpreter "python3"
-        flycheck-python-pylint-executable "pylint"
-        flycheck-python-flake8-executable "flake8"))
-
-(after! lsp-pyright
-  (setq lsp-pyright-python-executable-cmd "python3"))
-
-;; dap
-(defun +my/dap-start ()
-  (interactive)
-  (dap-mode 1)
-  (call-interactively #'dap-debug))
-
-(add-hook! dap-mode-hook ((dap-tooltip-mode 1) (tooltip-mode 1)))
-
-(after! dap-mode
-  (setq dap-python-executable "python3")
-
-  (add-hook 'dap-stopped-hook
-            (lambda (arg) (call-interactively #'dap-hydra))))
-
-
-;; conda
-(require 'conda)
-(setq conda-anaconda-home (concat zj-home ".conda/envs/bioenv"))
-(setq conda-env-home-directory (concat zj-home ".conda/envs/bioenv"))
-(setq conda-env-subdirectory "../")
-
-
-;; rust
-(setq rustic-lsp-server 'rust-analyzer)
-(setq lsp-rust-analyzer-server-command '("/usr/bin/rust-analyzer"))
-
-
-;; format-all
-;; clang-format
-(after! format
-  (set-formatter! 'clang-format
-    '("clang-format"
-      "-style={BasedOnStyle: LLVM, IndentWidth: 4, BreakBeforeBraces: Allman, SortIncludes: true}"
-      ("-assume-filename=%S" (or buffer-file-name mode-result "")))
-    ))
-
-;; emacs-jupyter
-(setq org-babel-default-header-args:jupyter-python '((:async . "yes")
-                                                     (:session . "py")))
-
+;;; private/cpp/config.el -*- lexical-binding: t; -*-
 ;; ccls
 ;; https://github.com/MaskRay/Config/blob/master/home/.config/doom/modules/private/my-cc/config.el
 (after! cc-mode
@@ -167,17 +108,11 @@
     :n "=" #'clang-format-region
     )))
 
-
-;; tex
-(after! tex
-  (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
-  (setq TeX-command-default "XeLaTeX"
-        TeX-save-query nil
-        TeX-show-compilation t)
-  )
-
-
-;; lsp
-;; (setq lsp-enable-text-document-color nil)
-;; (setq lsp-enable-semantic-highlighting nil)
-;; (setq lsp-enable-symbol-highlighting nil)
+;; format-all
+;; clang-format
+(after! format
+  (set-formatter! 'clang-format
+    '("clang-format"
+      "-style={BasedOnStyle: LLVM, IndentWidth: 4, BreakBeforeBraces: Allman, SortIncludes: true}"
+      ("-assume-filename=%S" (or buffer-file-name mode-result "")))
+    ))

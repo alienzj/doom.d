@@ -1,5 +1,4 @@
-;;; ../projects/doom.d/+blog.el -*- lexical-binding: t; -*-
-
+;;; private/blog/config.el -*- lexical-binding: t; -*-
 ;; org-static-blog
 (setq org-static-blog-publish-title "ZJ Org Blog"
       org-static-blog-publish-url "https://alienzj.github.io/"

@@ -1,4 +1,6 @@
-;;; ../projects/doom.d/+ui.el -*- lexical-binding: t; -*-
+;;; private/ui/config.el -*- lexical-binding: t; -*-
+;; splash
+(setq fancy-splash-image (concat zj-project-dir "doom.d/lige.png"))
 
 ;; doom-theme
 (setq doom-theme 'doom-one)
@@ -235,3 +237,6 @@
    ("C-x t B"   . treemacs-bookmark)
    ("C-x t C-t" . treemacs-find-file)
    ("C-x t M-t" . treemacs-find-tag)))
+
+;; projectile
+(setq projectile-project-search-path '("~/projects/" "~/documents/doraemon/" "~/documents/doraemon/org/blog"))

@@ -9,9 +9,9 @@
 ;; found in modules/README.org.
 
 (setq package-archives
-    '(("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-      ("org"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
-      ("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
+      '(("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+        ("org"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
+        ("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
 
 (doom! :input
        chinese
@@ -52,7 +52,7 @@
         +defaults)                      ; default popup rules
        ;;pretty-code       ; replace bits of code with pretty symbols
        tabs                             ; an tab bar for Emacs
-       treemacs          ; a project drawer, like neotree but cooler
+       treemacs                         ; a project drawer, like neotree but cooler
        tree-sitter
        ;;unicode           ; extended unicode support for various languages
        vc-gutter                        ; vcs diff in the fringe
@@ -171,7 +171,7 @@
        ;;(lean +lsp)
        ;;factor
        ;;(ledger +lsp)           ; an accounting system in Emacs
-       (lua +monoscript)              ; one-based indices? one-based indices
+       (lua +monoscript)                ; one-based indices? one-based indices
        (markdown +grip)                 ; writing docs for people to ignore
        (nim +lsp)                       ; python + lisp at the speed of c
        ;;(nix +lsp)              ; I hereby declare "nix geht mehr!"
@@ -241,7 +241,32 @@
        ;; The default module sets reasonable defaults for Emacs. It also
        ;; provides a Spacemacs-inspired keybinding scheme and a smartparens
        ;; config. Use it as a reference for your own modules.
-       (default +bindings +smartparens))
+       (default +bindings +smartparens)
+
+       :private
+       archlinux
+       blog
+       conda
+       cpp
+       dap
+       doraemon
+       dsl
+       eaf
+       git
+       jupyter
+       lsp
+       ;; ohmeta
+       org
+       python
+       r
+       rss
+       rust
+       tex
+       tramp
+       ui
+       )
+
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

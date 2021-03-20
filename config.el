@@ -19,12 +19,6 @@
   (setq  zj-blog-dir (concat zj-org-dir "blog/ohmeta.github.io/"))
   (load! "+blog2")))
 
-(load! "+ui")
-(load! "+text")
-(load! "+misc")
-(load! "+prog")
-(load! "+doraemon")
-
 ;; better defaults
 (setq doom-scratch-buffer-major-mode 'emacs-lisp-mode)
 
