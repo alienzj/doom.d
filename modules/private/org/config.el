@@ -24,6 +24,18 @@
 ;;  (eaf-open file))
 ;; (add-to-list 'org-file-apps '("\\.pdf\\'" . eaf-org-open-file))
 
+;; (use-package! org-pdftools
+;;   :after pdf-tools
+;;   :config
+;;   ;; https://lists.gnu.org/archive/html/emacs-orgmode/2016-11/msg00169.html
+;;   ;; Before adding, remove it (to avoid clogging)
+;;   (delete '("\\.pdf\\'" . default) org-file-apps)
+;;   ;; https://lists.gnu.org/archive/html/emacs-orgmode/2016-11/msg00176.html
+;;   (add-to-list 'org-file-apps
+;;                '("\\.pdf\\'" . (lambda (file link)
+;;                                  (org-pdftools-open link)
+;;                                  ;; (eaf-org-open-file link)
+;;                                  ))))
 
 ;; org-ref
 ;; https://github.com/jkitchin/org-ref/blob/master/org-ref.org
