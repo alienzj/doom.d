@@ -16,8 +16,8 @@
   ;;       eaf-proxy-host "127.0.0.1"
   ;;       eaf-proxy-port "9909")
   ;;
-  (eaf-setq eaf-browser-aria2-proxy-host "127.0.0.1")
-  (eaf-setq eaf-browser-aria2-proxy-port "9910")
+  ;; (eaf-setq eaf-browser-aria2-proxy-host "127.0.0.1")
+  ;; (eaf-setq eaf-browser-aria2-proxy-port "9910")
 
   (setq browse-url-browser-function 'eaf-open-browser)
   (defalias 'browse-web #'eaf-open-browser)
@@ -34,11 +34,16 @@
 
   (eaf-setq eaf-mindmap-dark-mode "true") ; default option
 
+  ;; (eaf-setq eaf-find-file-ext-blacklist '("pdf"))
+  ;; (eaf-setq eaf-find-file-ext-blacklist (list eaf-pdf-extension-list))
   ;; (eaf-setq eaf-pdf-dark-mode "ignore")
-  (eaf-setq eaf-pdf-dark-mode "false")
-  (eaf-setq eaf-pdf-default-zoom "0.8")
-  (eaf-setq eaf-pdf-dark-exclude-image "true")
-  (eaf-setq eaf-pdf-scroll-ratio "0.05")
+  ;; (eaf-setq eaf-pdf-dark-mode "false")
+  ;; (eaf-setq eaf-pdf-default-zoom "0.8")
+  ;; (eaf-setq eaf-pdf-dark-exclude-image "true")
+  ;; (eaf-setq eaf-pdf-scroll-ratio "0.05")
+  (advice-remove #'find-file #'eaf--find-file-advisor)
+  (advice-remove #'dired-find-file #'eaf--dired-find-file-advisor)
+  (advice-remove #'dired-find-alternate-file #'eaf--dired-find-file-advisor)
 
   (eaf-setq eaf-camera-save-path "~/videos/eaf")
 
@@ -54,7 +59,6 @@
             ("image-viewer" (kbd eaf-evil-leader-key))
             (_  (kbd "SPC")))
         (kbd "SPC"))))
-
   )
 
 ;; snails

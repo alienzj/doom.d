@@ -282,6 +282,8 @@
        tex
        tramp
        ui
+       gif
+       keycast
        )
 
 
