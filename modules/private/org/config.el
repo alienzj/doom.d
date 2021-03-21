@@ -12,9 +12,9 @@
       org-roam-directory org-directory)
 
 ;; pdf
-(require 'eaf-org)
-(defun eaf-org-open-file (file &optional link)
-  (eaf-open file))
+;;(require 'eaf-org)
+;;(defun eaf-org-open-file (file &optional link)
+;;  (eaf-open file))
 ;; (add-to-list 'org-file-apps '("\\.pdf\\'" . eaf-org-open-file))
 
 ;; org-ref
