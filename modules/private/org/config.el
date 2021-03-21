@@ -1,5 +1,12 @@
 ;;; private/org/config.el -*- lexical-binding: t; -*-
 
+;; variables
+(setq references_bib (concat zj-org-dir "references.bib"))
+(setq references_pdf (concat zj-org-dir "pdf_bib/"))
+(setq references_pdf_source (concat zj-org-dir "pdf/"))
+(setq references_note (concat zj-org-dir "ref/"))
+
+
 ;;; org
 (setq org-journal-encrypt-journal t
       org-directory zj-org-dir
@@ -8,8 +15,8 @@
       org-babel-python-command "python3"
       org-bullets-bullet-list '("#")
       org-download-screenshot-method "flameshot gui --raw > %s"
-      org-download-image-dir (concat zj-org-dir "images/")
-      org-roam-directory org-directory)
+      org-download-image-dir (concat zj-org-dir "images/"))
+
 
 ;; pdf
 ;;(require 'eaf-org)
@@ -17,13 +24,9 @@
 ;;  (eaf-open file))
 ;; (add-to-list 'org-file-apps '("\\.pdf\\'" . eaf-org-open-file))
 
+
 ;; org-ref
 ;; https://github.com/jkitchin/org-ref/blob/master/org-ref.org
-(setq references_bib (concat zj-org-dir "references.bib"))
-(setq references_pdf (concat zj-org-dir "pdf_bib/"))
-(setq references_pdf_source (concat zj-org-dir "pdf/"))
-(setq references_note (concat zj-org-dir "ref/"))
-
 ;; https://github.com/jkitchin/org-ref/issues/656
 (defun my/org-ref-move-buffer-file (oldname newname)
   "moves both current buffer and file it's visiting to DIR."
@@ -33,6 +36,7 @@
     (set-visited-file-name newname)
     (set-buffer-modified-p nil)
     t))
+
 
 ;; https://github.com/jkitchin/org-ref/pull/763
 (defun orcb-add-file-field ()
@@ -127,6 +131,10 @@
 
 
 ;; org-roam
+(use-package! org-roam
+   :config
+   (setq org-roam-directory zj-org-dir))
+
 ;; org-roam-server
 (use-package! org-roam-server
   :config
