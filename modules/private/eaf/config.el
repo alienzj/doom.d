@@ -35,15 +35,16 @@
   (eaf-setq eaf-mindmap-dark-mode "true") ; default option
 
   ;; (eaf-setq eaf-find-file-ext-blacklist '("pdf"))
-  ;; (eaf-setq eaf-find-file-ext-blacklist (list eaf-pdf-extension-list))
+  (setq eaf-find-file-ext-blacklist (list eaf-pdf-extension-list))
   ;; (eaf-setq eaf-pdf-dark-mode "ignore")
   ;; (eaf-setq eaf-pdf-dark-mode "false")
   ;; (eaf-setq eaf-pdf-default-zoom "0.8")
   ;; (eaf-setq eaf-pdf-dark-exclude-image "true")
   ;; (eaf-setq eaf-pdf-scroll-ratio "0.05")
-  (advice-remove #'find-file #'eaf--find-file-advisor)
-  (advice-remove #'dired-find-file #'eaf--dired-find-file-advisor)
-  (advice-remove #'dired-find-alternate-file #'eaf--dired-find-file-advisor)
+
+  ;; (advice-remove #'find-file #'eaf--find-file-advisor)
+  ;; (advice-remove #'dired-find-file #'eaf--dired-find-file-advisor)
+  ;; (advice-remove #'dired-find-alternate-file #'eaf--dired-find-file-advisor)
 
   (eaf-setq eaf-camera-save-path "~/videos/eaf")
 
