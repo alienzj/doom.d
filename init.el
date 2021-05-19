@@ -270,6 +270,7 @@
        doraemon
        dsl
        eaf
+       email
        git
        jupyter
        lsp

@@ -1,0 +1,121 @@
+############################
+#alienchuj@gmail.com
+############################
+IMAPAccount gmail
+Host imap.gmail.com
+User alienchuj@gmail.com
+PassCmd "pass mail/gmail_alienzj"
+#PassCmd "gpg --quiet --decrypt .password-store/mail/gmail_alienzj.gpg"
+AuthMechs LOGIN
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore gmail-remote
+Account gmail
+
+MaildirStore gmail-local
+Subfolders Verbatim
+Path ~/.local/share/mail/gmail/
+Inbox ~/.local/share/mail/gmail/INBOX
+
+Channel gmail-all
+Far :gmail-remote:"[Gmail]/All Mail"
+Near :gmail-local:"All Mail"
+Create Slave
+Expunge Both
+SyncState *
+
+Channel gmail-inbox
+Far :gmail-remote:"INBOX"
+Near :gmail-local:"Inbox"
+Create Slave
+Expunge Both
+SyncState *
+
+Channel gmail-drafts
+Far :gmail-remote:"[Gmail]/Drafts"
+Near :gmail-local:"Drafts"
+Create Slave
+Expunge Both
+SyncState *
+
+Channel gmail-sent
+Far :gmail-remote:"[Gmail]/Sent Mail"
+Near :gmail-local:"Sent Mail"
+Create Slave
+Expunge Both
+SyncState *
+
+Channel gmail-trash
+Far :gmail-remote:"[Gmail]/Trash"
+Near :gmail-local:"Trash"
+Create Slave
+Expunge Both
+SyncState *
+
+Group gmail
+Channel gmail-all
+Channel gmail-inbox
+Channel gmail-drafts
+Channel gmail-sent
+Channel gmail-trash
+
+#####################################
+#zhujie@genomics.cn
+#####################################
+IMAPAccount genomics
+Host outlook.office365.com
+User zhujie@genomics.cn
+PassCmd "pass mail/genomics"
+AuthMechs LOGIN
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore genomics-remote
+Account genomics
+
+MaildirStore genomics-local
+Path ~/.local/share/mail/genomics/
+Inbox ~/.local/share/mail/genomics/INBOX
+
+Channel genomics-all
+Far :genomics-remote:"[Gmail]/All Mail"
+Near :genomics-local:"All Mail"
+Create Slave
+Expunge Both
+SyncState *
+
+Channel genomics-inbox
+Far :genomics-remote:"INBOX"
+Near :genomics-local:"Inbox"
+Create Slave
+Expunge Both
+SyncState *
+
+Channel genomics-drafts
+Far :genomics-remote:"[Gmail]/Drafts"
+Near :genomics-local:"Drafts"
+Create Slave
+Expunge Both
+SyncState *
+
+Channel genomics-sent
+Far :genomics-remote:"[Gmail]/Sent Mail"
+Near :genomics-local:"Sent Mail"
+Create Slave
+Expunge Both
+SyncState *
+
+Channel genomics-trash
+Far :genomics-remote:"[Gmail]/Trash"
+Near :genomics-local:"Trash"
+Create Slave
+Expunge Both
+SyncState *
+
+Group genomics
+Channel genomics-all
+Channel genomics-inbox
+Channel genomics-drafts
+Channel genomics-sent
+Channel genomics-trash
