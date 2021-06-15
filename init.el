@@ -206,7 +206,7 @@
         +present
         +pomodoro
         +pretty
-        ;+roam                          ; using org-mode for presentations
+        +roam                          ; using org-mode for presentations
 	)
        ;;(perl +lsp)            ; write code no one else can comprehend
        (php +lsp)                       ; perl's insecure younger brother
@@ -269,7 +269,7 @@
        dap
        doraemon
        dsl
-       eaf
+       ;; eaf
        email
        git
        jupyter
