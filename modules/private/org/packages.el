@@ -23,3 +23,5 @@
 (package! org-chef)
 (package! org-pandoc-import :recipe
   (:host github :repo "tecosaur/org-pandoc-import" :files ("*.el" "filters" "preprocessors")))
+(package! ox-ipynb :recipe
+  (:host github :repo "jkitchin/ox-ipynb" :files ("*")))

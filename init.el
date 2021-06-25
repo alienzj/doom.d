@@ -108,7 +108,7 @@
        vc                               ; version-control and Emacs, sitting in a tree
        ibuffer
                                         ;+icons)
-       undo
+       (undo +tree)
                                         ;+tree)
 
        :term

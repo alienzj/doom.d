@@ -449,3 +449,6 @@ See also `org-save-all-org-buffers'"
 ;;                            :todo ("SOMEDAY" )
 ;;                            :order 90)
 ;;                           (:discard (:tag ("Chore" "Routine" "Daily")))))))))))
+
+;; org to jupyter notebook
+(require 'ox-ipynb)
