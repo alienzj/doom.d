@@ -7,3 +7,5 @@
 (package! calibredb)
 (package! nov)
 (package! graphviz-dot-mode)
+(package! anki-editor)
+(package! google-translate)

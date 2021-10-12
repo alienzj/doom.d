@@ -5,7 +5,7 @@
 (package! org-static-blog)
 (package! citeproc-org)
 
-(package! org-roam-server)
+;(package! org-roam-server)
 (package! org-roam-bibtex)
 ;; (package! company-org-roam)
 

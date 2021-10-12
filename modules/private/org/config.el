@@ -6,6 +6,8 @@
 (setq references_pdf_source (concat zj-org-dir "pdf/"))
 (setq references_note (concat zj-org-dir "ref/"))
 
+;; keymap: z-M
+(setq org-hide-block-startup t)
 
 ;;; org
 (setq org-journal-encrypt-journal t
@@ -318,37 +320,37 @@ See also `org-save-all-org-buffers'"
 ;; javascript:location.href = 'org-protocol://roam-ref?template=a&ref=' + encodeURIComponent(location.href) + '&title='+encodeURIComponent(document.title) + '&body='+encodeURIComponent(function(){var html = "";var sel = window.getSelection();if (sel.rangeCount) {var container = document.createElement("div");for (var i = 0, len = sel.rangeCount; i < len; ++i) {container.appendChild(sel.getRangeAt(i).cloneContents());}html = container.innerHTML;}var dataDom = document.createElement('div');dataDom.innerHTML = html;['p', 'h1', 'h2', 'h3', 'h4'].forEach(function(tag, idx){dataDom.querySelectorAll(tag).forEach(function(item, index) {var content = item.innerHTML.trim();if (content.length > 0) {item.innerHTML = content + '&#13;&#10;';}});});return dataDom.innerText.trim();}())
 
 ;; org-roam-server
-(use-package! org-roam-server
-  ;; :after (ogr-roam server)
-  :config
-  (setq org-roam-server-host "127.0.0.1"
-        org-roam-server-port 8078
-        org-roam-server-authenticate nil
-        org-roam-server-export-inline-images t
-        org-roam-server-serve-files nil
-        org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
-        org-roam-server-network-poll t
-        org-roam-server-network-arrows nil
-        org-roam-server-network-label-truncate t
-        org-roam-server-network-label-truncate-length 60
-        org-roam-server-network-label-wrap-length 20)
-
-  (defun org-roam-server-open ()
-    "Ensure the server is active, then open the roam graph."
-    (interactive)
-    (smartparens-global-mode -1)
-    (org-roam-server-mode 1)
-    (browse-url-xdg-open (format "http://localhost:%d" org-roam-server-port))
-    (smartparens-global-mode 1)
-    )
-  (org-roam-server-mode 1)
-  )
+;(use-package! org-roam-server
+;  ;; :after (ogr-roam server)
+;  :config
+;  (setq org-roam-server-host "127.0.0.1"
+;        org-roam-server-port 8078
+;        org-roam-server-authenticate nil
+;        org-roam-server-export-inline-images t
+;        org-roam-server-serve-files nil
+;        org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
+;        org-roam-server-network-poll t
+;        org-roam-server-network-arrows nil
+;        org-roam-server-network-label-truncate t
+;        org-roam-server-network-label-truncate-length 60
+;        org-roam-server-network-label-wrap-length 20)
+;
+;  (defun org-roam-server-open ()
+;    "Ensure the server is active, then open the roam graph."
+;    (interactive)
+;    (smartparens-global-mode -1)
+;    (org-roam-server-mode 1)
+;    (browse-url-xdg-open (format "http://localhost:%d" org-roam-server-port))
+;    (smartparens-global-mode 1)
+;    )
+;  (org-roam-server-mode 1)
+;  )
 
 ;; automatically enable server-mode
-(after! org-roam
-  (smartparens-global-mode -1)
-  (org-roam-server-mode)
-  (smartparens-global-mode 1))
+;(after! org-roam
+;  (smartparens-global-mode -1)
+;  (org-roam-server-mode)
+;  (smartparens-global-mode 1))
 
 ;; org-roam-bibtex
 (use-package! org-roam-bibtex
@@ -452,3 +454,10 @@ See also `org-save-all-org-buffers'"
 
 ;; org to jupyter notebook
 (require 'ox-ipynb)
+
+
+;; orgcss
+;; https://github.com/gongzhitaao/orgcss
+;; (setq org-html-htmlize-output-type 'inline-css)
+;; (setq org-html-htmlize-output-type nil)
+;(setq org-html-htmlize-output-type 'css)
