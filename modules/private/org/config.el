@@ -209,8 +209,10 @@ See also `org-save-all-org-buffers'"
   (setq
    org-ref-completion-library 'org-ref-ivy-cite
    reftex-default-bibliography (list references_bib)
-   org-ref-default-bibliography (list references_bib)
-   org-ref-pdf-directory references_pdf
+   ;; org-ref-default-bibliography (list references_bib)
+   bibtex-completion-bibliography (list references_bib)
+   ;; org-ref-pdf-directory references_pdf
+   bibtex-completion-library-path references_pdf
    ;; org-ref-show-broken-links nil
    ;; org-ref-default-ref-type "eqref"
    ;; org-ref-default-citation-link "citet"

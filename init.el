@@ -171,7 +171,8 @@
        ;;fstar
        ;;gdscript
        ;;(fsharp +lsp)          ; ML stands for Microsoft's Language
-       (go +lsp)                        ; the hipster dialect
+       ;;(go +lsp)
+                                        ; the hipster dialect
        (haskell +dante +lsp +ghcide)    ; a language that's lazier than I am
        ;;(hy +lsp)               ; readability of scheme w/ speed of python
        ;;(idris +lsp)             ;
@@ -188,9 +189,11 @@
        ;;(lean +lsp)
        ;;factor
        ;;(ledger +lsp)           ; an accounting system in Emacs
-       (lua +monoscript)                ; one-based indices? one-based indices
+       ;;(lua +monoscript)
+                                        ; one-based indices? one-based indices
        (markdown +grip)                 ; writing docs for people to ignore
-       (nim +lsp)                       ; python + lisp at the speed of c
+       ;;(nim +lsp)
+                                        ; python + lisp at the speed of c
        ;;(nix +lsp)              ; I hereby declare "nix geht mehr!"
        (ocaml +lsp)                     ; an objective camel
        (org                             ; organize your plain life in plain text
@@ -208,8 +211,9 @@
         +pretty
         +roam                          ; using org-mode for presentations
 	)
-       ;;(perl +lsp)            ; write code no one else can comprehend
-       (php +lsp)                       ; perl's insecure younger brother
+       (perl +lsp)            ; write code no one else can comprehend
+       ;; (php +lsp)
+                                        ; perl's insecure younger brother
        plantuml                         ; diagrams for confusing people more
        ;;(purescript +lsp)       ; javascript, but functional
        (python
@@ -238,7 +242,8 @@
        (yaml +lsp)
 
        :email
-       (mu4e +gmail)                    ; WIP
+       ;; (mu4e +gmail)
+                                        ; WIP
        ;;notmuch             ; WIP
        ;;(wanderlust +gmail) ; WIP
 
@@ -270,7 +275,7 @@
        doraemon
        dsl
        ;; eaf
-       email
+       ;; email
        git
        jupyter
        lsp
