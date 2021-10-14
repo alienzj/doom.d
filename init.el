@@ -32,8 +32,8 @@
        :ui
        ;;deft
        doom
-       ;;doom-dashboard
-       ;;doom-quit
+       doom-dashboard
+       doom-quit
        ;;(emoji +unicode)
        ;;fill-column
        hl-todo
@@ -48,13 +48,13 @@
        ;;pretty-code
        tabs
        treemacs
-       ;;tree-sitter
+       tree-sitter
        ;;unicode
        vc-gutter
        ;;vi-tilde-fringe
        (window-select
-	+switch-window
- 	+numbers)
+        +switch-window
+        +numbers)
        workspaces
        zen
 
@@ -78,40 +78,40 @@
        :checkers
        syntax
        spell
-       ;;grammar
+       grammar
 
        :emacs
        dired
        electric
        vc
-       ;;ibuffer
+       ibuffer
        (undo +tree)
 
        :term
        eshell
        ;;shell
        ;;term
-       ;;vterm
+       vterm
 
        :tools
        ;;ansible
        (debugger +lsp)
        ;;direnv
-       ;;docker
+       docker
        ;;editorconfig
        ;;ein
        (eval +overlay)
        ;;gist
-       (looku
- 	+dictionary
- 	+docsets)
+       (lookup
+        +dictionary
+        +docsets)
        lsp
        magit
        ;;make
        ;;(pass +auth)
        pdf
        ;;prodigy
-       ;;rgb
+       rgb
        ;;terraform
        ;;tmux
        ;;upload
@@ -162,28 +162,28 @@
        ;;(nix +lsp)
        ;;(ocaml +lsp)
        (org
- 	+brain
- 	+dragndrop
- 	+gnuplot
- 	+hugo
- 	+ipython
-	+journal
-	+jupyter
-	+noter
-	+pandoc
-	+present
- 	+pomodoro
-	+pretty
- 	+roam)
+        +brain
+        +dragndrop
+        +gnuplot
+        +hugo
+        +ipython
+        +journal
+        +jupyter
+        +noter
+        +pandoc
+        +present
+        +pomodoro
+        +pretty
+        +roam)
        ;;(perl +lsp)
        ;;(php +lsp)
        plantuml
        ;;(purescript +lsp)
        (python
- 	+conda
- 	+lsp
- 	+pyright
- 	+cython)
+        +conda
+        +lsp
+        +pyright
+        +cython)
        ;;qt
        ;;racket
        ;;(raku +lsp)
@@ -198,8 +198,8 @@
        ;;solidity
        ;;(swift +lsp)
        ;;terra
-       ;;(web +lsp)
-       ;;(yaml +lsp)
+       (web +lsp)
+       (yaml +lsp)
 
        :email
        ;;(mu4e +gmail)
