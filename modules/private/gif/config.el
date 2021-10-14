@@ -1,4 +1,5 @@
 ;;; private/gif/config.el -*- lexical-binding: t; -*-
+
 (use-package! gif-screencast
   :commands gif-screencast-mode
   :config

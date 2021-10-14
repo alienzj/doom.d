@@ -4,8 +4,6 @@
 (package! emacs-everywhere)
 (package! info-colors)
 (package! vlf :disable t)
-(package! calibredb)
-(package! nov)
 (package! graphviz-dot-mode)
 (package! anki-editor)
 (package! google-translate)

@@ -1,6 +1,6 @@
 ;;; private/ui/config.el -*- lexical-binding: t; -*-
 ;; splash
-(setq fancy-splash-image (concat zj-project-dir "doom.d/lige.png"))
+;;(setq fancy-splash-image (concat zj-project-dir "doom.d/lige.png"))
 
 ;; doom-theme
 (setq doom-theme 'doom-one)
@@ -22,8 +22,8 @@
 
 (cond
  ((string= user-login-name "alienzj")
-  (setq doom-font (font-spec :family user-font :size 25)
-        doom-big-font (font-spec :family user-font :size 25)
+  (setq doom-font (font-spec :family user-font :size 26)
+        doom-big-font (font-spec :family user-font :size 26)
         doom-modeline-height 10)
   )
 
