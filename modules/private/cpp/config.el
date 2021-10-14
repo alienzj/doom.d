@@ -92,7 +92,8 @@
      :index (:initialBlacklist ,+ccls-initial-blacklist :parametersInDeclarations :json-false :trackDependency 1)))
 
   (after! projectile
-    (add-to-list 'projectile-globally-ignored-directories ".ccls-cache"))
+    (add-to-list 'projectile-globally-ignored-directories ".ccls-cache")
+    (add-to-list 'projectile-project-root-files-bottom-up ".ccls-root"))
 
   (evil-set-initial-state 'ccls-tree-mode 'emacs)
   )

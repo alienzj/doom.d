@@ -23,7 +23,7 @@
 ;;         ("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
 
 (doom! :completion
-       (company +childframe)
+       (company +auto +childframe)
        ;;helm
        ;;ido
        (ivy +childframe)
@@ -41,7 +41,7 @@
        ;;indent-guides
        ;;minimap
        modeline
-       ;;nav-flash
+       nav-flash
        ;;neotree
        ophints
        (popup +defaults)

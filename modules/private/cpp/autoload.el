@@ -1,6 +1,5 @@
 ;;; ../projects/doom.d/autoload/ccls.el -*- lexical-binding: t; -*-
-
-;; https://github.com/MaskRay/Config/blob/master/home/.config/doom/modules/private/my-cc/autoload.el
+;;; private/my-cc/autoload.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
 (defvar +ccls-path-mappings [])
@@ -15,6 +14,9 @@
 (defun +ccls|enable ()
   (when (and buffer-file-name (--all? (not (string-match-p it buffer-file-name)) +lsp-blacklist))
     (require 'ccls)
+    (require 'lsp-completion)
+    (require 'lsp-headerline)
+    (require 'lsp-modeline)
     (setq-local lsp-ui-sideline-show-symbol nil)
     (when (string-match-p "/llvm" buffer-file-name)
       (setq-local lsp-enable-file-watchers nil))
