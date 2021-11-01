@@ -55,11 +55,11 @@
     :n "r" #'ccls/references-read
     :n "w" #'ccls/references-write
     :desc "breakpoint"
-    :n "db" (lambda ()
-              (interactive)
-              (evil-open-above 1)
-              (insert "volatile static int z=0;while(!z)asm(\"pause\");")
-              (evil-normal-state))
+    ;:n "db" (lambda ()
+    ;          (interactive)
+    ;          (evil-open-above 1)
+    ;          (insert "volatile static int z=0;while(!z)asm(\"pause\");")
+    ;          (evil-normal-state))
     :n "dd" #'realgud:gdb
     ))
   )
@@ -95,7 +95,7 @@
     (add-to-list 'projectile-globally-ignored-directories ".ccls-cache")
     (add-to-list 'projectile-project-root-files-bottom-up ".ccls-root"))
 
-  (evil-set-initial-state 'ccls-tree-mode 'emacs)
+  ;(evil-set-initial-state 'ccls-tree-mode 'emacs)
   )
 
 (use-package! tablegen-mode

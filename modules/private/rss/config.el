@@ -42,14 +42,14 @@
       :nm "s" #'elfeed-show-new-live-search
       :nm "y" #'elfeed-show-yank)
 
-(after! elfeed-search
-  (set-evil-initial-state! 'elfeed-search-mode 'normal))
-(after! elfeed-show-mode
-  (set-evil-initial-state! 'elfeed-show-mode   'normal))
+;(after! elfeed-search
+;  (set-evil-initial-state! 'elfeed-search-mode 'normal))
+;(after! elfeed-show-mode
+;  (set-evil-initial-state! 'elfeed-show-mode   'normal))
 
-(after! evil-snipe
-  (push 'elfeed-show-mode   evil-snipe-disabled-modes)
-  (push 'elfeed-search-mode evil-snipe-disabled-modes))
+;(after! evil-snipe
+;  (push 'elfeed-show-mode   evil-snipe-disabled-modes)
+;  (push 'elfeed-search-mode evil-snipe-disabled-modes))
 (after! elfeed
 
   (elfeed-org)

@@ -180,14 +180,14 @@ Make sure to put cursor on date heading that contains list of urls."
 
 
 ;;  which-key
-(setq which-key-idle-delay 0.5)
-(setq which-key-allow-multiple-replacements t)
-(after! which-key
-  (pushnew!
-   which-key-replacement-alist
-   '(("" . "\\`+?evil[-:]?\\(?:a-\\)?\\(.*\\)") . (nil . "◂\\1"))
-   '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "◃\\1"))
-   ))
+;(setq which-key-idle-delay 0.5)
+;(setq which-key-allow-multiple-replacements t)
+;(after! which-key
+;  (pushnew!
+;   which-key-replacement-alist
+;   '(("" . "\\`+?evil[-:]?\\(?:a-\\)?\\(.*\\)") . (nil . "◂\\1"))
+;   '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "◃\\1"))
+;   ))
 
 
 ;; anki-editor
