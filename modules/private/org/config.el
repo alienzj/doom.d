@@ -240,7 +240,8 @@ See also `org-save-all-org-buffers'"
 ;; org-media-note
 (require 'org-attach)
 (use-package! org-media-note
-  :hook (org-mode . org-media-note-setup-org-ref)
+  :init (setq org-media-note-use-org-ref t)
+  :hook (org-mode . org-media-note-mode)
   :bind (("s-v" . org-media-note-hydra/body))
   :config
   (setq org-media-note-screenshot-image-dir (concat zj-org-dir "images/"))
