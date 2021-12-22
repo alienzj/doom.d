@@ -25,3 +25,5 @@
   (:host github :repo "tecosaur/org-pandoc-import" :files ("*.el" "filters" "preprocessors")))
 (package! ox-ipynb :recipe
   (:host github :repo "jkitchin/ox-ipynb" :files ("*")))
+(package! notebook-mode :recipe
+  (:host github :repo "rougier/notebook-mode" :files ("*")))
