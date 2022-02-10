@@ -56,9 +56,9 @@
 (define-key global-map            (kbd "C-c i") 'org-capture-inbox)
 
 ;; Only if you use mu4e
-(require 'mu4e)
-(define-key mu4e-headers-mode-map (kbd "C-c i") 'org-capture-mail)
-(define-key mu4e-view-mode-map    (kbd "C-c i") 'org-capture-mail)
+;(require 'mu4e)
+;(define-key mu4e-headers-mode-map (kbd "C-c i") 'org-capture-mail)
+;(define-key mu4e-view-mode-map    (kbd "C-c i") 'org-capture-mail)
 ;; Refile
 (setq org-refile-use-outline-path 'file)
 (setq org-outline-path-complete-in-steps nil)
