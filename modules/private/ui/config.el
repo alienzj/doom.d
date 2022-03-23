@@ -89,6 +89,7 @@
   (rainbow-delimiters-mode)
   (rainbow-identifiers-mode))
 
+
 (setq rainbow-identifiers-choose-face-function 'rainbow-identifiers-cie-l*a*b*-choose-face
       rainbow-identifiers-cie-l*a*b*-saturation 72  ;80 ;125
       rainbow-identifiers-cie-l*a*b*-lightness 72   ;45 ;100
@@ -97,7 +98,7 @@
                                               font-lock-keyword-face
                                               font-lock-function-name-face
                                               font-lock-variable-name-face))
-(add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
+                                        ;(add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
 
 
 ;; nyancat
@@ -254,4 +255,6 @@
   )
 
 ;; projectile
-(setq projectile-project-search-path '("~/projects/" "~/documents/doraemon/" "~/documents/doraemon/org/blog"))
+(after! projectile
+  (setq projectile-project-search-path '("~/projects/" "~/documents/doraemon/" "~/documents/doraemon/org/blog"))
+  (add-to-list 'projectile-globally-ignored-directories ".attach"))

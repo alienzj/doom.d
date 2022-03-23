@@ -22,19 +22,24 @@
 ;;         ("org"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
 ;;         ("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
 
-(doom! :completion
+(doom!
+
+       :input
+       chinese
+
+       :completion
        (company +auto +childframe)
        ;;helm
        ;;ido
-       (ivy +childframe)
-       vertico
+       (ivy +childframe +fuzzy +icons)
+       (vertico +icons)
 
        :ui
        ;;deft
        doom
        doom-dashboard
        doom-quit
-       ;;(emoji +unicode)
+       ;(emoji +unicode)
        ;;fill-column
        hl-todo
        ;;hydra
@@ -51,16 +56,12 @@
        tree-sitter
        ;;unicode
        vc-gutter
-       ;;vi-tilde-fringe
+       vi-tilde-fringe
        (window-select
         +switch-window
         +numbers)
        workspaces
        zen
-
-       :input
-       chinese
-       ;;japanese
 
        :editor
        (evil +everywhere)
@@ -76,9 +77,9 @@
        ;;word-wrap
 
        :checkers
-       syntax
-       spell
-       grammar
+       (syntax +childframe)
+       ;spell
+       ;grammar
 
        :emacs
        dired
@@ -143,21 +144,21 @@
        ;;fstar
        ;;gdscript
        ;;(fsharp +lsp)
-       ;;(go +lsp)
-       ;;(haskell +dante +lsp +ghcide)
+       (go +lsp)
+       (haskell +dante +lsp +ghcide)
        ;;(hy +lsp)
        ;;(idris +lsp)
        ;;(json +lsp)
        ;;(java +lsp)
-       ;;(javascript +lsp)
-       ;;(julia +lsp)
+       (javascript +lsp)
+       (julia +lsp)
        ;;(kotlin +lsp)
        (latex +latexmk +cdlatex +fold +lsp)
        ;;(lean +lsp)
        ;;factor
        ;;(ledger +lsp)
        ;;(lua +monoscript)
-       markdown
+       (markdown +grip)
        ;;(nim +lsp)
        ;;(nix +lsp)
        ;;(ocaml +lsp)
@@ -174,8 +175,8 @@
         +present
         +pomodoro
         +pretty
-        +roam)
-       ;;(perl +lsp)
+        +roam2)
+       ;(perl +lsp)
        ;;(php +lsp)
        plantuml
        ;;(purescript +lsp)
@@ -186,10 +187,10 @@
         +cython)
        ;;qt
        ;;racket
-       ;;(raku +lsp)
+       (raku +lsp)
        ;;rest
        rst
-       ;;(ruby +lsp +rvm +rbenv +rails +chruby)
+       (ruby +lsp) ;+rvm +rbenv +rails +chruby)
        (rust +lsp)
        ;;(scala +lsp)
        scheme

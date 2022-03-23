@@ -58,7 +58,7 @@ Make sure to put cursor on date heading that contains list of urls."
   (require 'cl-macs)
   (let ((ring-bell-function nil)
         (visible-bell nil))
-    (loop repeat 100 do (ding) (other-frame 0) (sit-for 1))))
+    (ci-loop repeat 100 do (ding) (other-frame 0) (sit-for 1))))
 
 (defun zj-pomodoro ()
   "Ding after a pomodoro time"
