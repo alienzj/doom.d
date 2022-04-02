@@ -41,7 +41,7 @@
                     ))
 
 ;; proxy
-;; (setenv "ALL_PROXY" "socks5h://127.0.0.1:9909")
+;(setenv "ALL_PROXY" "socks5h://127.0.0.1:9909")
 
 (let ((profile "~/.doom.d/profile.el"))
   (when (file-exists-p profile)

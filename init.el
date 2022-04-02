@@ -31,7 +31,8 @@
        (company +auto +childframe)
        ;;helm
        ;;ido
-       (ivy +childframe +fuzzy +icons)
+       (ivy +childframe +icons)
+       ;+fuzzy
        (vertico +icons)
 
        :ui

@@ -471,3 +471,5 @@ See also `org-save-all-org-buffers'"
 ;;(use-package! notebook-mode
 ;;  :after org)
 (setq notebook-mode t)
+
+(setq flycheck-disabled-checkers '(proselint))
