@@ -7,7 +7,7 @@
 (setq references_note (concat zj-org-dir "ref/"))
 
 ;; keymap: z-M
-(setq org-hide-block-startup t)
+(setq org-cycle-hide-block-startup t)
 
 ;;; org
 (setq org-journal-encrypt-journal t

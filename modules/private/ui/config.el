@@ -3,8 +3,8 @@
 ;;(setq fancy-splash-image (concat zj-project-dir "doom.d/lige.png"))
 
 ;; doom-theme
-;;(setq doom-theme 'doom-one-light)
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-one-light)
+;;(setq doom-theme 'doom-one)
 
 (if (display-graphic-p)
     (progn
