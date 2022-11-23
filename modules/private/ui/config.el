@@ -3,8 +3,8 @@
 ;;(setq fancy-splash-image (concat zj-project-dir "doom.d/lige.png"))
 
 ;; doom-theme
-(setq doom-theme 'doom-one-light)
-;;(setq doom-theme 'doom-one)
+;;(setq doom-theme 'doom-one-light)
+(setq doom-theme 'doom-one)
 
 (if (display-graphic-p)
     (progn
@@ -23,8 +23,8 @@
 
 (cond
  ((string= user-login-name "alienzj")
-  (setq doom-font (font-spec :family user-font :size 27)
-        doom-big-font (font-spec :family user-font :size 27)
+  (setq doom-font (font-spec :family user-font :size 15)
+        doom-big-font (font-spec :family user-font :size 15)
         doom-modeline-height 10)
   )
 

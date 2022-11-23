@@ -54,7 +54,7 @@
        ;;pretty-code
        tabs
        treemacs
-       tree-sitter
+       ;;tree-sitter
        ;;unicode
        vc-gutter
        vi-tilde-fringe
@@ -120,7 +120,7 @@
        ;;wakatime
 
        :os
-       arch
+       ;;arch
        ;;nixos
        tty
 
@@ -239,6 +239,7 @@
        ui
        gif
        keycast
+       calendar
 
        :config
        (default +bindings +smartparens))
