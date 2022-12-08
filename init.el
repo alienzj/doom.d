@@ -124,7 +124,7 @@
 
        :os
        ;;arch
-       nixos
+       ;;nixos
        tty
 
        :lang
@@ -214,10 +214,9 @@
        :app
        calendar
        ;irc
-       everwhere
+       ;everywhere
        (rss +org)
        ;twitter
-       ereader
 
        :private
        ;archlinux
@@ -227,7 +226,7 @@
        dap
        doraemon
        dsl
-       ;;ereader
+       ereader
        ;;eaf
        ;;email
        git
