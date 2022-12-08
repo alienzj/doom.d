@@ -2,6 +2,6 @@
 
 ;; conda
 (require 'conda)
-(setq conda-anaconda-home (concat zj-home ".conda/envs/bioenv"))
-(setq conda-env-home-directory (concat zj-home ".conda/envs/bioenv"))
+(setq conda-anaconda-home (concat jack-home ".conda/envs/bioenv"))
+(setq conda-env-home-directory (concat jack-home ".conda/envs/bioenv"))
 (setq conda-env-subdirectory "../")

@@ -1,6 +1,7 @@
 ;;; private/cpp/config.el -*- lexical-binding: t; -*-
 ;; ccls
 ;; https://github.com/MaskRay/Config/blob/master/home/.config/doom/modules/private/my-cc/config.el
+
 (after! cc-mode
   ;; https://github.com/radare/radare2
   (c-add-style
@@ -15,7 +16,7 @@
       (statement-cont . ++)
       )))
   (c-add-style
-   "my-cc" '("user"
+   "jack-cc" '("user"
              (c-basic-offset . 2)
              (c-offsets-alist
               . ((innamespace . 0)
@@ -24,7 +25,7 @@
                  (member-init-intro . +)
                  (topmost-intro . 0)
                  (arglist-cont-nonempty . +)))))
-  (setq c-default-style "my-cc")
+  (setq c-default-style "jack-cc")
   (add-hook 'c-mode-common-hook
             (lambda ()
               ;; TODO work around https://github.com/hlissner/doom-emacs/issues/1006
@@ -98,16 +99,16 @@
   ;(evil-set-initial-state 'ccls-tree-mode 'emacs)
   )
 
-(use-package! tablegen-mode
-  :load-path "~/projects/llvm-project/llvm/utils/emacs"
-  :defer t
-  :mode "\\.td\\'"
-  :config
-  (map!
-   :map tablegen-mode-map
-   (:leader
-    :n "=" #'clang-format-region
-    )))
+;(use-package! tablegen-mode
+;  :load-path "~/projects/llvm-project/llvm/utils/emacs"
+;  :defer t
+;  :mode "\\.td\\'"
+;  :config
+;  (map!
+;   :map tablegen-mode-map
+;   (:leader
+;    :n "=" #'clang-format-region
+;    )))
 
 ;; format-all
 ;; clang-format

@@ -4,13 +4,13 @@
 (use-package! elfeed
   :config
   (setq
-   rmh-elfeed-org-files (list (concat zj-org-dir "elfeed.org"))
+   rmh-elfeed-org-files (list (concat jack-org-dir "elfeed.org"))
    elfeed-search-filter "@10-week-ago")
 
-  ;https://github.com/skeeto/elfeed/issues/193
-  ;https://github.com/skeeto/elfeed/issues/281
-  ;(setf elfeed-curl-extra-arguments "-xhttp://127.0.0.1:9910")
-  ;(setf elfeed-curl-extra-arguments '("--socks5-hostname" "127.0.0.1:9909"))
+                                        ;https://github.com/skeeto/elfeed/issues/193
+                                        ;https://github.com/skeeto/elfeed/issues/281
+                                        ;(setf elfeed-curl-extra-arguments "-xhttp://127.0.0.1:9910")
+                                        ;(setf elfeed-curl-extra-arguments '("--socks5-hostname" "127.0.0.1:9909"))
   )
 
 (map! :map elfeed-search-mode-map

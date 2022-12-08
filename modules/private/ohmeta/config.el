@@ -2,9 +2,9 @@
 ;; org-static-blog
 (setq org-static-blog-publish-title "Metagenomics Research Blog"
       org-static-blog-publish-url "https://ohmeta.github.io/"
-      org-static-blog-publish-directory zj-blog-dir
-      org-static-blog-posts-directory (concat zj-blog-dir "posts/")
-      org-static-blog-drafts-directory (concat zj-blog-dir "drafts/")
+      org-static-blog-publish-directory ohmeta-blog-dir
+      org-static-blog-posts-directory (concat ohmeta-blog-dir "posts/")
+      org-static-blog-drafts-directory (concat ohmeta-blog-dir "drafts/")
       org-static-blog-enable-tags t
       org-export-with-toc nil
       org-export-with-section-numbers nil)

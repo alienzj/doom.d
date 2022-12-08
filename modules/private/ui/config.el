@@ -1,6 +1,6 @@
 ;;; private/ui/config.el -*- lexical-binding: t; -*-
 ;; splash
-;;(setq fancy-splash-image (concat zj-project-dir "doom.d/lige.png"))
+;;(setq fancy-splash-image (concat jack-project-dir "doom.d/lige.png"))
 
 ;; doom-theme
 ;;(setq doom-theme 'doom-one-light)

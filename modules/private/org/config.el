@@ -1,23 +1,23 @@
 ;;; private/org/config.el -*- lexical-binding: t; -*-
 
 ;; variables
-(setq references_bib (concat zj-org-dir "references.bib"))
-(setq references_pdf (concat zj-org-dir "pdf_bib/"))
-(setq references_pdf_source (concat zj-org-dir "pdf/"))
-(setq references_note (concat zj-org-dir "ref/"))
+(setq references_bib (concat jack-org-dir "references.bib"))
+(setq references_pdf (concat jack-org-dir "pdf_bib/"))
+(setq references_pdf_source (concat jack-org-dir "pdf/"))
+(setq references_note (concat jack-org-dir "ref/"))
 
 ;; keymap: z-M
 (setq org-cycle-hide-block-startup t)
 
 ;;; org
 (setq org-journal-encrypt-journal t
-      org-directory zj-org-dir
+      org-directory jack-org-dir
       org-agenda-files (list "inbox.org" "agenda.org" "notes.org" "projects.org")
       org-ellipsis " ▼ "
       org-babel-python-command "python3"
       org-bullets-bullet-list '("#")
       org-download-screenshot-method "flameshot gui --raw > %s"
-      org-download-image-dir (concat zj-org-dir "resource/images/"))
+      org-download-image-dir (concat jack-org-dir "resource/images/"))
 
 ;; ref
 ;; https://github.com/rougier/emacs-gtd
@@ -56,9 +56,9 @@
 (define-key global-map            (kbd "C-c i") 'org-capture-inbox)
 
 ;; Only if you use mu4e
-;(require 'mu4e)
-;(define-key mu4e-headers-mode-map (kbd "C-c i") 'org-capture-mail)
-;(define-key mu4e-view-mode-map    (kbd "C-c i") 'org-capture-mail)
+                                        ;(require 'mu4e)
+                                        ;(define-key mu4e-headers-mode-map (kbd "C-c i") 'org-capture-mail)
+                                        ;(define-key mu4e-view-mode-map    (kbd "C-c i") 'org-capture-mail)
 ;; Refile
 (setq org-refile-use-outline-path 'file)
 (setq org-outline-path-complete-in-steps nil)
@@ -244,64 +244,64 @@ See also `org-save-all-org-buffers'"
   :hook (org-mode . org-media-note-mode)
   :bind (("s-v" . org-media-note-hydra/body))
   :config
-  (setq org-media-note-screenshot-image-dir (concat zj-org-dir "resource/images/"))
+  (setq org-media-note-screenshot-image-dir (concat jack-org-dir "resource/images/"))
   (setq org-media-note-use-refcite-first t))
 
 
 ;; plantuml
-(setq plantuml-jar-path  "/usr/share/java/plantuml/plantuml.jar"
-      org-plantuml-jar-path plantuml-jar-path)
+                                        ;(setq plantuml-jar-path  "/usr/share/java/plantuml/plantuml.jar"
+                                        ;      org-plantuml-jar-path plantuml-jar-path)
 
 
 ;; org-roam
 (use-package! org-roam
   :config
-  ;; (setq org-roam-directory (concat zj-org-dir "roam"))
+  ;; (setq org-roam-directory (concat jack-org-dir "roam"))
   (setq
-   ;; org-roam-directory (concat zj-org-dir "note/")
-   org-roam-directory zj-org-dir
-   org-roam-db-location (concat zj-org-dir ".org-roam.db")
+   ;; org-roam-directory (concat jack-org-dir "note/")
+   org-roam-directory jack-org-dir
+   org-roam-db-location (concat jack-org-dir ".org-roam.db")
    )
   )
 
-;(setq org-roam-capture-templates
-;      '(
-;        ("d" "default" plain (function org-roam-capture--get-point)
-;         "%?"
-;         :file-name "%<%Y%m%d%H%M%S>-${slug}"
-;         :head "#+title: ${title}\n#+roam_alias:\n\n")
-;        ("g" "group")
-;        ("ga" "Group A" plain (function org-roam-capture--get-point)
-;         "%?"
-;         :file-name "%<%Y%m%d%H%M%S>-${slug}"
-;         :head "#+title: ${title}\n#+roam_alias:\n\n")
-;        ("gb" "Group B" plain (function org-roam-capture--get-point)
-;         "%?"
-;         :file-name "%<%Y%m%d%H%M%S>-${slug}"
-;         :head "#+title: ${title}\n#+roam_alias:\n\n")))
+                                        ;(setq org-roam-capture-templates
+                                        ;      '(
+                                        ;        ("d" "default" plain (function org-roam-capture--get-point)
+                                        ;         "%?"
+                                        ;         :file-name "%<%Y%m%d%H%M%S>-${slug}"
+                                        ;         :head "#+title: ${title}\n#+roam_alias:\n\n")
+                                        ;        ("g" "group")
+                                        ;        ("ga" "Group A" plain (function org-roam-capture--get-point)
+                                        ;         "%?"
+                                        ;         :file-name "%<%Y%m%d%H%M%S>-${slug}"
+                                        ;         :head "#+title: ${title}\n#+roam_alias:\n\n")
+                                        ;        ("gb" "Group B" plain (function org-roam-capture--get-point)
+                                        ;         "%?"
+                                        ;         :file-name "%<%Y%m%d%H%M%S>-${slug}"
+                                        ;         :head "#+title: ${title}\n#+roam_alias:\n\n")))
 
-;(add-to-list 'org-roam-capture-templates
-;             '("t" "Term" plain (function org-roam-capture--get-point)
-;               "- 领域: %^{术语所属领域}\n- 释义:"
-;               :file-name "%<%Y%m%d%H%M%S>-${slug}"
-;               :head "#+title: ${title}\n#+roam_alias:\n#+roam_tags: \n\n"
-;               :unnarrowed t
-;               ))
+                                        ;(add-to-list 'org-roam-capture-templates
+                                        ;             '("t" "Term" plain (function org-roam-capture--get-point)
+                                        ;               "- 领域: %^{术语所属领域}\n- 释义:"
+                                        ;               :file-name "%<%Y%m%d%H%M%S>-${slug}"
+                                        ;               :head "#+title: ${title}\n#+roam_alias:\n#+roam_tags: \n\n"
+                                        ;               :unnarrowed t
+                                        ;               ))
 
-;(add-to-list 'org-roam-capture-templates
-;             '("p" "Paper Note" plain (function org-roam-capture--get-point)
-;               "* 相关工作\n\n%?\n* 观点\n\n* 模型和方法\n\n* 实验\n\n* 结论\n"
-;               :file-name "%<%Y%m%d%H%M%S>-${slug}"
-;               :head "#+title: ${title}\n#+roam_alias:\n#+roam_tags: \n\n"
-;               :unnarrowed t
-;               ))
+                                        ;(add-to-list 'org-roam-capture-templates
+                                        ;             '("p" "Paper Note" plain (function org-roam-capture--get-point)
+                                        ;               "* 相关工作\n\n%?\n* 观点\n\n* 模型和方法\n\n* 实验\n\n* 结论\n"
+                                        ;               :file-name "%<%Y%m%d%H%M%S>-${slug}"
+                                        ;               :head "#+title: ${title}\n#+roam_alias:\n#+roam_tags: \n\n"
+                                        ;               :unnarrowed t
+                                        ;               ))
 
-;(setq org-roam-capture-immediate-template
-;      '("d" "default" plain (function org-roam-capture--get-point)
-;        "%?"
-;        :file-name "%<%Y%m%d%H%M%S>-${slug}"
-;        :head "#+title: ${title}\n"
-;        :unnarrowed t))
+                                        ;(setq org-roam-capture-immediate-template
+                                        ;      '("d" "default" plain (function org-roam-capture--get-point)
+                                        ;        "%?"
+                                        ;        :file-name "%<%Y%m%d%H%M%S>-${slug}"
+                                        ;        :head "#+title: ${title}\n"
+                                        ;        :unnarrowed t))
 
 
 ;; 实现网页内容摘录
@@ -312,13 +312,13 @@ See also `org-save-all-org-buffers'"
 ;;          :head "#+title: ${title}\n#+roam_key: ${ref}\n"
 ;;          :unnarrowed t)))
 
-;(add-to-list 'org-roam-capture-ref-templates
-;             '("a" "Annotation" plain (function org-roam-capture--get-point)
-;               "%U ${body}\n"
-;               :file-name "${slug}"
-;               :head "#+title: ${title}\n#+roam_key: ${ref}\n#+roam_alias:\n"
-;               :immediate-finish t
-;               :unnarrowed t))
+                                        ;(add-to-list 'org-roam-capture-ref-templates
+                                        ;             '("a" "Annotation" plain (function org-roam-capture--get-point)
+                                        ;               "%U ${body}\n"
+                                        ;               :file-name "${slug}"
+                                        ;               :head "#+title: ${title}\n#+roam_key: ${ref}\n#+roam_alias:\n"
+                                        ;               :immediate-finish t
+                                        ;               :unnarrowed t))
 ;; javascript:location.href = 'org-protocol://roam-ref?template=r&ref=' + encodeURIComponent(location.href) + '&title=' + encodeURIComponent(document.title)
 ;; javascript:location.href = 'org-protocol://roam-ref?template=a&ref=' + encodeURIComponent(location.href) + '&title='+encodeURIComponent(document.title) + '&body='+encodeURIComponent(function(){var html = "";var sel = window.getSelection();if (sel.rangeCount) {var container = document.createElement("div");for (var i = 0, len = sel.rangeCount; i < len; ++i) {container.appendChild(sel.getRangeAt(i).cloneContents());}html = container.innerHTML;}var dataDom = document.createElement('div');dataDom.innerHTML = html;['p', 'h1', 'h2', 'h3', 'h4'].forEach(function(tag, idx){dataDom.querySelectorAll(tag).forEach(function(item, index) {var content = item.innerHTML.trim();if (content.length > 0) {item.innerHTML = content + '&#13;&#10;';}});});return dataDom.innerText.trim();}())
 
@@ -369,8 +369,8 @@ See also `org-save-all-org-buffers'"
 
 
 ;; ivy
-(setq ivy-read-action-function #'ivy-hydra-read-action)
-(setq ivy-sort-max-size 50000)
+                                        ;(setq ivy-read-action-function #'ivy-hydra-read-action)
+                                        ;(setq ivy-sort-max-size 50000)
 
 
 ;; org-chef

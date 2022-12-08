@@ -76,7 +76,7 @@
 (use-package! calibredb
   :commands calibredb
   :config
-  (setq calibredb-root-dir (concat zj-doraemon-dir "books/calibre")
+  (setq calibredb-root-dir (concat jack-doraemon-dir "books/calibre")
         calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
   (map! :map calibredb-show-mode-map
         :ne "?" #'calibredb-entry-dispatch

@@ -1,21 +1,24 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
-(setq zj-home (concat "/home/" user-login-name "/")
-      zj-project-dir (concat zj-home "projects/")
-      zj-document-dir (concat zj-home "documents/")
-      zj-doraemon-dir (concat zj-document-dir "doraemon/")
-      zj-org-dir (concat zj-doraemon-dir "org/")
+(setq jack-home (concat "/home/" user-login-name "/")
+      jack-project-dir (concat jack-home "projects/")
+      jack-document-dir (concat jack-home "documents/")
+      jack-doraemon-dir (concat jack-document-dir "doraemon/")
+      jack-org-dir (concat jack-doraemon-dir "org/")
       )
 
-(cond
- ((string= user-login-name "alienzj")
-  (setq zj-blog-dir (concat zj-org-dir "blog/alienzj.github.io/"))
-  )
+;(cond
+; ((string= user-login-name "alienzj")
+;  (setq jack-blog-dir (concat jack-org-dir "blog/alienzj.github.io/"))
+;  )
+;
+; ((string= user-login-name "zhujie")
+;  (setq  jack-blog-dir (concat jack-org-dir "blog/ohmeta.github.io/"))
+;  )
+; )
 
- ((string= user-login-name "zhujie")
-  (setq  zj-blog-dir (concat zj-org-dir "blog/ohmeta.github.io/"))
-  )
- )
+(setq jack-blog-dir (concat jack-org-dir "blog/alienzj.github.io/"))
+(setq ohmeta-blog-dir (concat jack-org-dir "blog/ohmeta.github.io/"))
 
 ;; (setq package-archives
 ;;       '(("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
@@ -31,7 +34,7 @@
        (company +auto +childframe)
        ;;helm
        ;;ido
-       (ivy +childframe +icons)
+       ;(ivy +childframe +icons)
        ;+fuzzy
        (vertico +icons)
 
@@ -47,7 +50,7 @@
        ;;indent-guides
        ;;minimap
        modeline
-       nav-flash
+       ;nav-flash
        ;;neotree
        ophints
        (popup +defaults)
@@ -79,7 +82,7 @@
 
        :checkers
        (syntax +childframe)
-       ;spell
+       spell
        ;grammar
 
        :emacs
@@ -98,7 +101,7 @@
        :tools
        ;;ansible
        (debugger +lsp)
-       ;;direnv
+       direnv
        docker
        ;;editorconfig
        ;;ein
@@ -121,7 +124,7 @@
 
        :os
        ;;arch
-       ;;nixos
+       nixos
        tty
 
        :lang
@@ -158,10 +161,10 @@
        ;;(lean +lsp)
        ;;factor
        ;;(ledger +lsp)
-       ;;(lua +monoscript)
+       (lua +monoscript +fennel)
        (markdown +grip)
        ;;(nim +lsp)
-       ;;(nix +lsp)
+       (nix +lsp)
        ;;(ocaml +lsp)
        (org
         +brain
@@ -211,22 +214,26 @@
        :app
        calendar
        ;irc
+       everwhere
        (rss +org)
        ;twitter
+       ereader
 
        :private
-       archlinux
+       ;archlinux
        blog
-       conda
+       ;conda
        cpp
        dap
        doraemon
        dsl
-       ereader
+       ;;ereader
        ;;eaf
        ;;email
        git
+       gif
        jupyter
+       keycast
        lsp
        ;;ohmeta
        org
@@ -237,9 +244,6 @@
        tex
        tramp
        ui
-       gif
-       keycast
-       calendar
 
        :config
        (default +bindings +smartparens))

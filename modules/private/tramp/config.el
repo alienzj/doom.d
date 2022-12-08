@@ -1,7 +1,7 @@
 ;;; private/tramp/config.el -*- lexical-binding: t; -*-
 ;; tramp
 (after! tramp
-  (setenv "SHELL" "/bin/bash")
+  (setenv "SHELL" "/usr/bin/zsh")
   (setq tramp-shell-prompt-pattern "\\(?:^\\|\\)[^]#$%>\n]*#?[]#$%>] *\\(\\[[0-9;]*[a-zA-Z] *\\)*")
   (appendq! tramp-remote-path
             '("~/.conda/envs/bioenv/bin"
