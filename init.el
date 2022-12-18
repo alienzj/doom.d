@@ -66,6 +66,7 @@
         +numbers)
        workspaces
        zen
+       dracula
 
        :editor
        (evil +everywhere)
@@ -167,18 +168,13 @@
        (nix +lsp)
        ;;(ocaml +lsp)
        (org
-        +brain
         +dragndrop
-        +gnuplot
-        +hugo
         +ipython
         +journal
         +jupyter
         +noter
         +pandoc
         +present
-        +pomodoro
-        +pretty
         +roam2)
        ;(perl +lsp)
        ;;(php +lsp)
@@ -205,11 +201,19 @@
        ;;terra
        (web +lsp)
        (yaml +lsp)
+       (snakemake)
+
+       :org
+       ref
+       noter
 
        :email
        ;;(mu4e +gmail)
        ;;notmuch
        ;;(wanderlust +gmail)
+
+       :remote
+       tramp
 
        :app
        calendar
@@ -217,32 +221,11 @@
        ;everywhere
        (rss +org)
        ;twitter
+       feeder
 
-       :private
-       ;archlinux
-       blog
-       ;conda
-       cpp
-       dap
-       doraemon
-       dsl
-       ereader
-       ;;eaf
-       ;;email
-       git
-       gif
-       jupyter
-       keycast
-       lsp
-       ;;ohmeta
-       org
-       python
-       r
-       rss
-       rust
-       tex
-       tramp
-       ui
+       :blog
+       alienzj
+       ;ohmeta
 
        :config
        (default +bindings +smartparens))

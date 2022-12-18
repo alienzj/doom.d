@@ -1,2 +1,2 @@
 ;; -*- no-byte-compile: t; -*-
-;;; packages.el
+;;; app/feeder/packages.el
