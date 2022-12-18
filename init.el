@@ -1,5 +1,10 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
+;; (setq package-archives
+;;       '(("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+;;         ("org"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
+;;         ("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
+
 (setq jack-home (concat "/home/" user-login-name "/")
       jack-project-dir (concat jack-home "projects/")
       jack-document-dir (concat jack-home "documents/")
@@ -20,13 +25,20 @@
 (setq jack-blog-dir (concat jack-org-dir "blog/alienzj.github.io/"))
 (setq ohmeta-blog-dir (concat jack-org-dir "blog/ohmeta.github.io/"))
 
-;; (setq package-archives
-;;       '(("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-;;         ("org"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
-;;         ("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
+(setq references_bib (concat jack-org-dir "references.bib"))
+(setq references_pdf (concat jack-org-dir "pdf_bib/"))
+(setq references_pdf_source (concat jack-org-dir "pdf/"))
+(setq references_note (concat jack-org-dir "ref/"))
+
+(setq ;org-journal-encrypt-journal t
+ org-directory jack-org-dir
+ org-agenda-files (list "agenda.org" "projects.org" "inbox.org" "agenda.org" "notes.org")
+                                        ;org-ellipsis " ▼ "
+                                        ;org-bullets-bullet-list '("#")
+ org-download-screenshot-method "flameshot gui --raw > %s"
+ org-download-image-dir (concat jack-org-dir "resource/images/"))
 
 (doom!
-
        :input
        chinese
 
