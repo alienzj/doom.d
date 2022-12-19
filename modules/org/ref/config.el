@@ -62,7 +62,7 @@
    org-ref-pdf-to-bibtex-function 'my/link-pdf-file)
   :config
   (setq
-   org-ref-completion-library 'org-ref-ivy-cite
+   ;org-ref-completion-library 'org-ref-ivy-cite
    reftex-default-bibliography (list references_bib)
    ;; org-ref-default-bibliography (list references_bib)
    bibtex-completion-bibliography (list references_bib)
