@@ -21,6 +21,14 @@
         elfeed-search-filter "@1-month-ago +unread"))
 
 
+;;projectile
+(use-package! projectile
+  :ensure t
+  :init
+  (require 'tramp)
+  (projectile-mode +1))
+
+
 ;; better defaults
 (setq doom-scratch-buffer-major-mode 'emacs-lisp-mode)
 
