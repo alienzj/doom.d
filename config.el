@@ -26,7 +26,13 @@
   :ensure t
   :init
   (require 'tramp)
-  (projectile-mode +1))
+  (projectile-mode +1)
+  (setq projectile-project-search-path
+	'("~/projects/"
+	  "~/documents/doraemon/"
+	  "~/documents/doraemon/org"
+	  "~/documents/doraemon/org/blog"))
+  (add-to-list 'projectile-globally-ignored-directories ".attach"))
 
 
 ;; better defaults
