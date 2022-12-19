@@ -1,4 +1,4 @@
-;;; .doom.d/config.el -*- lexical-binding: t; -*-
+;;; config.el -*- lexical-binding: t; -*-
 
 ;; user information
 
@@ -6,6 +6,14 @@
 (setq user-full-name user-login-name
       user-mail-address "alienchuj@gmail.com"
       epa-file-encrypt-to user-mail-address)
+
+(setq ;org-journal-encrypt-journal t
+ org-directory jack-org-dir
+ org-agenda-files (list "agenda.org" "projects.org" "inbox.org" "agenda.org" "notes.org")
+                                        ;org-ellipsis " ▼ "
+                                        ;org-bullets-bullet-list '("#")
+ org-download-screenshot-method "flameshot gui --raw > %s"
+ org-download-image-dir (concat jack-org-dir "resource/images/"))
 
 ;; better defaults
 (setq doom-scratch-buffer-major-mode 'emacs-lisp-mode)
