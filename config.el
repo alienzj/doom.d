@@ -1,23 +1,31 @@
 ;;; config.el -*- lexical-binding: t; -*-
 
 ;; user information
-
-
 (setq user-full-name user-login-name
       user-mail-address "alienchuj@gmail.com"
       epa-file-encrypt-to user-mail-address)
 
-(setq ;org-journal-encrypt-journal t
+
+;; org
+(setq
+;;;org-journal-encrypt-journal t
  org-directory jack-org-dir
  org-agenda-files (list "agenda.org" "projects.org" "inbox.org" "agenda.org" "notes.org")
-                                        ;org-ellipsis " ▼ "
-                                        ;org-bullets-bullet-list '("#")
  org-download-screenshot-method "flameshot gui --raw > %s"
  org-download-image-dir (concat jack-org-dir "resource/images/"))
+
+
+;; rss
+(after! elfeed
+  (setq rmh-elfeed-org-files (list (concat jack-org-dir "elfeed.org"))
+        elfeed-search-filter "@1-month-ago +unread"))
+
 
 ;; better defaults
 (setq doom-scratch-buffer-major-mode 'emacs-lisp-mode)
 
+
+;; default
 (setq-default
  tab-width 4
  undo-limit 80000000
@@ -28,10 +36,12 @@
  ;; delete-trailing-lines t
  )
 
+
 ;; Delete the selection when pasting
 (delete-selection-mode 1)
 
 
+;; popup rules
 (set-popup-rules! '(("^\\*helpful" :size 0.35)
                     ("^\\*Ibuffer\\*$" :size 0.35)
                     ("^\\*info.*" :size 80 :side right)
@@ -48,9 +58,12 @@
                     ((lambda (buf _) (with-current-buffer buf (eq major-mode 'forge-topic-mode))) :size 0.35)
                     ))
 
-;; proxy
-;(setenv "ALL_PROXY" "socks5h://127.0.0.1:9909")
 
+;; proxy
+;;;(setenv "ALL_PROXY" "socks5h://127.0.0.1:9909")
+
+
+;; profile
 (let ((profile "~/.config/doom/profile.el"))
   (when (file-exists-p profile)
     (load-file profile)))

@@ -227,7 +227,6 @@
        ;everywhere
        (rss +org)
        ;twitter
-       feeder
 
        :blog
        alienzj
