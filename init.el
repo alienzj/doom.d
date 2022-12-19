@@ -181,12 +181,12 @@
        ;;(ocaml +lsp)
        (org
         +dragndrop
-        +ipython
         +journal
         +jupyter
         +noter
         +pandoc
         +present
+        ;+pretty
         +roam2)
        ;(perl +lsp)
        ;;(php +lsp)
