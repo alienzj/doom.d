@@ -22,7 +22,7 @@
 
 
 ;;projectile
-(use-package! projectile
+(after! projectile
   :ensure t
   :init
   (require 'tramp)
