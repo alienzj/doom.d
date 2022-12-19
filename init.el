@@ -105,6 +105,7 @@
 
        :tools
        ;;ansible
+       biblio
        (debugger +lsp)
        direnv
        docker
@@ -115,8 +116,8 @@
        (lookup
         +dictionary
         +docsets)
-       lsp
-       magit
+       (lsp +peek)
+       (magit +forge)
        ;;make
        ;;(pass +auth)
        pdf
@@ -124,6 +125,7 @@
        rgb
        ;;terraform
        ;;tmux
+       tree-sitter
        ;;upload
        ;;wakatime
 
