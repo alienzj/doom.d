@@ -1,7 +1,7 @@
 ;;; org/ref/config.el -*- lexical-binding: t; -*-
 
 ;; org-citar
-(setq org-cite-csl-styles-dir (concat zj-document-dir "zotero/styles"))
+(setq org-cite-csl-styles-dir (concat jack-document-dir "zotero/styles"))
 
 (setq! bibtex-completion-bibliography '(references_bib))
 (setq! citar-bibliography '(references_bib))
