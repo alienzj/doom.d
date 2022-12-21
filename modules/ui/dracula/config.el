@@ -23,15 +23,15 @@
 
 (cond
  ((string= user-login-name "alienzj")
-  (setq doom-font (font-spec :family user-font :size 23)
-        doom-big-font (font-spec :family user-font :size 23)
-        doom-modeline-height 15)
+  (setq doom-font (font-spec :family user-font :size 24)
+        doom-big-font (font-spec :family user-font :size 24)
+        doom-modeline-height 18)
   )
 
  ((string= user-login-name "zhujie")
-  (setq doom-font (font-spec :family user-font :size 23)
-        doom-big-font (font-spec :family user-font :size 23)
-        doom-modeline-height 23)
+  (setq doom-font (font-spec :family user-font :size 24)
+        doom-big-font (font-spec :family user-font :size 24)
+        doom-modeline-height 18)
   )
  )
 
