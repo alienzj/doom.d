@@ -15,9 +15,12 @@
 
 (use-package! org-download
   :after org
+  :defer nil
   :custom
-  org-download-screenshot-method "flameshot gui --raw > %s"
-  org-download-image-dir (concat jack-org-dir "resource/images/"))
+  (org-download-screenshot-method "flameshot gui --raw > %s")
+  (org-download-image-dir (concat jack-org-dir "resource/images/"))
+  :config
+  (require 'org-download))
 
 
 ;; rss
