@@ -10,9 +10,14 @@
 (setq
 ;;;org-journal-encrypt-journal t
  org-directory jack-org-dir
- org-agenda-files (list "agenda.org" "projects.org" "inbox.org" "agenda.org" "notes.org")
- org-download-screenshot-method "flameshot gui --raw > %s"
- org-download-image-dir (concat jack-org-dir "resource/images/"))
+ org-agenda-files (list "agenda.org" "projects.org" "inbox.org" "agenda.org" "notes.org"))
+
+
+(use-package! org-download
+  :after org
+  :custom
+  org-download-screenshot-method "flameshot gui --raw > %s"
+  org-download-image-dir (concat jack-org-dir "resource/images/"))
 
 
 ;; rss
