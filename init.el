@@ -211,6 +211,7 @@
 
        :org
        ref
+       roam
        noter
 
        :email

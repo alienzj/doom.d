@@ -11,14 +11,3 @@
 
 (setq! citar-library-paths '(references_pdf references_pdf_source)
        citar-notes-paths '(references_note))
-
-
-;; org-roam
-(use-package! org-roam
-  :config
-  (setq
-   org-roam-directory (concat jack-org-dir "note/")
-   org-roam-directory jack-org-dir
-   org-roam-db-location (concat jack-org-dir ".org-roam.db")
-   )
-  )
