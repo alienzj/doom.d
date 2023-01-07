@@ -1,6 +1,6 @@
 ;;; blog/alienzj/config.el -*- lexical-binding: t; -*-
 
-(setq org-static-blog-publish-title "Jack Org Blog"
+(setq org-static-blog-publish-title "ZJ Blog"
       org-static-blog-publish-url "https://alienzj.github.io/"
       org-static-blog-publish-directory jack-blog-dir
       org-static-blog-posts-directory (concat jack-blog-dir "posts/")
@@ -27,7 +27,7 @@
 
 (setq org-static-blog-page-preamble
       "<div class=\"header\">
-  <a href=\"https://alienzj.github.io/\" class=\"logo\">Jack Org Blog</a>
+  <a href=\"https://alienzj.github.io/\" class=\"logo\">ZJ Blog</a>
   <br>
     <a href=\"https://alienzj.github.io/archive\">Archive</a>
     <a href=\"https://alienzj.github.io/tags\">Tags</a>
@@ -59,7 +59,7 @@
 
             <span xmlns:dct=\"https://purl.org/dc/terms/\" href=
             \"https://purl.org/dc/dcmitype/Text\" property=
-            \"dct:title\" rel=\"dct:type\">Jack Org Blog</span> by
+            \"dct:title\" rel=\"dct:type\">ZJ Blog</span> by
             <a xmlns:cc=\"https://creativecommons.org/ns#\" href=
             \"https://alienzj.github.io\" property=
             \"cc:attributionName\" rel=\"cc:attributionURL\">Jie
