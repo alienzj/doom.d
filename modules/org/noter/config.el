@@ -1,7 +1,10 @@
 ;;; org/noter/config.el -*- lexical-binding: t; -*-
 
-;; org-noter
-(setq org-noter-notes-search-path (list references_note))
+;; pdf-tools
+;(use-package! pdf-tools
+;  :init
+;  (pdf-tools-install)
+;)
 
 ;; org-media-note
 (require 'org-attach)
