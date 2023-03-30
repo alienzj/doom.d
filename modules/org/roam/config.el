@@ -4,7 +4,7 @@
 (use-package! org-roam
   :config
   (setq
-   ;;org-roam-directory (concat jack-org-dir "note/")
+   ;;org-roam-directory (concat jack-org-dir "notes/")
    org-roam-directory jack-org-dir
    org-roam-db-location (concat jack-org-dir ".org-roam.db")
 

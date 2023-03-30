@@ -10,7 +10,7 @@
 (setq
 ;;;org-journal-encrypt-journal t
  org-directory jack-org-dir
- org-agenda-files (list "agenda.org" "projects.org" "inbox.org" "agenda.org" "notes.org"))
+ org-agenda-files (list "agenda.org"))
 
 
 (use-package! org-download
@@ -18,7 +18,7 @@
   :defer nil
   :custom
   (org-download-screenshot-method "flameshot gui --raw > %s")
-  (org-download-image-dir (concat jack-org-dir "resource/images/"))
+  (org-download-image-dir (concat jack-org-dir "static/images/"))
   :config
   (require 'org-download))
 
@@ -38,8 +38,7 @@
   (setq projectile-project-search-path
 	'("~/projects/"
 	  "~/documents/doraemon/"
-	  "~/documents/doraemon/org"
-	  "~/documents/doraemon/org/blog"))
+	  "~/documents/doraemon/org"))
   (add-to-list 'projectile-globally-ignored-directories ".attach"))
 
 

@@ -13,5 +13,9 @@
   :hook (org-mode . org-media-note-mode)
   :bind (("s-v" . org-media-note-hydra/body))
   :config
-  (setq org-media-note-screenshot-image-dir (concat jack-org-dir "resource/images/"))
+  ;(setq org-noter-notes-search-path (list org-directory references_note))
+  ;(setq org-noter-notes-search-path (list references_note))
+  (setq org-media-note-screenshot-image-dir (concat jack-org-dir "static/images/"))
   (setq org-media-note-use-refcite-first t))
+
+(setq org-noter-notes-search-path (list references_note))

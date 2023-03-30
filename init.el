@@ -6,10 +6,18 @@
 ;;         ("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
 
 (setq jack-home (concat "/home/" user-login-name "/")
+
       jack-project-dir (concat jack-home "projects/")
+
       jack-document-dir (concat jack-home "documents/")
+
       jack-doraemon-dir (concat jack-document-dir "doraemon/")
+
       jack-org-dir (concat jack-doraemon-dir "org/")
+
+      jack-note-dir (concat jack-org-dir "notes/")
+
+      jack-paper-dir (concat jack-doraemon-dir "papers/")
       )
 
 ;(cond
@@ -22,13 +30,14 @@
 ;  )
 ; )
 
-(setq jack-blog-dir (concat jack-org-dir "blog/alienzj.github.io/"))
-(setq ohmeta-blog-dir (concat jack-org-dir "blog/ohmeta.github.io/"))
+(setq jack-blog-dir   (concat jack-project-dir "ohblog/alienzj.github.io/"))
+(setq ohmeta-blog-dir (concat jack-project-dir "ohblog/ohmeta.github.io/"))
 
-(setq references_bib (concat jack-org-dir "references.bib"))
-(setq references_pdf (concat jack-org-dir "pdf_bib/"))
-(setq references_pdf_source (concat jack-org-dir "pdf/"))
-(setq references_note (concat jack-org-dir "ref/"))
+(setq references_bib  (concat jack-note-dir "references.bib"))
+(setq references_note (concat jack-note-dir "references/"))
+
+(setq references_pdf        (concat jack-paper-dir "references_bib/"))
+(setq references_pdf_source (concat jack-paper-dir "references/"))
 
 (doom!
        :input
