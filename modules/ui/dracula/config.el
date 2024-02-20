@@ -19,13 +19,13 @@
 ;;(setq doom-theme 'doom-one-light)
 ;(setq doom-theme 'doom-one)
 
-(if (display-graphic-p)
-    (progn
-      (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
-      (setq doom-themes-treemacs-theme "Default")
-      (doom-themes-treemacs-config)
-      ))
-(doom-themes-org-config)
+;(if (display-graphic-p)
+;    (progn
+;      (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
+;      (setq doom-themes-treemacs-theme "Default")
+;      (doom-themes-treemacs-config)
+;      ))
+;(doom-themes-org-config)
 
 
 ;; font
