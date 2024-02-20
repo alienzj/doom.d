@@ -1,9 +1,23 @@
 ;;; ui/dracula/config.el -*- lexical-binding: t; -*-
 
 
+
+(setq doom-theme 'doom-dracula
+      doom-font (font-spec :family "JetBrainsMono" :size 24)
+      doom-variable-pitch-font (font-spec :family "DejaVu Sans" :size 25))
+
+;; Line numbers are pretty slow all around. The performance boost of disabling
+;; them outweighs the utility of always keeping them on.
+(setq display-line-numbers-type nil)
+
+;; Prevents some cases of Emacs flickering.
+(add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
+
+
+
 ;; doom-theme
 ;;(setq doom-theme 'doom-one-light)
-(setq doom-theme 'doom-one)
+;(setq doom-theme 'doom-one)
 
 (if (display-graphic-p)
     (progn
@@ -15,25 +29,25 @@
 
 
 ;; font
-(setq user-font
-      (cond
-       ((find-font (font-spec :name  "monospace")) "monospace")
-       ((find-font (font-spec :name  "Droid Sans Mono")) "Droid Sans Mono")
-       ((find-font (font-spec :name  "Droid Sans Fallback")) "Droid Sans Fallback")))
+;(setq user-font
+;      (cond
+;       ((find-font (font-spec :name  "monospace")) "monospace")
+;       ((find-font (font-spec :name  "Droid Sans Mono")) "Droid Sans Mono")
+;       ((find-font (font-spec :name  "Droid Sans Fallback")) "Droid Sans Fallback")))
 
-(cond
- ((string= user-login-name "alienzj")
-  (setq doom-font (font-spec :family user-font :size 25)
-        doom-big-font (font-spec :family user-font :size 25)
-        doom-modeline-height 18)
-  )
+;(cond
+; ((string= user-login-name "alienzj")
+;  (setq doom-font (font-spec :family user-font :size 25)
+;        doom-big-font (font-spec :family user-font :size 25)
+;        doom-modeline-height 18)
+;  )
 
- ((string= user-login-name "zhujie")
-  (setq doom-font (font-spec :family user-font :size 25)
-        doom-big-font (font-spec :family user-font :size 25)
-        doom-modeline-height 18)
-  )
- )
+; ((string= user-login-name "zhujie")
+;  (setq doom-font (font-spec :family user-font :size 25)
+;        doom-big-font (font-spec :family user-font :size 25)
+;        doom-modeline-height 18)
+;  )
+; )
 
 
 ;; rainbow
