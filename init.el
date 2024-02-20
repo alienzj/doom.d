@@ -44,7 +44,7 @@
        chinese
 
        :completion
-       ;(company +auto +childframe)
+       (company +childframe)
        ;;helm
        ;;ido
        ;(ivy +childframe +icons)
@@ -234,7 +234,7 @@
        :app
        calendar
        ;irc
-       ;everywhere
+       everywhere
        (rss +org)
        ;twitter
 
